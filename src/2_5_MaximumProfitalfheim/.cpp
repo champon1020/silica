@@ -1,3 +1,8 @@
+/*
+    This algorithm can get the max profit of trading.
+    Very easy training.
+*/
+
 #include <iostream>
 #include <algorithm>
 
