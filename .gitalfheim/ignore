@@ -2,3 +2,4 @@ vsc_run
 .vscode/*
 .DS_Store
 /src/test*
+/bin/test*
