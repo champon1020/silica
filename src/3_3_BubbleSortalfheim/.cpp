@@ -4,6 +4,7 @@
     This is bubble sort algorithm.
     Calculation order is O(N**2).
     Num of exchanges expresses array disorder.
+    This is Stable.
 */
 
 #include <iostream>

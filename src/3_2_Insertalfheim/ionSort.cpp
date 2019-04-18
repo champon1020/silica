@@ -4,6 +4,7 @@
     This is Insertion Sort Algorithm.
     Calculation order is O(N**2).
     If the datas has been aligned certain degree, this algorithm is effective.
+    This is Stable.
 */
 
 #include <iostream>
