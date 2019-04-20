@@ -3,3 +3,4 @@ vsc_run
 .DS_Store
 /src/test*
 /bin/win/test*
+/bin/osx/test*
