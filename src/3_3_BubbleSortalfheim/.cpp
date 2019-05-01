@@ -32,7 +32,7 @@ void bubbleSort(int* array, int n){
     }
 
     for(int k=0; k<n; k++) cout << array[k] << " ";
-    cout << endl << "Num of exchanges:" << count << endl;
+    cout << endl << "Num of exchanges: " << count << endl;
 }
 
 int main(){
