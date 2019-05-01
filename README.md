@@ -10,5 +10,5 @@ Languages are C and C++.
 3. "insertion sort" and "bubble sort" is stable, but "selection sort" is not.
    (Stable means that if the array has same numbers, they cannot be exchanged by sort.)
 
-
-If I notice something later, I will renew README.
+"shell sort":
+This is updated selection sort. If data's alignment is almost orderd, this algorithm is faster than others, of course selection sort. In this algorithm, 'g' is data's distance. It is selected by number sequence "p_n+1 = 3*p_n + 1".
