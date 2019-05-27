@@ -5,13 +5,10 @@
 
 #define MAX 100
 
-using namespace std;
 
 int calc(int num1, int num2, char op);
 int pop();
-bool push(int x);
-bool isEmpty();
-bool isFull();
+void push(int x);
 
 int top;
 int stack[MAX];
@@ -21,24 +18,22 @@ int main(void){
     top = 0;
     char op[100];
     
-    cout << "enter formula" << endl;
+    std::cout << "enter formula" << std::endl;
 
-    while((op = cin.get()) != '\n'){
+    while(scanf("%s", op) != EOF){
         if(op[0] == '+' || op[0] == '-' || op[0] == '*'){
-            int result = calc(pop(), pop(), op[0]);
-            push(result);
+            push(calc(pop(), pop(), op[0]));
 
         }else{
             push(atoi(op));
         }
-    }
 
-    cout << pop() << endl;
+        std::cout << "stack[top] = " << stack[top] << std::endl;
+    }
 }
 
 
 int calc(int num1, int num2, char op){
-    cout << op << endl;
     switch(op){
         case '+':
             return num1 + num2;
@@ -50,39 +45,19 @@ int calc(int num1, int num2, char op){
             return num1 * num2;
 
         default:
-            return false;
+            std::cout << "error" << std::endl;
+            break;
     }
+
+    return -1;
 }
 
 
 int pop(){
-    if(isEmpty()){
-        return false;
-    }
     return stack[top--];
 }
 
 
-bool push(int x){
-    if(isFull()){
-        return false;
-    }
+void push(int x){
     stack[++top] = x;
-    return true;
-}
-
-
-bool isEmpty(){
-    if(top == 0){
-        return true;
-    }
-    return false;
-}
-
-
-bool isFull(){
-    if(top == MAX-1){
-        return true;
-    }
-    return false;
 }
