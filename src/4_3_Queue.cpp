@@ -1,45 +1,63 @@
 #include <iostream>
 #include <stdio.h>
-#include <vector>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 100000
 
 using namespace std;
 
+Deal queue[SIZE];
+int first, last;
 
 class Deal{
-    public:
+public:
     char name[10];
     int time;
+    
+    Deal(){}
+    Deal(char *name, int time){
+        strcpy(this->name, name);
+        this->time = time;
+    }
 };
+
+
+void enqueue(Deal d){
+    if(last == SIZE-1){
+        
+    }
+}
+
+
+Deal deque(){
+}
 
 
 int main(void){
     int n, q;
-    int first, last;
-    int time=0;
+    char name[10];
+    int time;
 
-    vector<Deal> queue;
-
-    scanf("%d %d", n, q);
-    for(int i=0; i<n; i++){
-        Deal buf;
-        scanf("%s %d", buf.name, buf.time);
-        queue.push_back(buf);
+    if(!(cin >> n >> q)){
+        exit(1);
     }
+    for(int i=0; i<n; i++){
+        scanf("%s %d", name, &time);
+    }
+    printf("\n");
 
     first = 0;
     last = n-1;
-
+    
+    int time = 0;
     do{
-        if(queue[first].time <= q){
-            time += queue[first].time;
-            printf("%s %d\n", queue[first].name, time);
-        }else{
-            time += q;
-            queue[first].time -= q;
-            queue.push_back(queue[first]);
-            queue.erase(queue.begin());
-        }
-    }while(!queue.empty());
+        
+    }while(0);
 
     return 0;
 }
+
+
+
+
