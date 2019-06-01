@@ -1,59 +1,76 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define SIZE 100000
 
 using namespace std;
 
-Deal queue[SIZE];
-int first, last;
 
-class Deal{
+class Process{
 public:
     char name[10];
     int time;
-    
-    Deal(){}
-    Deal(char *name, int time){
-        strcpy(this->name, name);
-        this->time = time;
-    }
 };
 
 
-void enqueue(Deal d){
-    if(last == SIZE-1){
-        
+class Queue{
+public:
+    int head = 0;
+    int tail = 0;
+    Process Q[100000];
+};
+
+
+Queue queue;
+
+
+void enqueue(Process p){
+    if(queue.head - queue.tail == 1){
+        printf("queue is full\n");
+        exit(1);
     }
+    queue.Q[queue.tail++] = p;
 }
 
 
-Deal deque(){
+Process dequeue(){
+    if(queue.head == queue.tail){
+        printf("queue is empty\n");
+        exit(1);
+    }
+    Process out;
+    out = queue.Q[queue.head++];
+    return out;
 }
 
 
 int main(void){
     int n, q;
-    char name[10];
-    int time;
+    Process buf;
 
     if(!(cin >> n >> q)){
         exit(1);
     }
     for(int i=0; i<n; i++){
-        scanf("%s %d", name, &time);
+        scanf("%s %d", buf.name, &buf.time);
+        enqueue(buf);
     }
     printf("\n");
 
-    first = 0;
-    last = n-1;
-    
     int time = 0;
     do{
+        Process p = dequeue();
         
-    }while(0);
+        if(p.time <= q){
+            time += p.time;
+            printf("%s %d\n", p.name, time);
+        }else if(p.time > q){
+            time += q;
+            p.time -= 100;
+            enqueue(p);
+        }
+    }while(queue.head != queue.tail);
 
     return 0;
 }
