@@ -3,33 +3,33 @@
 using namespace std;
 
 
-int main(){
-    int n, S[10000];
-    int q, T[500];
-    int count = 0;
+
+int linearSearch(int A[], int n, int key){
+    int i = 0;
+    A[n] = key;
+    while(A[i]!=key){
+        i++;
+    }
+    return i != n;
+}
+
+
+int main(void){
+    int n, A[100000+1], q;
+    int key, sum=0;
 
     scanf("%d", &n);
     for(int i=0; i<n; i++){
-        scanf("%d", &S[i]);
+        scanf("%d", &A[i]);
     }
 
     scanf("%d", &q);
     for(int i=0; i<q; i++){
-        scanf("%d", &T[i]);
-    }
-
-    for(int i=0; i<n; i++){
-        for(int j=0; j<q; j++){
-            if(S[i] == T[j]){
-                count++;
-            }
+        scanf("%d", &key);
+        if(linearSearch(A, n, key)){
+            sum++;
         }
     }
 
-    if(count > 0){
-        printf("%d", count);
-    
-    }else{
-        printf("Common number is nothing");
-    }
+    printf("%d\n", sum);
 }
