@@ -1,33 +1,34 @@
-#include <iostream>
-#include <cstdio>
-#include <cmath>
-
+#include <bits/stdc++.h>
 using namespace std;
+using Int = long long int;
+template<typename T> void swap(T *t1, T *t2){ T* tmp=t1; t1=t2; t2=tmp;}
 
 
 int main(){
-    int n;
-    double x[200], y[200];
+    Int n;
     cin >> n;
+    vector<Int> x(n), y(n);
     for(int i=0; i<n; i++){
         cin >> x[i] >> y[i];
     }
 
-    double result;
-    double max = 0;
-    double xx, yy;
-    for(int bit=0; bit < (1<<n); bit++){
-        xx = 0;
-        yy = 0;
-        for(int i=0; i<n; i++){
-            if(bit & (1<<i)){
-                xx += x[i];
-                yy += y[i];
+    double ans = 0;
+    for(int i=0; i<n; i++){
+        Int gx = x[i];
+        Int gy = y[i];
+        for(int k=0; k<4; k++){
+            {
+                Int nx = -gy;
+                Int ny = gx;
+                gx = nx;
+                gy = ny;
             }
+
+            auto dot = [](Int x1, Int y1, Int x2, Int y2){ return x1*x2 + y1*y2; };
+            auto cross = [](Int x1, Int y1, Int x2, Int y2){ return x1*y2 - x2*y1; };
+
         }
-        result = sqrt(pow(xx, 2) + pow(yy, 2));
-        max = (result > max) ? result : max;
     }
-    printf("%.20lf", max);
+
     return 0;
 }
