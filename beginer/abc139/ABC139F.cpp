@@ -26,7 +26,7 @@ int main(){
 
             auto dot = [](Int x1, Int y1, Int x2, Int y2){ return x1*x2 + y1*y2; };
             auto cross = [](Int x1, Int y1, Int x2, Int y2){ return x1*y2 - x2*y1; };
-
+            
         }
     }
 
