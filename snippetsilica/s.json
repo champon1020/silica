@@ -12,6 +12,7 @@
 			"\tios::sync_with_stdio(false);",
 			"\tcin.tie(0);",
 			"\t$0",
+			"",
 			"\treturn 0;",
 			"}"
 		],
