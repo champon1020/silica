@@ -1,52 +1,51 @@
-#include <iostream>
-#include <vector>
-#define NIL -1
-#define MAX 200000
-
+#include <bits/stdc++.h>
 using namespace std;
+using Int = long long int;
+template<typename T> void swap(T *t1, T *t2){ T* tmp=t1; t1=t2; t2=tmp;}
 
 
-struct Node {
-    int p;
-    vector<int> c;
-};
+vector<Int> m[300002];
+Int stts[300002];
+Int arr[300002];
 
-Node t[MAX+1];
-int s[MAX+1];
-
-void init(int n){
-    for(int i=0; i<=n; i++){
-        t[i].p = NIL;
-        s[i] = 0;
+void dfs(Int u, Int val) {
+    stts[u] = 1;
+    arr[u] += val;
+    for(Int i=0; i<m[u].size(); i++){
+        if(stts[m[u][i]] == 0){
+            dfs(m[u][i], arr[u]);
+        }
     }
 }
 
 int main(){
-    int n, q, a1, a2;
-    int buf;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    Int n, q, a, b;
     cin >> n >> q;
-    init(n);
-    for(int i=1; i<=n-1; i++){
-        cin >> a1 >> a2;
-        t[a2].p = a1;
-        t[a1].c.push_back(a2);
+    Int p, x;
+
+    // init
+    for(Int i=0; i<n; i++){
+        arr[i] = 0;
+        stts[i] = 0;
     }
-    int p, x;
-    for(int i=0; i<q; i++){
+
+    for(Int i=0; i<n-1; i++){
+        cin >> a >> b;
+        m[a-1].push_back(b-1);
+        m[b-1].push_back(a-1);
+    }
+    for(Int i=0; i<q; i++){
         cin >> p >> x;
-        s[p] += x;
+        arr[p-1] += x;
     }
-
-    for(int i=2; i<=n; i++){
-        s[i] += s[t[i].p];
-    }
-
-    for(int i=1; i<=n; i++){
-        if(i != 1){
-            cout << " ";
-        }
-        cout << s[i];
+    dfs(0, 0);
+    for(Int i=0; i<n; i++){
+        cout << arr[i] << " ";
     }
     cout << endl;
+
     return 0;
 }

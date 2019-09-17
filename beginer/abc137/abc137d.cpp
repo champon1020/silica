@@ -9,19 +9,22 @@ int main(){
     cin.tie(0);
 
     Int n, m, a, b;
-    vector<pair<Int, Int>> v;
+    vector<Int> v[100002];
     priority_queue<Int> pq;
     cin >> n >> m;
     for(int i=0; i<n; i++){
         cin >> a >> b;
-        if(a > m){
-            continue;
-        }
-        v.push_back(make_pair(a, b));
+        v[a].push_back(b);
     }
     Int sum = 0;
     for(Int i=1; i<=m; i++){
-        
+        for(Int j=0; j<v[i].size(); j++){
+            pq.push(v[i][j]);
+        }
+        if(!pq.empty()){
+            sum += pq.top();
+            pq.pop();
+        }
     }
     cout << sum << endl;
     return 0;
