@@ -10,7 +10,26 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    Int n;
+    cin >> n;
+    Int a[200001], b[200001];
+    vector<Int> c;
+    for(Int i=0; i<n; i++){
+        cin >> a[i] >> b[i];
+        c.push_back(b[i]-a[i]);
+    }
+    sort(c.begin(), c.end());
+    for(Int i=0; i<n; i++){
+        if(c[i] <= 0){
+            cout << "No" << endl;
+            return 0;
+        }
+        if(c[i] < i){
+            cout << "No" << endl;
+            return 0;
+        }
+    }
+    cout << "Yes" << endl;
 
     return 0;
 }
