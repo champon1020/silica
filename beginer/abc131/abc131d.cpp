@@ -6,30 +6,27 @@ Int tmpi = 0;
 double tmpd = 0.0;
 
 
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    Int n;
+    Int n, a, b;
+    vector<pair<Int, Int>> pair;
     cin >> n;
-    Int a[200001], b[200001];
-    vector<Int> c;
     for(Int i=0; i<n; i++){
-        cin >> a[i] >> b[i];
-        c.push_back(b[i]-a[i]);
+        cin >> a >> b;
+        pair.push_back(make_pair(b, a));
     }
-    sort(c.begin(), c.end());
-    for(Int i=0; i<n; i++){
-        if(c[i] <= 0){
-            cout << "No" << endl;
-            return 0;
-        }
-        if(c[i] < i){
+    sort(pair.begin(), pair.end());
+    Int time = 0;
+    for(auto p : pair){
+        time += p.second;
+        if(time > p.first){
             cout << "No" << endl;
             return 0;
         }
     }
     cout << "Yes" << endl;
-
     return 0;
 }
