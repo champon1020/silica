@@ -39,6 +39,7 @@ int main(){
     for(Int i=0; i<n-1; i++){
         cin >> u >> v >> w;
         graph[u].push_back(Edge(v, w));
+        graph[v].push_back(Edge(u, w));
     }
     for(Int i=1; i<=n; i++){
         color[i] = 0;
