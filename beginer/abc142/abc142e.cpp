@@ -10,39 +10,37 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    Int n, m, a, b;
-    map<Int, Int> amap;
-    vector<Int> c[1001];
-
+    Int n, m;
+    Int a[1001], b[1001], c[1001][20];
     cin >> n >> m;
     for(Int i=1; i<=m; i++){
-        cin >> a >> b;
-        amap.insert(make_pair(a, i));
-        for(Int j=0; j<b; j++){
-            cin >> tmpi;
-            c[i].push_back(tmpi);
+        cin >> a[i] >> b[i];
+        for(Int j=1; j<=b[i]; j++){
+            cin >> c[i][j];
         }
     }
 
-    Int cnt = 0;
-    Int ans = 0;
-    int marker[20];
-    for(auto const& aa : amap){
-        Int money = aa.first;
-        Int index = aa.second;
-        for(auto cc : c[index]){
-            if(marker[cc] == 0){
-                //cout << index << " " << cc << " " << money << endl;
-                ans += money;
-                marker[cc] = 1;
-                cnt++;
+    const int INF = 1e9;
+    vector<Int> dp(10001, INF);
+    dp[0] = 0;
+
+    for(Int i=1; i<=m; i++){
+        Int now = 0;
+        for(Int j=1; j<=b[i]; j++){
+            now |= (1 << c[i][j] - 1);
+        }
+        for(Int bit=0; bit < (1<<n); bit++){
+            if(dp[bit | now] > dp[bit]+a[i]){
+                dp[bit | now] = dp[bit] + a[i];
             }
         }
     }
-    if(cnt < n){
+
+    if(dp[(1<<n)-1] == INF){
         cout << -1 << endl;
         return 0;
     }
-    cout << ans << endl;
+    cout << dp[(1<<n)-1] << endl;
+
     return 0;
 }
