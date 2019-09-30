@@ -32,31 +32,31 @@ int main(){
                 hand.push_back(v[i]);
                 sum += v[i];
             }
-            for(Int i=n-1; i>=n-r; i--){
-                hand.push_back(v[i]);
-                sum += v[i];
+            for(Int i=0; i<r; i++){
+                hand.push_back(v[n-1-i]);
+                sum += v[n-1-i];
             }
 
-            Int cnt = min(n, k)-r-l;
-            Int it = 0;
             sort(hand.begin(), hand.end());
-            while(cnt > 0){
-                if(it >= hand.size()){
+            for(Int i=0; i<k-r-l; i++){
+                if(hand.empty()){
                     break;
                 }
-                if(hand[it] < 0){
-                    sum -= hand[it];
-                    it++;
-                    cnt--;
+                Int& f = hand.front();
+                if(f < 0){
+                    sum -= f;
+                    hand.erase(hand.begin());
                 }else{
                     break;
                 }
             }
-            for(Int i=0; i<hand.size(); i++){
-                cout << hand[i] << " ";
-            }
-            cout << sum;
-            cout << endl;
+
+            // cout << sum << ": ";
+            // for(Int i=0; i<hand.size(); i++){
+            //     cout << hand[i] << " ";
+            // }
+            // cout << endl;
+            
             max = sum > max ? sum : max;
         }
     }
