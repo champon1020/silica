@@ -10,20 +10,16 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    char s;
-    cin >> s;
+    Int n, k;
+    cin >> n >> k;
+    Int cnt=0, h;
+    for(Int i=0; i<n; i++){
+        cin >> h;
+        if(h >= k){
+            cnt++;
+        }
+    }
+    cout << cnt << endl;
 
-    if(s=='A'){
-        cout << 'T' << endl;
-    }
-    if(s=='T'){
-        cout << 'A' << endl;
-    }
-    if(s=='C'){
-        cout << 'G' << endl;
-    }
-    if(s=='G'){
-        cout << 'C' << endl;
-    }
     return 0;
 }

@@ -10,20 +10,18 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    char s;
-    cin >> s;
+    Int n;
+    map<Int, Int> a;
+    cin >> n;
+    for(Int i=0; i<n; i++){
+        cin >> tmpi;
+        a.insert(make_pair(tmpi, i));
+    }
 
-    if(s=='A'){
-        cout << 'T' << endl;
+    for(auto const& entry: a){
+        cout << entry.second+1 << " ";
     }
-    if(s=='T'){
-        cout << 'A' << endl;
-    }
-    if(s=='C'){
-        cout << 'G' << endl;
-    }
-    if(s=='G'){
-        cout << 'C' << endl;
-    }
+    
+
     return 0;
 }

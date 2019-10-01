@@ -29,18 +29,15 @@ int main(){
         flg = false;
         marker[i] = 0;
     }
-
     int t[100001];
     t[0] = marker[0];
     for(int i=1; i<n; i++){
         t[i] = t[i-1] + marker[i];
     }
-
     int l, r;
     for(Int i=0; i<q; i++){
         cin >> l >> r;
         cout << t[r-1]-t[l-1] << endl;
     }
-
     return 0;
 }

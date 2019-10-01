@@ -10,20 +10,16 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    char s;
-    cin >> s;
+    double n;
+    cin >> n;
 
-    if(s=='A'){
-        cout << 'T' << endl;
+    double cnt = 0;
+    for(Int i=0; i<n; i++){
+        if((i+1)%2==1){
+            cnt++;
+        }
     }
-    if(s=='T'){
-        cout << 'A' << endl;
-    }
-    if(s=='C'){
-        cout << 'G' << endl;
-    }
-    if(s=='G'){
-        cout << 'C' << endl;
-    }
+    printf("%.10lf", cnt/n);
+
     return 0;
 }
