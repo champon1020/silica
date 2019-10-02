@@ -53,7 +53,7 @@ case $BASE_DIR in
             echo "Error: 'agc$BASE_NUM' directory is already exist"
             exit 1
         else
-            mkdir "arc$BASE_DIR"
+            mkdir "agc$BASE_NUM"
             echo "Create '$BASE_DIR/agc$BASE_NUM'"
             cd agc$BASE_NUM
             BASE_FILE=agc$BASE_NUM

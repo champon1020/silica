@@ -10,20 +10,20 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    char s;
+    char s[100001];
     cin >> s;
 
-    if(s=='A'){
-        cout << 'T' << endl;
+    char marker = s[0];
+    Int sum = 1;
+    for(Int i=1; i<strlen(s); i++){
+        if(s[i] == marker){
+            sum++;
+        }
     }
-    if(s=='T'){
-        cout << 'A' << endl;
+    
+    if(strlen(s)-sum < sum){
+        sum = strlen(s)-sum;
     }
-    if(s=='C'){
-        cout << 'G' << endl;
-    }
-    if(s=='G'){
-        cout << 'C' << endl;
-    }
+    cout << sum*2 << endl;
     return 0;
 }
