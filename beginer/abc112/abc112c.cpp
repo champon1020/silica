@@ -23,28 +23,36 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-vector<ll> a(100001);
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, k;
-    cin >> n >> k;
+    int n, ind;
+    vector<ll> x(101, 0);
+    vector<ll> y(101, 0);
+    vector<ll> h(101, 0);
+    cin >> n;
     rep(i, n){
-        cin >> a[i];
+        cin >> x[i] >> y[i] >> h[i];
+        if(h[i]!=0) ind = i;
     }
 
-    ll dp[1000, 2];
-    dp[40][0] = 0;
-    dp[40][1] = 0;
-    repr(i, 40){
-        ll mask = 1LL << i;
-
-        //先頭からj桁目でビットが立っているものの個数
-        int cnt=0;
-        rep(j, n){
-            if(a[j] & mask) cnt++;
+    rep(cy, 101){
+        rep(cx, 101){
+            bool flg = true;
+            ll height = h[ind]+abs(x[ind]-cx)+abs(y[ind]-cy);
+            rep(i, n){
+                ll tmph = max(0, int(height-abs(x[i]-cx)-abs(y[i]-cy)));
+                if( tmph != h[i] ){
+                    flg = false;
+                    break;
+                }
+            }
+            if(flg){
+                cout << cx << " " << cy << " " << height << endl;
+                return 0;
+            }
         }
     }
 

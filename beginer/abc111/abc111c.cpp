@@ -23,30 +23,56 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-vector<ll> a(100001);
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, k;
-    cin >> n >> k;
+    ll n, tmp;
+    vector<int> evenind(100001, 0);
+    vector<int> oddind(100001, 0);
+    cin >> n;
     rep(i, n){
-        cin >> a[i];
+        cin >> tmp;
+        if(i%2==0) oddind[tmp]++;
+        else evenind[tmp]++;
     }
 
-    ll dp[1000, 2];
-    dp[40][0] = 0;
-    dp[40][1] = 0;
-    repr(i, 40){
-        ll mask = 1LL << i;
+    int evenmax = 0;
+    int oddmax = 0;
+    bool flg = false;
+    int buf = 0;
+    rep(i, 1e5+1){
+        if(evenind[i] == 0 && oddind[i] == 0) continue;
+        if(evenind[i] > 0 && oddind[i] > 0){
+            if(evenind[i] > oddind[i]){
+                evenmax = evenind[i];
+            }else if(evenind[i] < oddind[i]){
+                oddmax = oddind[i];
+            }else{
+                if(flg){
+                    evenmax = max(evenmax, evenind[i]);
+                    oddmax = max(oddmax, oddind[i]);
+                    continue;
+                }
+                flg = true;
+                buf = i;
+            }
+            continue;
+        }
+        evenmax = max(evenmax, evenind[i]);
+        oddmax = max(oddmax, oddind[i]);
+    }
 
-        //先頭からj桁目でビットが立っているものの個数
-        int cnt=0;
-        rep(j, n){
-            if(a[j] & mask) cnt++;
+    if(flg){
+        //cout << evenmax << " " << oddmax << endl;
+        if(evenmax > oddmax){
+            oddmax = oddind[buf];
+        }else{
+            evenmax = evenind[buf];
         }
     }
+
+    cout << n/2-evenmax + ceil(n, 2)-oddmax << endl;
 
     return 0;
 }

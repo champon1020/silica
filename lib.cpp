@@ -16,7 +16,7 @@ template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " ";
 template<typename T> T arrdebug(T arr[], int n){ rep(i, n){ cout << arr[i] << " "; } cout << endl; }
 void ans(bool b){ if(b) cout << "Yes" << endl; else cout << "No" << endl; }
 void ans2(bool b){ if(b) cout << "YES" << endl; else cout << "NO" << endl; }
-void keta(ll num){ int k=0; while(num>0){ num/=0; k++ } return k; }
+int keta(ll num){ int k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
