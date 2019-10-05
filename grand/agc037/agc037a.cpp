@@ -10,6 +10,8 @@
 #define ok cout << "ok" << endl;
 using namespace std;
 using ll = long long;
+template<typename T> bool chmax(T &a, T &b){ if(a<b) { a=b; return 1; }}
+template<typename T> bool chmin(T &a, T &b){ if(b<a) { a=b; return 1; }}
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
 template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }
 template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
@@ -24,6 +26,21 @@ int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
+
+    string s;
+    cin >> s;
+    int len = s.length();
+
+    ll dp[200001][2];
+
+    if(s[0] == s[1]){
+        
+    }
+    rep(i, n){
+        if(s[i] == s[i+1]){
+
+        }
+    }
 
     return 0;
 }

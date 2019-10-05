@@ -10,6 +10,8 @@
 #define ok cout << "ok" << endl;
 using namespace std;
 using ll = long long;
+template<typename T> bool chmax(T &a, T &b){ if(a<b) { a=b; return 1; }}
+template<typename T> bool chmin(T &a, T &b){ if(b<a) { a=b; return 1; }}
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
 template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }
 template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
@@ -24,6 +26,46 @@ int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
+
+    string s;
+    ll k;
+    cin >> s;
+    cin >> k;
+    
+    int len = s.length();
+
+    if(len == 1){
+        cout << k/2 << endl;
+        return 0;
+    }
+
+    ll cnt = 0;
+    rep(i, len-1){
+        if(s[i] == s[i+1]){
+            if(i == len-2){
+                if(s[0] == s[len-1]){
+                    s[i+1] = '?';
+                    cnt++;
+                }else{
+                    s[i] = '?';
+                    cnt++;
+                }
+            }else if(i+2 < s.length() && s[i] == s[i+2]){
+                cnt++;
+                s[i+1] = '?';
+            }else{
+                cnt++;
+                s[i] = '?';
+            }
+        }
+    }
+    ll res = cnt*k;
+    if(s[0] == s[len-1]){
+        res += k-1;
+    }
+ 
+    cout << res << endl;
+    //cout << s << endl;
 
     return 0;
 }
