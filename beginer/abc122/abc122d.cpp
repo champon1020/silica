@@ -1,95 +1,40 @@
 #include <bits/stdc++.h>
+#define rep(i, n) for(int i=0; i<n; i++)
+#define repr(i, n) for(int i=n; i>=0; i--)
+#define reps(i, s, e) for(int i=s; i<e; i++)
+#define inf 1e10
+#define vsort(v) sort(v.begin(), v.end())
+#define vsortr(v) sort(v.begin(), v.end(), greater<lli>())
+#define sz(x) x.size()
+#define ceil(a, b) (a+b-1)/b
+#define ok cout << "ok" << endl;
 using namespace std;
-using Int = long long int;
-template<typename T> void swap(T *t1, T *t2){ T* tmp=t1; t1=t2; t2=tmp;}
-Int tmpi = 0;
-double tmpd = 0.0;
+using lli = long long int;
+template<typename T> bool chmax(T &a, T &b){ if(a<b) { a=b; return 1; }}
+template<typename T> bool chmin(T &a, T &b){ if(b<a) { a=b; return 1; }}
+template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
+template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }
+template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
+template<typename T> T arrdebug(T arr[], int n){ rep(i, n){ cout << arr[i] << " "; } cout << endl; }
+void ans(bool b){ if(b) cout << "Yes" << endl; else cout << "No" << endl; }
+void ans2(bool b){ if(b) cout << "YES" << endl; else cout << "NO" << endl; }
+int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
+int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    Int n;
+    lli n;
     cin >> n;
 
-    Int inf = 1e9;
-    Int dp[500][20];
+    lli dp[200][4];
 
-    Int len = n%2==0 ? n/2 : (n+1)/2;
-
-    if(n%2==1){
-        dp[1][1] = 1;
-        dp[1][6] = 1;
-        dp[1][9] = 1;
+    rep(i, 4){
+        dp[0][i] = 1;
     }
-    for(Int i=2; i<=n/2; i++){
-        for(Int j=0; j<16; j++){
-            if(j==1){
-                for(Int k=8; k<12; k++){
-                    dp[i][k] += dp[i-1][j] + 1;
-                }
-                for(Int k=0; k<16; k++){
-                    if(k%4 != 2) continue;
-                    dp[i][j] += dp[i-1][k] + 1;
-                }
-            }
-            else if(j==2 || j==8){
-                for(Int k=4; k<8; k++){
-                    dp[i][k] += dp[i-1][j] + 1;
-                }
-            }
-            else if(j==6 || j==9){
-                for(Int k=0; k<16; k++){
-                    if(k%4 != 0) continue;
-                    dp[i][j] += dp[i-1][k] + 1;
-                }
-            }
-            else {
-                for(Int k=0; k<16; k++){
-                    dp[i][j] += dp[i-1][k];
-                }
-            }
 
-
-            // if(j==1){
-            //     for(Int k=8; k<12; k++){
-            //         dp[i][k]++;
-            //     }
-            //     for(Int k=0; k<16; k++){
-            //         if(k%4 != 2) continue;
-            //         dp[i][j]++;
-            //     }
-            // }
-            // else if(j==2 || j==8){
-            //     for(Int k=4; k<8; k++){
-            //         dp[i][k]++;
-            //     }
-            // }
-            // else if(j==6 || j==9){
-            //     for(Int k=0; k<16; k++){
-            //         if(k%4 != 0) continue;
-            //         dp[i][j]++;
-            //     }
-            // }
-
-            // for(Int k=0; k<16; k++){
-            //     dp[i][j] += dp[i-1][k];
-            // }
-            
-            dp[i][j] %= inf;
-        }
-    }
-    
-    Int sum = 0;
-    for(Int j=0; j<16; j++){
-        sum += dp[n/2][j];
-        cout << dp[n/2][j] << " ";
-    }
-    cout << endl;
-
-    Int num = pow(4,n);
-    cout << (num-sum)%inf << endl;
 
     return 0;
 }
