@@ -9,15 +9,14 @@
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 using namespace std;
-using lli = long long int;
-template<typename T> bool chmax(T &a, T &b){ if(a<b) { a=b; return 1; }}
-template<typename T> bool chmin(T &a, T &b){ if(b<a) { a=b; return 1; }}
+using ll = long long;
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
 template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }
 template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
 template<typename T> T arrdebug(T arr[], int n){ rep(i, n){ cout << arr[i] << " "; } cout << endl; }
 void ans(bool b){ if(b) cout << "Yes" << endl; else cout << "No" << endl; }
 void ans2(bool b){ if(b) cout << "YES" << endl; else cout << "NO" << endl; }
+void keta(ll num){ int k=0; while(num>0){ num/=0; k++ } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
