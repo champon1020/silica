@@ -22,7 +22,8 @@ int keta(ll num){ int k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
-
+// 各処理の計算量　O(log(n))
+// 初期化の計算量 O(n)
 const int MAX = 1<<17;
 
 class SegmentTree {
@@ -77,6 +78,10 @@ public:
             // 2つの最小値
             return min(vl, vr);
         }
+    }
+
+    ll operator[](int i){
+        return dat[i + n - 1];
     }
 };
 
