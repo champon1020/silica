@@ -21,56 +21,38 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
     
     
-bool comp(pair<int,int> p1, pair<int,int> p2){
-    if(p1.second == p2.second){
-        return p1.first < p2.first;
-    }else{
-        return p1.second > p2.second;
-    }
-}
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
- 
-    int n, a, b, c, d;
-    vector<pair<int, int>> red, blue;
-    cin >> n;
-    rep(i, n){
-        cin >> a >> b;
-        red.push_back(make_pair(a, b));
-    }
-    rep(i, n){
-        cin >> c >> d;
-        blue.push_back(make_pair(c, d));
-    }
- 
-    sort(red.begin(), red.end(), comp);
-    sort(blue.begin(), blue.end());
+    
+    ll n, d;
+    cin >> n >> d;
 
-    // cout << endl;
-    // for(auto r : red){
-    //     cout << r.first << " " << r.second << endl;
-    // }
- 
-    int res = 0;
-    int used[1000];
-    rep(i, n){
-        used[i] = 0;
+    ll dp[101][7];
+    rep(i, 7){
+        dp[0][i] = d;
     }
-    for(auto const& b : blue){
-        rep(i, n){
-            if(used[i]) continue;
-            if(red[i].first >= b.first) continue;
-            if(red[i].second < b.second){
-                res++;
-                used[i] = 1;
-                break;
+
+    int cnt = 0;
+    rep(i, n){
+        reps(j, 1, 7){
+            reps(k, 1, 7){
+                dp[i+1][j] = dp[i][k] % j;
             }
         }
+        reps(l, 1, 6){
+            cout << dp[i+1][l] << " ";
+        }
+        cout << endl;
     }
- 
-    cout << res << endl;
- 
+
+    rep(i, n+1){
+        reps(j, 1, 7){
+            if(dp[i][j] == 0) cnt++;
+        }
+    }
+
+    double res = cnt / pow(6, n);
+    printf("%.10lf", res);
     return 0;
 }

@@ -21,56 +21,42 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
     
     
-bool comp(pair<int,int> p1, pair<int,int> p2){
-    if(p1.second == p2.second){
-        return p1.first < p2.first;
-    }else{
-        return p1.second > p2.second;
-    }
-}
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
- 
-    int n, a, b, c, d;
-    vector<pair<int, int>> red, blue;
+    
+    int n, tmpint;
+    vector<int> p;
     cin >> n;
     rep(i, n){
-        cin >> a >> b;
-        red.push_back(make_pair(a, b));
+        cin >> tmpint;
+        p.push_back(tmpint);
     }
-    rep(i, n){
-        cin >> c >> d;
-        blue.push_back(make_pair(c, d));
+    
+    int dp[100001];
+    rep(i, 10000){
+        dp[i] = 0;
     }
- 
-    sort(red.begin(), red.end(), comp);
-    sort(blue.begin(), blue.end());
+    dp[0] = 1;
 
-    // cout << endl;
-    // for(auto r : red){
-    //     cout << r.first << " " << r.second << endl;
-    // }
- 
-    int res = 0;
-    int used[1000];
     rep(i, n){
-        used[i] = 0;
-    }
-    for(auto const& b : blue){
-        rep(i, n){
-            if(used[i]) continue;
-            if(red[i].first >= b.first) continue;
-            if(red[i].second < b.second){
-                res++;
-                used[i] = 1;
-                break;
+        vector<int> buf;
+        rep(j, 10000){
+            if(dp[j] == 1){
+                buf.push_back(p[i] + j);
             }
         }
+        for(auto b : buf){
+            dp[b] = 1;
+        }
     }
- 
+
+    int res = 0;
+    rep(i, 10000){
+        if(dp[i]) res++;
+    }
+
     cout << res << endl;
- 
+    
     return 0;
 }
