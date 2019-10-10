@@ -4,14 +4,14 @@
 #define reps(i, s, e) for(int i=s; i<e; i++)
 #define inf 1e18
 #define vsort(v) sort(v.begin(), v.end())
-#define vsortr(v) sort(v.begin(), v.end(), greater<lli>())
+#define vsortr(v) sort(v.begin(), v.end(), greater<ll>())
 #define sz(x) x.size()
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 using namespace std;
 using ll = long long;
-template<typename T> bool chmax(T &a, T &b){ if(a<b) { a=b; return 1; }}
-template<typename T> bool chmin(T &a, T &b){ if(b<a) { a=b; return 1; }}
+template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }
+template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } return false; }
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
 template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }
 template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
@@ -23,34 +23,19 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int dp[2048][2048];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, k, tmpa;
-    vector<ll> a;
-    cin >> n >> k;
+    int n;
+    ll W, tmpv, tmpw;
+    vector<ll> v, w;
+    cin >> n >> w;
     rep(i, n){
-        cin >> tmpa;
-        a.push_back(tmpa);
+        cin >> tmpv >> tmpw;
+        v.push_back(tmpv);
+        w.push_back(tmpw);
     }
-
-    ll game = 0;
-    rep(i, n){
-        game += a[i];
-        rep(j, n){
-        }
-    }
-
-    int res = 0;
-    rep(i, n+1){
-        if(dp[n][i] <= k) res = i;
-        cout << dp[n][i] << " ";
-    }
-
-    cout << res << endl;
 
     return 0;
 }
