@@ -20,39 +20,27 @@ int keta(ll num){ int k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
     
-
-vector<ll> dp[100010];
-
+    
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     
-    ll n, m;
-    cin >> n >> m;
+    ll n, k;
+    cin >> n >> k;
 
-    vector<ll> d;
-    for(int i=1; i*i<=m; i++){
-        if(m%i == 0){
-            d.push_back(i);
-            if(i*i != m){
-                d.push_back(m/i);
-            }
-        }
+    vector<ll> v, v2;
+    reps(i, 1, n+1){
+        if(i%k == 0) v.push_back(i);
+        if(k%2 == 0 && i%k == k/2) v2.push_back(i);
     }
 
-    sort(d.begin(), d.end(), greater<ll>());
+    ll res = pow(v.size(), 3);
 
-    //vdebug(d);
-
-    int res;
-    for(auto dd : d){
-        if(dd*n <= m){
-            res = dd;
-            break;
-        }
+    if(k%2==1) cout << res << endl;
+    else {
+        res += pow(v2.size(), 3);
+        cout << res << endl;
     }
-
-    cout << res << endl;
-
+    
     return 0;
 }
