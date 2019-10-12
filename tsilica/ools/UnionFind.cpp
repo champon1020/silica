@@ -23,11 +23,52 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+const int MAXN = 100;
+
+class UnionFind{
+    int par[MAXN];   // 親
+    int rank[MAXN];  // 木の深さ
+
+public:
+    // n要素分を初期化
+    UnionFind(int n){
+        rep(i, n){
+            par[i] = i;
+            rank[i] = 0;
+        }
+    }
+
+    // 木の根を求める
+    int find(int x){
+        if(par[x] == x){
+            return x;
+        }else{
+            return par[x] = find(par[x]);
+        }
+    }
+
+    // xとyの属するグループを合体
+    void unite(int x, int y){
+        x = find(x);
+        y = find(y);
+        if(x == y) return;
+        if(rank[x] < rank[y]){
+            par[x] = y;
+        }else{
+            par[y] = x;
+            if(rank[x] == rank[y]) rank[x]++;
+        }
+    }
+
+    // xとyが同じグループに属するか
+    bool same(int x, int y){
+        return find(x) == find(y);
+    }
+};
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
-    
 
     return 0;
 }

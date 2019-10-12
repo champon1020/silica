@@ -34,7 +34,7 @@ class SegmentTree {
 public:
     // 初期化
     // 葉の枚数nnに対して 2^nn-1 個のノードが必要
-    void init(ll nn){
+    SegmentTree(ll nn){
         n = 1;
         while(n < nn) n*=2;
         rep(i, 2*n-1) dat[i] = inf;
