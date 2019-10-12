@@ -12,44 +12,35 @@ using namespace std;
 using ll = long long;
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
 template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }
-template<typename T> T vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
-template<typename T> T adebug(T arr[], int n){ rep(i, n){ cout << arr[i] << " "; } cout << endl; }
+template<typename T> void vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
+template<typename T> void adebug(T arr[], int n){ rep(i, n){ cout << arr[i] << " "; } cout << endl; }
 void ans(bool b){ if(b) cout << "Yes" << endl; else cout << "No" << endl; }
 void ans2(bool b){ if(b) cout << "YES" << endl; else cout << "NO" << endl; }
 int keta(ll num){ int k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
-
-
-ll total[51];
-ll paty[51];
-
-ll rec(ll x, ll level){ 
-    if(x==1){
-        if(level == 0) return 1;
-        else return 0;
-    }
-    if(1 < x && x <= total[level]/2) return rec(x-1, level-1);
-    if(x == total[level]/2+1) return paty[level-1]+1;
-    if(total[level]/2+1 < x && x <= total[level]-1) return paty[level-1] + 1 + rec(x - (total[level]/2+1), level-1);
-    return paty[level];
-}
+    
     
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     
-    ll n, x;
-    cin >> n >> x;
+    ll n, k;
+    cin >> n >> k;
 
-    total[0] = 1;
-    paty[0] = 1;
-    rep(i, n){
-        total[i+1] = 2*total[i] + 3;
-        paty[i+1] = 2*paty[i] + 1;
+    vector<ll> v, v2;
+    reps(i, 1, n+1){
+        if(i%k == 0) v.push_back(i);
+        if(k%2 == 0 && i%k == k/2) v2.push_back(i);
     }
 
-    cout << rec(x, n) << endl;
+    ll res = pow(v.size(), 3);
 
+    if(k%2==1) cout << res << endl;
+    else {
+        res += pow(v2.size(), 3);
+        cout << res << endl;
+    }
+    
     return 0;
 }
