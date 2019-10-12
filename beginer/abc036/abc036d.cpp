@@ -23,49 +23,16 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int cnt = 0;
-int visit[100010];
-vector<int> g[100010];
-
-void visitinit(ll n){
-    rep(i, n){
-        visit[i] = 0;
-    }
-}
-
-void dfs(int u){
-    cnt++;
-    visit[u] = 1;
-    for(auto gg : g[u]){
-        if(visit[gg] == 1) continue;
-        if(gg == -1) continue;
-        dfs(gg);
-    }
-}
+struct tree{
+    int p;
+    vector<int> c;
+};
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m, a, b;
-    vector<pair<ll, ll>> bridge;
-    cin >> n >> m;
-    rep(i, m){
-        cin >> a >> b;
-        g[a].push_back(b);
-        g[b].push_back(a);
-        bridge.push_back(make_pair(a, b));
-    }
-
-    rep(i, m){
-        cnt = 0;
-        visitinit(n);
-        ll island1 = bridge[i].first;
-        ll island2 = bridge[i].second;
-        g[island1][island2] = -1;
-        g[island2][island1] = -1;
-        
-    }
+    
 
     return 0;
 }

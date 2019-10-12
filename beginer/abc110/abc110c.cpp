@@ -23,49 +23,73 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int cnt = 0;
-int visit[100010];
-vector<int> g[100010];
-
-void visitinit(ll n){
-    rep(i, n){
-        visit[i] = 0;
-    }
-}
-
-void dfs(int u){
-    cnt++;
-    visit[u] = 1;
-    for(auto gg : g[u]){
-        if(visit[gg] == 1) continue;
-        if(gg == -1) continue;
-        dfs(gg);
-    }
-}
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m, a, b;
-    vector<pair<ll, ll>> bridge;
-    cin >> n >> m;
-    rep(i, m){
-        cin >> a >> b;
-        g[a].push_back(b);
-        g[b].push_back(a);
-        bridge.push_back(make_pair(a, b));
+    string s, t;
+    cin >> s >> t;
+    int len = s.length();
+    int table[26][26];
+    rep(i, 26){
+        rep(j, 26){
+            table[i][j] = 0;
+        }
     }
 
-    rep(i, m){
-        cnt = 0;
-        visitinit(n);
-        ll island1 = bridge[i].first;
-        ll island2 = bridge[i].second;
-        g[island1][island2] = -1;
-        g[island2][island1] = -1;
-        
+    rep(i, len){
+        rep(j, 26){
+            //if(table[s[i]-'a'][j] != 0 && j != t[i]-'a') table[s[i]-'a'][j] = 0;
+            table[s[i]-'a'][t[i]-'a'] = 1;
+        }
     }
+
+    rep(i, 26){
+        int cnt = 0;
+        rep(j, 26){
+            if(table[i][j]) cnt++;
+        }
+        if(cnt > 1){
+            ans(false);
+            return 0;
+        }
+    }
+    rep(i, 26){
+        int cnt=0;
+        rep(j, 26){
+            if(table[j][i]) cnt++;
+        }
+        if(cnt > 1){
+            ans(false);
+            return 0;
+        }
+    }
+    ans(true);
+
+    // cout << "  ";
+    // rep(i, 26){
+    //     cout << char('a'+i) << " ";
+    // }
+    // cout << endl;
+    // rep(i, 26){
+    //     cout << char('a'+i) << " ";
+    //     rep(j, 26){
+    //         cout << table[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    // rep(i, len){
+    //     rep(j, 26){
+    //         if(table[s[i]-'a'][j] != 0){
+    //             s[i] = char(j+'a');
+    //             break;
+    //         }
+    //     }
+    // }
+
+    //ans(s==t);
+
 
     return 0;
 }
