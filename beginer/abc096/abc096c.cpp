@@ -23,27 +23,40 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int dp[100010];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, tmpa;
-    vector<int> a;
-
-    cin >> n;
-    rep(i, n){
-        cin >> tmpa;
-        a.push_back(tmpa);
+    int h, w;
+    char pic[100][100];
+    cin >> h >> w;
+    rep(hh, h){
+        rep(ww, w){
+            cin >> pic[ww][hh];
+        }
     }
 
-    ll res = 0;
-    rep(i, n){
-        res += a[i]-1;
+    rep(hh, h){
+        rep(ww, w){
+            if(pic[ww][hh] != '#') continue;
+            bool flg = false;
+            rep(i, 4){
+                int deltax = ww + dx[i];
+                int deltay = hh + dy[i];
+                if(deltax < 0 || w <= deltax || deltay < 0 || h <= deltay) continue;
+                if(pic[deltax][deltay] == '#'){
+                    flg = true;
+                    break;
+                }
+            }
+            if(!flg){
+                ans(false);
+                return 0;
+            }
+        }
     }
 
-    cout << res << endl;
+    ans(true);
 
     return 0;
 }

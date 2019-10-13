@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for(int i=0; i<n; i++)
-#define repr(i, n) for(int i=n; i>=0; i--)
+#define repr(i, s, e) for(int i=s; i>=e; i--)
 #define reps(i, s, e) for(int i=s; i<e; i++)
 #define inf 1e18
 #define vsort(v) sort(v.begin(), v.end())
@@ -23,24 +23,35 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int dp[100010];
+ll righte[300010], leftw[300010];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, tmpa;
-    vector<int> a;
+    int n;
+    string s;
+    cin >> n >> s;
 
-    cin >> n;
-    rep(i, n){
-        cin >> tmpa;
-        a.push_back(tmpa);
+    rep(i, n-1){
+        if(s[i] == 'W'){
+            leftw[i+1] = leftw[i] + 1;
+        }else{
+            leftw[i+1] = leftw[i];
+        }
     }
 
-    ll res = 0;
+    repr(i, n-1, 1){
+        if(s[i] == 'E'){
+            righte[i-1] = righte[i] + 1;
+        }else{
+            righte[i-1] = righte[i];
+        }
+    }
+
+    ll res = inf;
     rep(i, n){
-        res += a[i]-1;
+        res = min(res, leftw[i] + righte[i]);
     }
 
     cout << res << endl;

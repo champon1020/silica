@@ -23,24 +23,24 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int dp[100010];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, tmpa;
-    vector<int> a;
-
-    cin >> n;
-    rep(i, n){
-        cin >> tmpa;
-        a.push_back(tmpa);
-    }
+    int a, b, c, x, y;
+    cin >> a >> b >> c >> x >> y;
 
     ll res = 0;
-    rep(i, n){
-        res += a[i]-1;
+    if(a + b > 2*c){
+        if(x > y){
+            res = 2*c*y + a*(x-y);
+        }else{
+            res = 2*c*x + b*(y-x);
+        }
+        ll tmp = (x>y) ? x : y;
+        res = min(2*c*tmp, res);
+    }else{
+        res = a*x + b*y;
     }
 
     cout << res << endl;

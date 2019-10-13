@@ -23,27 +23,37 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int dp[100010];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, tmpa;
-    vector<int> a;
-
+    ll n, tmp;
+    vector<ll> x;
     cin >> n;
     rep(i, n){
-        cin >> tmpa;
-        a.push_back(tmpa);
+        cin >> tmp;
+        x.push_back(tmp);
     }
 
-    ll res = 0;
+    vector<ll> buf = x;
+
+    sort(x.begin(), x.end());
+
+    ll cl = x[n/2-1];
+    ll cr = x[n/2];
+
     rep(i, n){
-        res += a[i]-1;
+        if(cr == cl){
+            cout << cl << endl;
+        }else{
+            if(buf[i] <= cl){
+                cout << cr << endl;
+            }
+            if(buf[i] >= cr){
+                cout << cl << endl;
+            }
+        }
     }
-
-    cout << res << endl;
 
     return 0;
 }

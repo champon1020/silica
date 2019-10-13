@@ -23,24 +23,30 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-int dp[100010];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, tmpa;
-    vector<int> a;
-
+    ll n, tmpa;
+    vector<ll> a;
     cin >> n;
     rep(i, n){
         cin >> tmpa;
         a.push_back(tmpa);
     }
 
-    ll res = 0;
-    rep(i, n){
-        res += a[i]-1;
+    bool flg = true;
+    int res = 0;
+    while(flg){
+        flg = false;
+        rep(i, n){
+            if(a[i]%2 == 0){
+                a[i] /= 2;
+                res++;
+                flg = true;
+                break;
+            }
+        }
     }
 
     cout << res << endl;
