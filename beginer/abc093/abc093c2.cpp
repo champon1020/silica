@@ -27,50 +27,19 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    vector<int> abc(3);
-    cin >> abc[0] >> abc[1] >> abc[2];
+    int a, b, c;
+    cin >> a >> b >> c;
 
-    int oddcnt = 0;
-    int oddarr[3];
+    int sum = a+b+c;
+    int maxabc = 0;
+    maxabc = max(a, b);
+    maxabc = max(maxabc, c);
 
-    rep(i, 3){
-        if(abc[i]%2 == 1){
-            oddcnt++;
-            oddarr[i] = 1;
-        }else{
-            oddarr[i] = 0;
-        }
+    if(sum%2 == maxabc%2){
+        cout << (maxabc*3 - sum) / 2 << endl;
+    }else{
+        cout << ((maxabc+1)*3 - sum) / 2 << endl;
     }
-
-    int res = 0;
-    if(oddcnt == 2){
-        rep(i, 3){
-            if(oddarr[i] == 1) abc[i]++;
-        }
-        res++;
-    }
-    if(oddcnt == 1){
-        rep(i, 3){
-            if(oddarr[i] == 0) abc[i]++;
-        }
-        res++;
-    }
-
-    sort(abc.begin(), abc.end());
-
-    int diff1 = abc[2]-abc[0];
-    int diff2 = abc[2]-abc[1];
-
-    while(diff1 > 0){
-        diff1 -= 2;
-        res++;
-    }
-    while(diff2 > 0){
-        diff2 -= 2;
-        res++;
-    }
-
-    cout << res << endl;
 
     return 0;
 }

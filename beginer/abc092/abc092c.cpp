@@ -23,54 +23,35 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+ll n, a[10010], diff[10010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    vector<int> abc(3);
-    cin >> abc[0] >> abc[1] >> abc[2];
+    cin >> n;
+    rep(i, n){
+        cin >> a[i];
+    }
 
-    int oddcnt = 0;
-    int oddarr[3];
+    reps(i, 1, n){
+        diff[i] = abs(a[i+1]-a[i]) + abs(a[i]-a[i-1]) - abs(a[i+1]-a[i-1]);
+    }
+    diff[0] = abs(a[1]-a[0]) + abs(a[0]) - abs(a[1]);
 
-    rep(i, 3){
-        if(abc[i]%2 == 1){
-            oddcnt++;
-            oddarr[i] = 1;
+    ll sum = 0;
+    rep(i, n){
+        if(i==0){
+            sum += abs(a[i]);
         }else{
-            oddarr[i] = 0;
+            sum += abs(a[i] - a[i-1]);
         }
     }
+    sum += abs(a[n-1]);
 
-    int res = 0;
-    if(oddcnt == 2){
-        rep(i, 3){
-            if(oddarr[i] == 1) abc[i]++;
-        }
-        res++;
+    rep(i, n){
+        cout << sum-diff[i] << endl;
     }
-    if(oddcnt == 1){
-        rep(i, 3){
-            if(oddarr[i] == 0) abc[i]++;
-        }
-        res++;
-    }
-
-    sort(abc.begin(), abc.end());
-
-    int diff1 = abc[2]-abc[0];
-    int diff2 = abc[2]-abc[1];
-
-    while(diff1 > 0){
-        diff1 -= 2;
-        res++;
-    }
-    while(diff2 > 0){
-        diff2 -= 2;
-        res++;
-    }
-
-    cout << res << endl;
 
     return 0;
 }

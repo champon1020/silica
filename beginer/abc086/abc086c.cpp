@@ -23,54 +23,31 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+int t[100010], x[100010], y[100010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    vector<int> abc(3);
-    cin >> abc[0] >> abc[1] >> abc[2];
+    int n;
+    cin >> n;
+    reps(i, 1, n+1){
+        cin >> t[i] >> x[i] >> y[i];
+    }
 
-    int oddcnt = 0;
-    int oddarr[3];
-
-    rep(i, 3){
-        if(abc[i]%2 == 1){
-            oddcnt++;
-            oddarr[i] = 1;
+    rep(i, n){
+        int time = t[i+1] - t[i];
+        int deltax = abs(x[i+1] - x[i]);
+        int deltay = abs(y[i+1] - y[i]);
+        if(time >= deltax + deltay && time%2 == (deltax+deltay)%2){
+            continue;
         }else{
-            oddarr[i] = 0;
+            ans(false);
+            return 0;
         }
     }
 
-    int res = 0;
-    if(oddcnt == 2){
-        rep(i, 3){
-            if(oddarr[i] == 1) abc[i]++;
-        }
-        res++;
-    }
-    if(oddcnt == 1){
-        rep(i, 3){
-            if(oddarr[i] == 0) abc[i]++;
-        }
-        res++;
-    }
-
-    sort(abc.begin(), abc.end());
-
-    int diff1 = abc[2]-abc[0];
-    int diff2 = abc[2]-abc[1];
-
-    while(diff1 > 0){
-        diff1 -= 2;
-        res++;
-    }
-    while(diff2 > 0){
-        diff2 -= 2;
-        res++;
-    }
-
-    cout << res << endl;
+    ans(true);
 
     return 0;
 }
