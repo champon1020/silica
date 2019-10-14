@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for(int i=0; i<n; i++)
-#define repr(i, n) for(int i=n; i>=0; i--)
+#define repr(i, s, e) for(int i=s; i>=e; i--)
 #define reps(i, s, e) for(int i=s; i<e; i++)
 #define inf 1e10
 #define vsort(v) sort(v.begin(), v.end())
@@ -29,43 +29,57 @@ int main(){
 
     string s;
     ll k;
-    cin >> s;
-    cin >> k;
+    cin >> s >> k;
+
+    ll slen = s.length();
+
+    ll frontseq = 1;
+    ll backseq = 1;
+    ll seqcnt = 1;
+    ll res = 0;
     
-    int len = s.length();
-
-    if(len == 1){
-        cout << k/2 << endl;
-        return 0;
-    }
-
-    ll cnt = 0;
-    rep(i, len-1){
+    rep(i, slen-1){
         if(s[i] == s[i+1]){
-            if(i == len-2){
-                if(s[0] == s[len-1]){
-                    s[i+1] = '?';
-                    cnt++;
-                }else{
-                    s[i] = '?';
-                    cnt++;
-                }
-            }else if(i+2 < s.length() && s[i] == s[i+2]){
-                cnt++;
-                s[i+1] = '?';
-            }else{
-                cnt++;
-                s[i] = '?';
+            seqcnt++;
+        }else{
+            if(seqcnt > 1){
+                res += seqcnt/2;
+                seqcnt = 1;
             }
         }
     }
-    ll res = cnt*k;
-    if(s[0] == s[len-1]){
-        res += k-1;
+
+    if(seqcnt > 1){
+        if(seqcnt == slen){
+            cout << slen*k/2 << endl;
+            return 0;
+        }
+        res += seqcnt/2;
     }
- 
-    cout << res << endl;
-    //cout << s << endl;
+
+    rep(i, slen-1){
+        if(s[i] == s[i+1]){
+            frontseq++;
+        }else{
+            break;
+        }
+    }
+
+    repr(i, slen-1, 1){
+        if(s[i] == s[i-1]){
+            backseq++;
+        }else{
+            break;
+        }
+    }
+
+    if(s[0] == s[slen-1]){
+        cout << res*k - (k-1)*(frontseq/2 + backseq/2 - (frontseq+backseq)/2) << endl;
+    }else{
+        cout << res*k << endl;
+    }
+
+    //cout << frontseq << " " << backseq << endl;
 
     return 0;
 }
