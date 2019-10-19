@@ -21,11 +21,11 @@
 			"template<typename T> void vdebug(vector<T> v){ for(auto vv : v){ cout << vv << \" \"; } cout << endl; }",
 			"template<typename T> void adebug(T arr[], int n){ rep(i, n){ cout << arr[i] << \" \"; } cout << endl; }",
 			"void ans(bool b){ if(b) cout << \"Yes\" << endl; else cout << \"No\" << endl; }",
-			"void ans2(bool b){ if(b) cout << \"YES\" << endl; else cout << \"NO\" << endl; }",
+      "void ans2(bool b){ if(b) cout << \"YES\" << endl; else cout << \"NO\" << endl; }",
 			"int keta(ll num){ int k=0; while(num>0){ num/=10; k++; } return k; }",
 			"int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};",
 			"int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};",
-			"",
+      "",
 			"",
 			"int main(){",
 			"\tios::sync_with_stdio(false);",
@@ -37,33 +37,16 @@
 			"}"
 		],
 		"description": "This is AtCoder template"
-	},
-
-	"cout": {
-		"prefix": "cout",
-		"body": [
-			"cout << $1 << $0"
-		]
-	},
-
-	"cin": {
-		"prefix": "cin",
-		"body": [
-			"cin >> $0"
-		]
-	},
-
-	"printf": {
-		"prefix": "printf",
-		"body": [
-			"printf(\"$0\", $1);"
-		]
-	},
-
-	"int": {
-		"prefix": "int",
-		"body": [
-			"Int"
-		]
-	}
+  },
+  "vector_find": {
+    "prefix": "vfind",
+    "body": [
+      "template<typename T> bool vector_finder(vector<T> v, T pattern) {",
+      "\tauto itr = find(v.begin(), v.end(), pattern);",
+      "\tsize_t ind = distance(v.begin(), itr);",
+      "\tif(ind != v.size()) return true;",
+      "\telse return false;",
+      "}"
+    ]
+  }
 }
