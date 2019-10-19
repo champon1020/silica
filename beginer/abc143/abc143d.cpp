@@ -40,12 +40,9 @@ int main(){
     ll res = 0;
     rep(i, n-1){
         reps(j, i+1, n){
-            auto itr = upper_bound(l.begin(), l.end(), l[i]+l[j]);
-            auto itr2 = upper_bound(l.begin(), l.end(), max(l[i]-l[j], l[j]-l[i]));
+            auto itr = lower_bound(l.begin(), l.end(), l[i]+l[j]);
             int ind = distance(l.begin(), itr);
-            int ind2 = distance(l.begin(), itr2);
-            cout << ind << " " << ind2 << endl;
-            res += ind-ind2-2;
+            res += ind-(j+1);
         }
     }
 
