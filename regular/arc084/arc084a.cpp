@@ -23,11 +23,57 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+ll bcnt[100010], acnt[100010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    ll n, tmp;
+    vector<ll> a, b, c;
+    cin >> n;
+    rep(i, 3*n){
+        cin >> tmp;
+        if(i < n) a.push_back(tmp);
+        else if(i < 2*n) b.push_back(tmp);
+        else c.push_back(tmp);
+    }
+
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    sort(c.begin(), c.end());
+
+    rep(i, n){
+        auto itr = upper_bound(c.begin(), c.end(), b[i]);
+        int ind = distance(c.begin(), itr);
+        if(ind != c.size()){
+            bcnt[i] = c.size()-ind;
+        }else{
+            bcnt[i] = 0;
+        }
+    }
+
+    repr(i, n-1, 1){
+        bcnt[i-1] += bcnt[i];
+    }
+
+    rep(i, n){
+        auto itr = upper_bound(b.begin(), b.end(), a[i]);
+        int ind = distance(b.begin(), itr);
+        if(ind != b.size()){
+            acnt[i] = bcnt[ind];
+        }else{
+            acnt[i] = 0;
+        }
+    }
+
+    ll res = 0;
+    rep(i, n){
+        res += acnt[i];
+        //cout << acnt[i] << endl;
+    }
+
+    cout << res << endl;
 
     return 0;
 }
