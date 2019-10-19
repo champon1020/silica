@@ -3,6 +3,7 @@
 #define repr(i, s, e) for(int i=s; i>=e; i--)
 #define reps(i, s, e) for(int i=s; i<e; i++)
 #define inf 1e18
+#define all(v) v.begin(),v.end()
 #define vsort(v) sort(v.begin(), v.end())
 #define vsortr(v) sort(v.begin(), v.end(), greater<ll>())
 #define sz(x) x.size()
@@ -23,60 +24,73 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-struct Node {
-    int to;
-    ll w;
-    Node(int to_, ll w_){
-        to = to_;
-        w = w_;
-    }
-};
-
-vector<Node> g[100010];
-set<int> visited;
-ll l;
-int goal;
-
-int dfs(int u, ll cnt, ll gas){
-    visited.insert(u);
-
-    //cout << u << " " << cnt << endl;
-    if(u == goal) return cnt;
-
-    for(auto gg : g[u]){
-        if(visited.find(gg.to) != visited.end()) continue;
-        int res;
-        if(gas - gg.w < 0){
-            res = dfs(gg.to, cnt+1, l-gg.w);
-        }else{
-            gas -= gg.w;
-            res = dfs(gg.to, cnt, gas);
-        }
-        if(res != -1) return res;
-    }
-    return -1;
-}
+/* dp[i][j] は i,j 間の最短距離 */
+ll dp[310][310];
+/* gas[i][j] は i,j 間の最小必要燃料 */
+ll gas[310][310];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m, a, b, c;
+    /**
+     * inf で初期化．
+     * i = jのときは往復なので0．
+     */
+    rep(i, 310){
+        rep(j, 310){
+            dp[i][j] = inf;
+            gas[i][j] = inf;
+        }
+        dp[i][i] = 0;
+        gas[i][i] = 0;
+    }
+
+    /* 入力 */
+    int n, m, a, b, c;
+    ll l;
     cin >> n >> m >> l;
     rep(i, m){
         cin >> a >> b >> c;
-        g[a].push_back(Node(b, c));
-        g[b].push_back(Node(a, c));
+        dp[a][b] = c;
+        dp[b][a] = c;
     }
-    
+
+    /* dpについてワーシャルフロイド法 */
+    rep(k, n+1){
+        rep(i, n+1){
+            rep(j, n+1){
+                dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+            }
+        }
+    }
+
+    /* dp <= lのときのi,jを重み1とした無向グラフgas[i][j] */
+    rep(i, n+1){
+        rep(j, n+1){
+            if(dp[i][j] <= l) gas[i][j] = min(gas[i][j], 1LL);
+        }
+    }
+
+    /* gasについてワーシャルフロイド法 */
+    rep(k, n+1){
+        rep(i, n+1){
+            rep(j, n+1){
+                gas[i][j] = min(gas[i][j], gas[i][k] + gas[k][j]);
+            }
+        }
+    }
+
+    /* 出力 */
     int q, s, t;
     cin >> q;
     rep(i, q){
-        visited.clear();
         cin >> s >> t;
-        goal = t;
-        int res = dfs(s, 0, l);
-        cout << res << endl;
+        if(gas[s][t] >= 1e9){
+            cout << -1 << endl;
+        }else{
+            cout << gas[s][t]-1 << endl;
+        }
     }
 
     return 0;
