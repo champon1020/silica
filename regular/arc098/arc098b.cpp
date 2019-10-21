@@ -23,33 +23,6 @@ int keta(ll num){ int k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
-const int MAX = 100010;
-
-class Bit {
-    ll bit[MAX+1];
-    int n;
-
-public:
-    Bit(int nn){
-        n = nn;
-    }
-
-    void add(int i, ll x) {
-        while(i <= n){
-            bit[i] += x;
-            i += i&-i;
-        }
-    }
-
-    ll sum(int i){
-        ll s = 0;
-        while(i > 0){
-            s += bit[i];
-            i -= i&-i;
-        }
-        return s;
-    }
-};
 
 int main(){
     ios::sync_with_stdio(false);
@@ -63,15 +36,21 @@ int main(){
         a.push_back(tmp);
     }
 
-    Bit tree(n);
-    rep(i, n){
-        tree.add(i+1, a[i]);
+    int r=0;
+    int cnt=0;
+    ll res = 0;
+    ll sum = 0;
+
+    rep(l, n){
+        while(r < n && !(sum & a[r])){
+            //cout << l << " " << r << endl;
+            sum ^= a[r++];
+        }
+        res += r-l;
+        sum ^= a[l];
     }
 
-    int l=0, r=0;
-    while(l <= n && r <= n){
-        
-    }
+    cout << res << endl;
 
     return 0;
 }
