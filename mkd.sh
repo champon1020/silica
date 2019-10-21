@@ -61,12 +61,24 @@ case $BASE_DIR in
 esac
 
 
-touch ${BASE_FILE}a.cpp
-touch ${BASE_FILE}b.cpp
-touch ${BASE_FILE}c.cpp
-touch ${BASE_FILE}d.cpp
+if [${BASE_DIR} == "regular"]
+    touch ${BASE_FILE}c.cpp
+    touch ${BASE_FILE}d.cpp
+    touch ${BASE_FILE}e.cpp
+    touch ${BASE_FILE}f.cpp
 
-echo "Create '${BASE_FILE}a.cpp'"
-echo "Create '${BASE_FILE}b.cpp'"
-echo "Create '${BASE_FILE}c.cpp'"
-echo "Create '${BASE_FILE}d.cpp'"
+    echo "Create '${BASE_FILE}c.cpp'"
+    echo "Create '${BASE_FILE}d.cpp'"
+    echo "Create '${BASE_FILE}e.cpp'"
+    echo "Create '${BASE_FILE}f.cpp'"
+else
+    touch ${BASE_FILE}a.cpp
+    touch ${BASE_FILE}b.cpp
+    touch ${BASE_FILE}c.cpp
+    touch ${BASE_FILE}d.cpp
+
+    echo "Create '${BASE_FILE}a.cpp'"
+    echo "Create '${BASE_FILE}b.cpp'"
+    echo "Create '${BASE_FILE}c.cpp'"
+    echo "Create '${BASE_FILE}d.cpp'"
+fi
