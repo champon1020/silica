@@ -61,7 +61,7 @@ case $BASE_DIR in
 esac
 
 
-if [${BASE_DIR} == "regular"]
+if [ ${BASE_DIR} = "regular" ]; then
     touch ${BASE_FILE}c.cpp
     touch ${BASE_FILE}d.cpp
     touch ${BASE_FILE}e.cpp
