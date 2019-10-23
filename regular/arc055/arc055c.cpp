@@ -28,21 +28,17 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll a, k;
-    cin >> a >> k;
+    ll n;
+    cin >> n;
 
-    if(k == 0){
-        cout << 2*1000000000000 - a << endl;
-    }else{
-        ll cnt = 0;
-        ll sum = a;
-        while(sum < 2*1e12){
-            cnt++;
-            sum += 1 + k*sum;
-            //cout << cnt << " " << sum << endl;
-        }
-        cout << cnt << endl;
+    string res = "1";
+
+    rep(i, n-1){
+        res += '0';
     }
+
+    res += '7';
+    cout << res << endl;
 
     return 0;
 }

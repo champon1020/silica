@@ -28,20 +28,15 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll a, k;
-    cin >> a >> k;
+    ll a, b, k, l;
+    cin >> a >> b >> k >> l;
 
-    if(k == 0){
-        cout << 2*1000000000000 - a << endl;
+    if(l*a <= b){
+        cout << a*k << endl;
     }else{
-        ll cnt = 0;
-        ll sum = a;
-        while(sum < 2*1e12){
-            cnt++;
-            sum += 1 + k*sum;
-            //cout << cnt << " " << sum << endl;
-        }
-        cout << cnt << endl;
+        ll v1 = (k/l)*b + (k - l*(k/l))*a;
+        ll v2 = (k/l + 1)*b;
+        cout << min(v1, v2) << endl;
     }
 
     return 0;
