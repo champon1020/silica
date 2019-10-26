@@ -1,13 +1,16 @@
 #include <bits/stdc++.h>
 #define rep(i, n) for(int i=0; i<n; i++)
 #define repr(i, s, e) for(int i=s; i>=e; i--)
-#define reps(i, s, e) for(int i=s; i<e; i++)
+#define reps(i, s, e) for(int i=s; i<=e; i++)
 #define inf 1e18
+#define all(v) v.begin(),v.end()
 #define vsort(v) sort(v.begin(), v.end())
 #define vsortr(v) sort(v.begin(), v.end(), greater<ll>())
 #define sz(x) x.size()
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
+#define sp << " " <<
+#define enl << endl
 using namespace std;
 using ll = long long;
 template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }
@@ -23,61 +26,17 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-ll a[100010], diff[100010];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, x;
-    cin >> n >> x;
-    rep(i, n){
-        cin >> a[i];
-    }
-
-    rep(i, n-1){
-        diff[i] = (a[i+1]+a[i])-x;
-    }
-
+    int n, k;
+    cin >> n >> k;
+    
     ll res = 0;
-    reps(i, 1, n-1){
-        if(diff[i] > 0){
-            if(diff[i-1] > 0 && a[i] > 0){
-                while(a[i] > 0 && diff[i] > 0 && diff[i-1] > 0){
-                    //cout << a[i] << " " << diff[i] << " " << diff[i-1] << endl;
-                    diff[i]--;
-                    diff[i-1]--;
-                    a[i]--;
-                    res++;
-                }
-            }
-        }
-        if(diff[i] > 0 && a[i] > 0){
-            while(a[i] > 0 || diff[i] > 0){
-                diff[i]--;
-                diff[i+1]--;
-                a[i]--;
-                res++;
-            }
-        }
-    }
-
-    // rep(i, n-1){
-    //     if(diff[i] > 0 && a[i] > 0){
-    //         while(a[i] > 0 || diff[i] > 0){
-    //             diff[i]--;
-    //             diff[i+1]--;
-    //             a[i]--;
-    //             res++;
-    //         }
-    //     }
-    // }
-
-    if(diff[n-2] > 0){
-        while(diff[n-2] > 0){
-            diff[n-2]--;
-            res++;
-        }
+    reps(a, k, n){
+        res += n-a;
+        res += a/k-1;
     }
 
     cout << res << endl;
