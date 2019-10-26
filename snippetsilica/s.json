@@ -20,7 +20,7 @@
 			"template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }",
 			"template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } return false; }",
 			"template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }",
-			"template<typename T> T lcm(T a, T b){ return a*b/gcd(a, b); }",
+			"template<typename T> T lcm(T a, T b){ return a*(b/gcd(a, b)); }",
 			"template<typename T> void vdebug(vector<T> v){ for(auto vv : v){ cout << vv << \" \"; } cout << endl; }",
 			"template<typename T> void adebug(T arr[], int n){ rep(i, n){ cout << arr[i] << \" \"; } cout << endl; }",
 			"void ans(bool b){ if(b) cout << \"Yes\" << endl; else cout << \"No\" << endl; }",
