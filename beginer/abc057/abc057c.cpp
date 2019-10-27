@@ -30,62 +30,19 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
+    ll n;
     cin >> n;
 
-    int a[101];
-
-    reps(i, 1, n){
-        a[i] = 0;
-        int num = i;
-        int q = 2;
-        while(num > 1){
-            if(num%q == 0){
-                num /= q;
-                a[q]++;
-            }else{
-                q++;
-            }
+    ll num = 1;
+    reps(i, 1, sqrt(n)){
+        if(n%i == 0){
+            num = i;
         }
     }
 
-    ll res = 0;
-    reps(i, 1, n){
-        if(a[i] >= 74) res++;
-    }
+    ll res = max(keta(num), keta(n/num));
 
-    int twentyfour=0, two=0;
-    reps(i, 1, n){
-        if(a[i] >= 24){
-            twentyfour++;
-        }
-        if(a[i] >= 2){
-            two++;
-        }
-    }
-    res += twentyfour * (two-1);
-
-    int fourteen=0, four=0;
-    reps(i, 1, n){
-        if(a[i] >= 14){
-            fourteen++;
-        }
-        if(a[i] >= 4){
-            four++;
-        }
-    }
-    res += fourteen * (four-1);
-
-    four=0; two=0;
-    reps(i, 1, n){
-        if(a[i] >= 4){
-            four++;
-        }
-        if(a[i] >= 2){
-            two++;
-        }
-    }
-    res += four*(four-1)/2 * (two-2);
+    //cout << num sp n/num << endl;
 
     cout << res << endl;
 

@@ -30,64 +30,44 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    cin >> n;
+    int res[100010];
+    res[2] = 1;
 
-    int a[101];
-
-    reps(i, 1, n){
-        a[i] = 0;
-        int num = i;
-        int q = 2;
-        while(num > 1){
-            if(num%q == 0){
-                num /= q;
-                a[q]++;
-            }else{
-                q++;
+    reps(i, 3, 100000){
+        res[i] = 0;
+        if(i%2 == 0) continue;
+        bool flg = true;
+        reps(j, 1, sqrt(i)){
+            if(i%j == 0 && j!=1){
+                flg = false;
+                break;
             }
         }
-    }
-
-    ll res = 0;
-    reps(i, 1, n){
-        if(a[i] >= 74) res++;
-    }
-
-    int twentyfour=0, two=0;
-    reps(i, 1, n){
-        if(a[i] >= 24){
-            twentyfour++;
-        }
-        if(a[i] >= 2){
-            two++;
+        if(flg){
+            res[i] = 1;
         }
     }
-    res += twentyfour * (two-1);
 
-    int fourteen=0, four=0;
-    reps(i, 1, n){
-        if(a[i] >= 14){
-            fourteen++;
-        }
-        if(a[i] >= 4){
-            four++;
+    vector<int> v;
+    reps(i, 2, 100000){
+        if(res[i] == 1 && res[(i+1)/2] == 1){
+            v.push_back(i);
         }
     }
-    res += fourteen * (four-1);
 
-    four=0; two=0;
-    reps(i, 1, n){
-        if(a[i] >= 4){
-            four++;
-        }
-        if(a[i] >= 2){
-            two++;
-        }
+    int q;
+    cin >> q;
+
+    int l, r;
+    rep(i, q){
+        cin >> l >> r;
+        int cnt = 0;
+
+        auto itrl = lower_bound(all(v), l);
+        auto itrr = upper_bound(all(v), r);
+        
+        cout << distance(v.begin(), itrr) - distance(v.begin(), itrl) << endl;
     }
-    res += four*(four-1)/2 * (two-2);
-
-    cout << res << endl;
 
     return 0;
 }
