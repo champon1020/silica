@@ -47,7 +47,23 @@ int main(){
     vsort(a);
     vsortr(f);
 
-    
+    ll l = -1;
+    ll r = 1e12;
+
+    while(l+1  < r){
+        ll c = (l+r)/2;
+        bool good = [&]{
+            ll sum = 0;
+            rep(i, n){
+                sum += max(0ll, a[i]-c/f[i]);
+            }
+            return sum <= k;
+        }();
+        if(good) r=c;
+        else l=c;
+    }
+
+    cout << r << endl;
 
     return 0;
 }
