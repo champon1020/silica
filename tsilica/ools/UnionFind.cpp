@@ -26,20 +26,22 @@ int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 const int MAXN = 100;
 
 class UnionFind{
-    int par[MAXN];   // 親
-    int rank[MAXN];  // 木の深さ
+    ll par[MAXN];   // 親
+    ll rank[MAXN];  // 木の深さ
+    ll size[MAXN];  // サイズ
 
 public:
     // n要素分を初期化
-    UnionFind(int n){
+    UnionFind(ll n){
         rep(i, n){
             par[i] = i;
             rank[i] = 0;
+            size[i] = 1;
         }
     }
 
     // 木の根を求める
-    int find(int x){
+    ll find(ll x){
         if(par[x] == x){
             return x;
         }else{
@@ -48,20 +50,27 @@ public:
     }
 
     // xとyの属するグループを合体
-    void unite(int x, int y){
+    void unite(ll x, ll y){
         x = find(x);
         y = find(y);
         if(x == y) return;
         if(rank[x] < rank[y]){
             par[x] = y;
+            size[y] += size[x]
         }else{
             par[y] = x;
+            size[x] += size[y];
             if(rank[x] == rank[y]) rank[x]++;
         }
     }
 
     // xとyが同じグループに属するか
-    bool same(int x, int y){
+    bool same(ll x, ll y){
         return find(x) == find(y);
+    }
+
+    // group のサイズ
+    ll size(ll x){
+        return size[find(x)];
     }
 };
