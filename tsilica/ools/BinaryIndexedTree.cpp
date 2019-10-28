@@ -53,15 +53,3 @@ class Bit{
         }
     }
 };
-
-
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
-    int a = 4;
-    cout << a << endl;
-    cout << (a&-a) << endl;
-
-    return 0;
-}

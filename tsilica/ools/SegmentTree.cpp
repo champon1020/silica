@@ -29,7 +29,8 @@ const int MAX = 1<<17;
 class SegmentTree {
     // nは葉の数（オリジナル配列の要素数）
     // datはセグメント木本体
-    ll n, dat[2*MAX-1];
+    ll n;
+    vector<ll> dat;
 
 public:
     // 初期化
@@ -37,7 +38,7 @@ public:
     SegmentTree(ll nn){
         n = 1;
         while(n < nn) n*=2;
-        rep(i, 2*n-1) dat[i] = inf;
+        dat.resize(2*n-1, inf);
     }
 
     // k番目をaに変更
@@ -84,12 +85,3 @@ public:
         return dat[i + n - 1];
     }
 };
-
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
-
-
-    return 0;
-}
