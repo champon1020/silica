@@ -25,11 +25,34 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+// i番目の肉を焼くのに
+bool dp[10][1000];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    ll n;
+    ll t[100];
+    cin >> n;
+    rep(i, n){
+        cin >> t[i];
+    }
+
+
+    rep(i, n){
+        reps(j, 0, 200){
+            dp[i][j] = j==0 ? true : false;
+        }
+    }
+
+    rep(i, n){
+        reps(j, 0, 200){
+            if(j >= t[i]){
+                
+            }
+        }
+    }
 
     return 0;
 }
