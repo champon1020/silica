@@ -25,30 +25,43 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-ll n, t[100];
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
+    ll n, t[100];
+    bool dp[10][1000];
+    ll sum = 0;
+
     cin >> n;
     rep(i, n){
         cin >> t[i];
+        sum += t[i];
     }
 
-    int res = 1e6;
-    rep(i, pow(2, n)){
-        int first = 0;
-        int second = 0;
-        rep(j, n){
-            if(1 << j & i) first += t[j];
-            else second += t[j];
+    rep(i, n){
+        reps(j, 0, 200){
+            dp[i][j] = j==0 ? true : false;
         }
-        //cout << first sp second << endl;
-        chmin(res, max(first, second));
     }
 
-    cout << res << endl;
+    rep(i, n){
+        reps(j, 0, 200){
+            if(j >= t[i]){
+                dp[i+1][j] = dp[i][j] | dp[i][j - t[i]];
+            }else{
+                dp[i+1][j] = dp[i][j];
+            }
+        }
+    }
+
+    ll start = sum%2==0 ? sum/2 : sum/2+1;
+    reps(j, start, 200){
+        if(dp[n][j]){
+            cout << j << endl;
+            break;
+        }
+    }
 
     return 0;
 }
