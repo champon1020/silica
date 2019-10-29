@@ -10,13 +10,13 @@ n 個の品物があり，i 番目の品物のそれぞれ重さと価値が w[i
 
 ##### 方針
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   dp[i+1][j]  >>>   i 番目までの品物の中で重さの総和が j 以下となるように選んだときの最大価値
 </pre>
 
 ##### 漸化式
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>if</strong> j >= w[i] <strong>then</strong>
     dp[i+1][j] = max{ dp[i][j - w[i]] + v[i], dp[i][j] }
   <strong>else</strong>
@@ -25,7 +25,7 @@ n 個の品物があり，i 番目の品物のそれぞれ重さと価値が w[i
 
 ##### 初期条件
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>REP</strong>(j, 0, W)
     dp[0][j] = 0
 </pre>
@@ -41,13 +41,13 @@ n 個の正の整数 a[0], a[1], …, a[n−1] の部分和が整数 A になる
 
 ##### 方針
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   dp[i+1][j]  >>>   i番目までの整数の中からいくつか選んで総和をjとすることが可能かどうか
 </pre>
 
 ##### 漸化式
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>if</strong> j >= a[i] <strong>then</strong>
     dp[i+1][j] = dp[i][j-a[i]] | dp[i][j]
   <strong>else</strong>
@@ -56,7 +56,7 @@ n 個の正の整数 a[0], a[1], …, a[n−1] の部分和が整数 A になる
 
 ##### 初期条件
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>REP</strong>(j, 0, A)
     dp[0][j] = (j==0) ? True : False
 </pre>
@@ -72,13 +72,13 @@ n 個の正の整数 a[0], a[1], …, a[n−1] から何個か選んで，総和
 
 ##### 方針
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   dp[i+1][j]  >>>   i番目までの整数からいくつか選んで総和をjとする場合の数
 </pre>
 
 ##### 漸化式
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>if</strong> j >= a[i] <strong>then</strong>
     dp[i+1][j] += dp[i][j - a[i]]
 
@@ -88,7 +88,7 @@ n 個の正の整数 a[0], a[1], …, a[n−1] から何個か選んで，総和
 
 ##### 初期条件
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>REP</strong>(j, 0, A)
     dp[0][j] = (j==0) ? 1 : 0;
 </pre>
@@ -104,13 +104,13 @@ n 個の整数 a[0], a[1], …, a[n−1] から何個か選んで総和を A に
 
 ##### 方針
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   dp[i+1][j]  >>>   i番目までの整数からいくつか選んで総和をjとするときの選んだ整数の最小個数
 </pre>
 
 ##### 漸化式
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>if</strong> j >= a[i] <strong>then</strong>
     dp[i+1][j] = min{ dp[i][j - a[i]], dp[i][j] }
   <strong>else</strong>
@@ -119,7 +119,7 @@ n 個の整数 a[0], a[1], …, a[n−1] から何個か選んで総和を A に
 
 ##### 初期条件
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>REP</strong>(j, 0, A)
     dp[0][j] = (j==0) ? 0 : infinity
 </pre>
@@ -135,13 +135,13 @@ n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで�
 
 ##### 方針
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   dp[i+1][j][k] >>>   i番目までの整数からk個の整数を選んで総和をjにすることは可能かどうか
 </pre>
 
 ##### 漸化式
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>if</strong> j >= a[i] <strong>then</strong>
     <strong>if</strong> k + a[i] <= K <strong>then</strong>
       dp[i+1][j][k] = dp[i][j - a[i]][k-1] | dp[i][j][k]
@@ -151,7 +151,7 @@ n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで�
 
 ##### 初期条件
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   <strong>REP</strong>(j, 0, A)
     dp[0][j][0] = (j==0) ? True : False
 </pre>
@@ -159,7 +159,7 @@ n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで�
 しかし，これだと計算量が O(nKA) となるため微妙．
 そこで，Nubmer Partitioning 1 の結果において
 
-<pre style="background-color:gainsboro">
+<pre style="background-color:whitesmoke">
   (dp[n][A] <= K) ? YES : NO
 </pre>
 
@@ -169,26 +169,31 @@ n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで�
 
 
 
-## Number Partitioning 5 （個数制限付き部分和）
+## LCS
 
-[例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-7%E5%80%8B%E6%95%B0%E5%88%B6%E9%99%90%E4%BB%98%E3%81%8D%E9%83%A8%E5%88%86%E5%92%8C%E5%95%8F%E9%A1%8C)
+[例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-8%E6%9C%80%E9%95%B7%E5%85%B1%E9%80%9A%E9%83%A8%E5%88%86%E5%88%97-lcs-%E5%95%8F%E9%A1%8C)
 
+2つの文字 S, T の共通部分文字列の長さの最大値を求める．
+※部分文字列とはその文字からいくつか抜き出して順に繋げてできる文字列のこと．
 
 ##### 方針
 
-<pre style="background-color:gainsboro">
-
+<pre style="background-color:whitesmoke">
+  dp[i+1][j+1]  >>>   Sのi文字目までとTのj文字目までの共通部分文字列の長さの最大値
 </pre>
 
 ##### 漸化式
 
-<pre style="background-color:gainsboro">
-
+<pre style="background-color:whitesmoke">
+  <strong>if</strong> S[i] == T[j] <strong>then</strong>
+    dp[i+1][j+1] = max{ dp[i+1][j], dp[i][j+1], dp[i][j] + 1 }
+  <strong>else</strong>
+    dp[i+1][j+1] = max{ dp[i+1][j], dp[i][j+1] }
 </pre>
 
 ##### 初期条件
 
-<pre style="background-color:gainsboro">
-
+<pre style="background-color:whitesmoke">
+  dp[0][0] = 0
 </pre>
 <br>
