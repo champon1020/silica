@@ -29,8 +29,9 @@ n 個の品物があり，i 番目の品物のそれぞれ重さと価値が w[i
   <strong>REP</strong>(j, 0, W)
     dp[0][j] = 0
 </pre>
-
 <br>
+
+
 
 ## Number Partitioning 1
 
@@ -59,10 +60,11 @@ n 個の正の整数 a[0], a[1], …, a[n−1] の部分和が整数 A になる
   <strong>REP</strong>(j, 0, A)
     dp[0][j] = (j==0) ? True : False
 </pre>
-
 <br>
 
-## Number Partitioning 2　(数え上げ)
+
+
+## Number Partitioning 2　(部分和数え上げ)
 
 [例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-4%E9%83%A8%E5%88%86%E5%92%8C%E6%95%B0%E3%81%88%E4%B8%8A%E3%81%92%E5%95%8F%E9%A1%8C)
 
@@ -78,9 +80,10 @@ n 個の正の整数 a[0], a[1], …, a[n−1] から何個か選んで，総和
 
 <pre style="background-color:whitesmoke">
   <strong>if</strong> j >= a[i] <strong>then</strong>
-    dp[i+1][j] = dp[i][j - a[i]] + dp[i][j]
-  <strong>else</strong>
-    dp[i+1][j] = dp[i][j]
+    dp[i+1][j] += dp[i][j - a[i]]
+
+  dp[i+1][j] += dp[i][j]
+  dp[i+1][j] %= MOD; 
 </pre>
 
 ##### 初期条件
@@ -89,3 +92,102 @@ n 個の正の整数 a[0], a[1], …, a[n−1] から何個か選んで，総和
   <strong>REP</strong>(j, 0, A)
     dp[0][j] = (j==0) ? 1 : 0;
 </pre>
+<br>
+
+
+
+## Number Partitioning 3 （最小個数部分和）
+
+[例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-5%E6%9C%80%E5%B0%8F%E5%80%8B%E6%95%B0%E9%83%A8%E5%88%86%E5%92%8C%E5%95%8F%E9%A1%8C)
+
+n 個の整数 a[0], a[1], …, a[n−1] から何個か選んで総和を A にする方法を考えたとき，選ぶ整数の個数の最小値はどうなるか．（できない場合も有り）
+
+##### 方針
+
+<pre style="background-color:whitesmoke">
+  dp[i+1][j]  >>>   i番目までの整数からいくつか選んで総和をjとするときの選んだ整数の最小個数
+</pre>
+
+##### 漸化式
+
+<pre style="background-color:whitesmoke">
+  <strong>if</strong> j >= a[i] <strong>then</strong>
+    dp[i+1][j] = min{ dp[i][j - a[i]], dp[i][j] }
+  <strong>else</strong>
+    dp[i+1][j] = dp[i][j]
+</pre>
+
+##### 初期条件
+
+<pre style="background-color:whitesmoke">
+  <strong>REP</strong>(j, 0, A)
+    dp[0][j] = (j==0) ? 0 : infinity
+</pre>
+<br>
+
+
+
+## Number Paritioning 4 （K個以内部分和）
+
+[例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-6k%E5%80%8B%E4%BB%A5%E5%86%85%E9%83%A8%E5%88%86%E5%92%8C%E5%95%8F%E9%A1%8C)
+
+n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで総和を A にすることは可能かどうか．
+
+##### 方針
+
+<pre style="background-color:whitesmoke">
+  dp[i+1][j][k] >>>   i番目までの整数からk個の整数を選んで総和をjにすることは可能かどうか
+</pre>
+
+##### 漸化式
+
+<pre style="background-color:whitesmoke">
+  <strong>if</strong> j >= a[i] <strong>then</strong>
+    <strong>if</strong> k + a[i] <= K <strong>then</strong>
+      dp[i+1][j][k] = dp[i][j - a[i]][k-1] | dp[i][j][k]
+
+  dp[i+1][j][k] |= dp[i][j][k]
+</pre>
+
+##### 初期条件
+
+<pre style="background-color:whitesmoke">
+  <strong>REP</strong>(j, 0, A)
+    dp[0][j][0] = (j==0) ? True : False
+</pre>
+
+しかし，これだと計算量が O(nKA) となるため微妙．
+そこで，Nubmer Partitioning 1 の結果において
+
+<pre style="background-color:whitesmoke">
+  (dp[n][A] <= K) ? YES : NO
+</pre>
+
+と表すことができる．これなら計算量は O(nA) で済む．
+<br>
+
+
+
+## Number Partitioning 5 （個数制限付き部分和）
+
+[例題]() | [参考]()
+
+
+##### 方針
+
+<pre style="background-color:whitesmoke">
+
+</pre>
+
+##### 漸化式
+
+<pre style="background-color:whitesmoke">
+
+</pre>
+
+##### 初期条件
+
+<pre style="background-color:whitesmoke">
+
+</pre>
+<br>
