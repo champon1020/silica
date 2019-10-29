@@ -2,8 +2,8 @@
 #define rep(i, n) for(int i=0; i<n; i++)
 #define repr(i, s, e) for(int i=s; i>=e; i--)
 #define reps(i, s, e) for(int i=s; i<=e; i++)
+#define ll long long
 using namespace std;
-using ll = long long;
 
 
 // dp[i][j] => i 番目までの品物の中から j を超えないように選んだ時の最大価値
