@@ -1,4 +1,4 @@
-# Dynamic Planning
+# Dynamic Programming
 
 
 ## Knapsack
