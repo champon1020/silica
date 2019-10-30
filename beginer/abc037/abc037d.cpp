@@ -24,40 +24,62 @@ ll keta(ll num){ ll k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
+ll dp[1010][1010];
+ll a[1010][1010];
+ll mod = 1e9+7;
+int h, w;
 
-bool comp(const pair<ll, ll> &a, const pair<ll, ll> &b){
-    if(a.first != b.first) return a.first > b.first;
-    else return a.second > b.second;
+ll rec(int x, int y){
+    if(dp[y][x] > 0) return dp[y][x];
+
+    ll res = 0;
+    rep(i, 4){
+        int deltax = x + dx[i];
+        int deltay = y + dy[i];
+        if(deltax < 0 || w <= deltax || deltay < 0 || h <= deltay) continue;
+
+        if(a[deltay][deltax] > a[y][x]){
+            res += rec(deltax, deltay) + 1;
+        }
+        res %= mod;
+    }
+    dp[y][x] = res;
+
+    return res;
 }
+
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, w, h;
-    vector<pair<ll, ll>> wh;
-    cin >> n;
-    rep(i, n){
-        cin >> w >> h;
-        wh.push_back(make_pair(w, h));
+    cin >> h >> w;
+    rep(i, h){
+        rep(j, w){
+            cin >> a[i][j];
+        }
     }
-
-    sort(all(wh), comp);
-
-    ll res = 1;
-    pair<ll, ll> last = wh[0];
-    reps(i, 1, n-1){
-        if(wh[i].first == last.first) continue;
-        if(wh[i].second < last.second){
-            res++;
-            last = wh[i];
+    
+    rep(i, h){
+        rep(j, w){
+            dp[i][j] = 0;
         }
     }
 
-    // cout << endl;
-    // for(auto e : wh){
-    //     cout << e.first sp e.second << endl;
-    // }
+    rep(y, h){
+        rep(x, w){
+            dp[y][x] = rec(x, y);
+            dp[y][x] %= mod;
+        }
+    }
+
+    ll res = h*w;
+    rep(y, h){
+        rep(x, w){
+            res += dp[y][x];
+            res %= mod;
+        }
+    }
 
     cout << res << endl;
 

@@ -23,21 +23,16 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-// 計算量 log(n)
-
-const int MAX = inf;
-
+// from 
 class Bit{
-    // 先頭要素の番号が 1 なので MAX+1 となることに注意
-    // n は
-    ll bit[MAX + 1], n;
+  public:
+    ll n;
+    vector<ll> bit;
 
-    // i番目までの和を求める
+    Bit(ll nn, ll e): n(nn),bit(nn+1, e){};
+
     ll sum(ll i) {
-        // 和
         ll s = 0;
-        // iが0になるまでiの最後の1のビットを減算
-        // その間に和に値を足していく
         while(i > 0){
             s += bit[i];
             i -= i&-i;
@@ -45,7 +40,6 @@ class Bit{
         return s;
     }
 
-    // i番目の要素にxを足す
     void add(ll i, ll x){
         while(i <= n){
             bit[i] += x;
@@ -53,3 +47,9 @@ class Bit{
         }
     }
 };
+// to
+
+
+int main(){
+    
+}

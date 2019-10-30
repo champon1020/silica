@@ -25,39 +25,44 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-bool comp(const pair<ll, ll> &a, const pair<ll, ll> &b){
-    if(a.first != b.first) return a.first > b.first;
-    else return a.second > b.second;
-}
+vector<vector<ll>> dp(1010, vector<ll>(1010, -1));
+ll a[1010][1010];
+ll mod = 1e9+7;
+int h, w;
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, w, h;
-    vector<pair<ll, ll>> wh;
-    cin >> n;
-    rep(i, n){
-        cin >> w >> h;
-        wh.push_back(make_pair(w, h));
-    }
-
-    sort(all(wh), comp);
-
-    ll res = 1;
-    pair<ll, ll> last = wh[0];
-    reps(i, 1, n-1){
-        if(wh[i].first == last.first) continue;
-        if(wh[i].second < last.second){
-            res++;
-            last = wh[i];
+    cin >> h >> w;
+    rep(i, h){
+        rep(j, w){
+            cin >> a[i][j];
         }
     }
+    
 
-    // cout << endl;
-    // for(auto e : wh){
-    //     cout << e.first sp e.second << endl;
-    // }
+    function<ll(int, int)>dfs = [&](int x, int y) -> ll{
+        if(dp[y][x] >= 0) return dp[y][x];
+        ll res = 0;
+        rep(i, 4){
+            int dlx = x + dx[i];
+            int dly = y + dy[i];
+            if(dlx < 0 || w <= dlx || dly < 0 || h <= dly) continue;
+            if(a[dly][dlx] > a[y][x]) res += dfs(dlx, dly) + 1;
+            res %= mod;
+        }
+        dp[y][x] = res;
+        return res;
+    };
+
+    ll res = h*w;
+    rep(y, h){
+        rep(x, w){
+            res += dfs(x, y);
+            res %= mod;
+        }
+    }
 
     cout << res << endl;
 
