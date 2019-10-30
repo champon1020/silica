@@ -17,7 +17,7 @@ template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } 
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
 template<typename T> T lcm(T a, T b){ return a*(b/gcd(a, b)); }
 template<typename T> void vdebug(vector<T> v){ for(auto vv : v){ cout << vv << " "; } cout << endl; }
-template<typename T> void adebug(T arr[], ll n){ reps(i, 0, n){ cout << arr[i] << " "; } cout << endl; }
+template<typename T> void adebug(T arr[], ll n){ rep(i, n){ cout << arr[i] << " "; } cout << endl; }
 void ans(bool b){ if(b) cout << "Yes" << endl; else cout << "No" << endl; }
 void ans2(bool b){ if(b) cout << "YES" << endl; else cout << "NO" << endl; }
 ll keta(ll num){ ll k=0; while(num>0){ num/=10; k++; } return k; }
@@ -29,23 +29,14 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    string s;
+    unsigned ll s;
     cin >> s;
 
-    ll dp[200010];
-    dp[0] = 0;
+    ll large = 1e9;
+    ll x3 = (large-s%large)%large;
+    ll x2 = (x3+s)/large;
 
-    rep(i, s.length()){
-        if(s[i] != s[i-1]) dp[i+1] = dp[i] + 1;
-        else{
-            if(i-2 >= 0) dp[i+1] = dp[i-2] + 2;
-            else dp[i+1] = 1;
-        }
-    }
-
-    //adebug(dp, s.length());
-
-    cout << dp[s.length()] << endl;
+    cout << 0 sp 0 sp x2 sp 1 sp x3 sp large << endl;
 
     return 0;
 }
