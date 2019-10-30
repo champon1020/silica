@@ -83,7 +83,7 @@ n 個の正の整数 a[0], a[1], …, a[n−1] から何個か選んで，総和
     dp[i+1][j] += dp[i][j - a[i]]
 
   dp[i+1][j] += dp[i][j]
-  dp[i+1][j] %= MOD; 
+  dp[i+1][j] %= MOD;
 </pre>
 
 ##### 初期条件
@@ -174,6 +174,7 @@ n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで�
 [例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-8%E6%9C%80%E9%95%B7%E5%85%B1%E9%80%9A%E9%83%A8%E5%88%86%E5%88%97-lcs-%E5%95%8F%E9%A1%8C)
 
 2つの文字 S, T の共通部分文字列の長さの最大値を求める．
+
 ※部分文字列とはその文字からいくつか抜き出して順に繋げてできる文字列のこと．
 
 ##### 方針
@@ -189,11 +190,85 @@ n 個の整数 a[0], a[1], …, a[n−1] からK個以内の個数を選んで�
     dp[i+1][j+1] = max{ dp[i+1][j], dp[i][j+1], dp[i][j] + 1 }
   <strong>else</strong>
     dp[i+1][j+1] = max{ dp[i+1][j], dp[i][j+1] }
+
+  ※それぞれ dp[i+1][j+1] との比較も必要
 </pre>
 
 ##### 初期条件
 
 <pre style="background-color:gainsboro">
   dp[0][0] = 0
+</pre>
+<br>
+
+
+
+## Minimum Cost Matching
+
+[例題]() | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-9%E6%9C%80%E5%B0%8F%E3%82%B3%E3%82%B9%E3%83%88%E5%BC%BE%E6%80%A7%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0%E5%95%8F%E9%A1%8C)
+
+A = ( a[0], a[1], ... a[m-1] ) 及び B = ( b[0], b[1], ... b[n-1] ) において，ペア( a[i], b[j] ) をマッチさせたときのコスト c[i][j] の最小値を求める．
+
+##### 方針
+
+<pre style="background-color:gainsboro">
+  dp[i+1][j+1]  >>>   a[i] までと b[j] までの最小コスト
+</pre>
+
+##### 漸化式
+
+<pre style="background-color:gainsboro">
+  dp[i+1][j+1] = min{ dp[i][j], dp[i+1][j], dp[i][j+1] } + c[i][j]
+
+  ※それぞれ dp[i+1][j+1] との比較も必要
+</pre>
+
+##### 初期条件
+
+<pre style="background-color:gainsboro">
+  dp[0][0] = 0
+
+  ※最小値を求めるので他は infinity にする
+</pre>
+<br>
+
+
+
+## Lebenshtein
+
+[例題](https://yukicoder.me/problems/no/225) | [参考](https://qiita.com/drken/items/a5e6fe22863b7992efdb#%E5%95%8F%E9%A1%8C-10%E3%83%AC%E3%83%BC%E3%83%99%E3%83%B3%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E8%B7%9D%E9%9B%A2-diff%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89),
+
+2つの文字列 S, T において，S に以下のうちいずれかの操作を加えて T に変換することを考える．
+
+このときの最小操作回数はいくらか．
+
+- S の中から1文字を選んで好きな文字に変更する
+- S の中から1文字を選んで消去する
+- S の好きな場所に文字を挿入する
+
+
+##### 方針
+
+<pre style="background-color:gainsboro">
+  dp[i][j]  >>>   S の i 文字目までで T の j 文字目までに変換できるときの最小操作回数
+</pre>
+
+##### 漸化式
+
+<pre style="background-color:gainsboro">
+  <strong>if</strong> S[i] == T[j] <strong>then</strong>
+    dp[i+1][j+1] = dp[i][j]
+  <strong>else</strong>
+    dp[i+1][j+1] = min{ dp[i][j], dp[i+1][j], dp[i][j+1] } + 1
+
+  ※それぞれ dp[i+1][j+1] との比較も必要
+</pre>
+
+##### 初期条件
+
+<pre style="background-color:gainsboro">
+  dp[0][0] = 0;
+
+  ※最小値を求めるので他は infinity にする
 </pre>
 <br>
