@@ -29,7 +29,31 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    string x;
+    cin >> x;
+
+    int slen = x.length();
+    ll cnt[200010];
+    cnt[slen-1] = (x[slen-1]=='T') ? 1 : 0;
+
+    repr(i, slen-2, 0){
+        cnt[i] = cnt[i+1];
+        if(x[i] == 'T') cnt[i]++;
+    }
+
+    //adebug(cnt, slen-1);
+
+    ll res = slen;
+    ll used = 0;
+    repr(i, slen-1, 0){
+        if(x[i] == 'T') continue;
+        if(cnt[i]-used > 0){
+            res -= 2;
+            used++;
+        }
+    }
+
+    cout << res << endl;
 
     return 0;
 }
