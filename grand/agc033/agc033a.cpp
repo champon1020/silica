@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
-#define ll long long
 #define rep(i, n) for(ll i=0; i<n; i++)
 #define repr(i, s, e) for(ll i=s; i>=e; i--)
 #define reps(i, s, e) for(ll i=s; i<=e; i++)
+#define ll long long
 #define inf 1e18
 #define all(v) v.begin(),v.end()
 #define vsort(v) sort(v.begin(), v.end())
@@ -29,31 +29,7 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, k;
-    ll a[100010];
-
-    cin >> n >> k;
-
-    rep(i, n){
-        cin >> a[i];
-    }
-
-    ll x = 0;
-    repr(j, 50, 0){
-        ll sum = 0;
-        rep(i, n){
-            if(a[i] & (1LL<<j)) sum++;
-        }
-        if(sum*2 < n) x |= (1LL<<j);
-        if(x > k) x &= ~(1LL<<j);
-    }
-
-    ll res = 0;
-    rep(i, n){
-        res += x^a[i];
-    }
-
-    cout << res << endl;
+    
 
     return 0;
 }
