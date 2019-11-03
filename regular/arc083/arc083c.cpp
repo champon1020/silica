@@ -30,27 +30,35 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, x;
-    ll a[100010];
-    cin >> n >> x;
-    rep(i, n){
-        cin >> a[i];
-    }
+    int a, b, c, d, e, f;
+    cin >> a >> b >> c >> d >> e >> f;
 
-    ll res = 0;
-    if(a[0] > x){
-        res += a[0]-x;
-        a[0] = x;
-    }
+    double maxdense = -1;
+    ll water=0, suger=0;
+    reps(i, 0, f/a){
+        if(i*a*100 > f) break;
+        reps(j, 0, f/b){
+            if(i==0 && j==0) continue;
+            ll w = i*a*100 + j*b*100;
+            if(w > f) break;
 
-    reps(i, 1, n-1){
-        if(a[i] + a[i-1] > x){
-            res += a[i] + a[i-1] - x;
-            a[i] = x - a[i-1];
+            reps(k, 0, w/100*e){
+                reps(l, 0, w/100*e){
+                    ll s = k*c + d*l;
+                    if(s > w/100.0*e) break;
+                    if(w + s > f) break;
+
+                    if(maxdense < double(100.0*s / (s+w))){
+                        maxdense = double(100.0*s / (s+w));
+                        water = w;
+                        suger = s;
+                    }
+                }
+            }
         }
     }
 
-    cout << res << endl;
+    cout << water+suger sp suger << endl;
 
     return 0;
 }

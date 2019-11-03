@@ -24,12 +24,46 @@ ll keta(ll num){ ll k=0; while(num>0){ num/=10; k++; } return k; }
 int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
+int h, w;
+char g[1010][1010];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    queue<pair<int, int>> visit;
+
+    cin >> h >> w;
+    rep(y, h){
+        rep(x, w){
+            cin >> g[x][y];
+            if(g[x][y] == '#') visit.push(make_pair(x, y));
+        }
+    }
+
+    int res = 0;
+    int cnt = visit.size(), cnt2 = 0;
+    while(!visit.empty()){
+        if(cnt == cnt2){
+            res++;
+            cnt = visit.size();
+            cnt2 = 0;
+        }
+        pair<int, int> xy = visit.front();
+        visit.pop();
+
+        rep(i, 4){
+            int x = xy.first + dx[i];
+            int y = xy.second + dy[i];
+            if(x < 0 || x >= w || y < 0 || y >= h) continue;
+            if(g[x][y] == '#') continue;
+            else g[x][y] = '#';
+            visit.push(make_pair(x, y));
+        }
+        cnt2++;
+    }
+
+    cout << res << endl;
 
     return 0;
 }
