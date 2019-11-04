@@ -38,6 +38,10 @@ class SegmentTree {
         }
     }
 
+    ll getquery(ll a, ll b){
+        return query(a, b, 0, 0, n-1);
+    }
+
     ll operator[](int i){
         return dat[i + n - 1];
     }
