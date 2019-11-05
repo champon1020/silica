@@ -33,56 +33,38 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-	int n, k;
-	ll ain;
-	ll asum[1010];
-	asum[0] = 0;
-	cin >> n >> k;
-	reps(i, 1, n){
-		cin >> ain;
-		asum[i] = asum[i-1] + ain;
+	string s;
+	cin >> s;
+	
+	int a=0, b=0, c=0;
+	int slen = s.length();
+	rep(i, slen){
+		if(s[i] == 'a') a++;
+		if(s[i] == 'b') b++;
+		if(s[i] == 'c') c++;
 	}
 	
-	vector<ll> bit[45];
-	reps(l, 0, n){
-		reps(r, l, n){
-			ll num = asum[r]-asum[l];
-			reps(i, 0, 40){
-				if(num & 1LL<<i){
-					bit[i].push_back(num);
-				}
-			}
-		}
+	if(slen == 0){
+		ans2(true);
+		return 0;
 	}
 	
-	ll res = 0;
-	vector<ll> dist;
-	repr(i, 40, 0){
-		if(bit[i].size() >= k){
-			dist = bit[i];
-			break;
-		}
+	if(a == slen || b == slen || c == slen){
+		ans2(false);
+		return 0;
 	}
 	
-	function<ll(vector<ll>) rec = [&](vector<ll> v) = {
-		repr(i, 40, 0){
-			for(auto const& vv : v){
-				if(vv & (1LL<<i)){
-					
-				}
-			}
-		}
-	};
-	
-	cout << res << endl;
-	
-	// debug
-	/*
-	reps(i, 0, 40){
-		cout << bit[i].size() << endl;
+	if((a==0 && abs(b-c)==1) || (b==0 && abs(c-a)==1) || (c==0 && abs(a-b)==1)){
+		ans2(false);
+		return 0;
 	}
-	adebug(asum, n);
-	*/
+	
+	if(2*(a+b) <= c || 2*(b+c) <= a || 2*(c+a) <= b){
+		ans2(false);
+		return 0;
+	}
+	
+	ans2(true);
 
     return 0;
 }
