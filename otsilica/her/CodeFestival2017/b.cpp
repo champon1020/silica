@@ -44,27 +44,13 @@ int main(){
 		if(s[i] == 'c') c++;
 	}
 	
-	if(slen == 0){
+	if(slen == 1){
 		ans2(true);
 		return 0;
 	}
 	
-	if(a == slen || b == slen || c == slen){
-		ans2(false);
-		return 0;
-	}
-	
-	if((a==0 && abs(b-c)==1) || (b==0 && abs(c-a)==1) || (c==0 && abs(a-b)==1)){
-		ans2(false);
-		return 0;
-	}
-	
-	if(2*(a+b) <= c || 2*(b+c) <= a || 2*(c+a) <= b){
-		ans2(false);
-		return 0;
-	}
-	
-	ans2(true);
+	if(abs(a-b) <= 1 && abs(b-c) <= 1 && abs(c-a) <= 1) ans2(true);
+    else ans2(false);
 
     return 0;
 }

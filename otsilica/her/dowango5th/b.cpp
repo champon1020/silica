@@ -43,36 +43,31 @@ int main(){
 		asum[i] = asum[i-1] + ain;
 	}
 	
-	vector<ll> bit[45];
+	vector<ll> sums;
 	reps(l, 0, n){
 		reps(r, l, n){
 			ll num = asum[r]-asum[l];
-			reps(i, 0, 40){
-				if(num & 1LL<<i){
-					bit[i].push_back(num);
-				}
-			}
+			sums.push_back(num);
 		}
 	}
 	
 	ll res = 0;
-	vector<ll> dist;
-	repr(i, 40, 0){
-		if(bit[i].size() >= k){
-			dist = bit[i];
-			break;
-		}
-	}
-	
-	function<ll(vector<ll>) rec = [&](vector<ll> v) = {
-		repr(i, 40, 0){
-			for(auto const& vv : v){
-				if(vv & (1LL<<i)){
-					
-				}
-			}
-		}
-	};
+    vector<ll> dist = sums;
+    repr(i, 40, 0){
+        ll cnt = 0;
+        vector<ll> tmp;
+        for(auto const& d : dist){
+            if(d & 1LL<<i){
+                tmp.push_back(d);
+                cnt++;
+            }
+        }
+        if(cnt >= k){
+            res += (1LL<<i);
+            dist.clear();
+            dist = tmp;
+        }
+    }
 	
 	cout << res << endl;
 	
