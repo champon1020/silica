@@ -11,8 +11,8 @@
 #define ok cout << "ok" << endl;
 #define sp << " " <<
 #define enl << endl
+#define ll long long
 using namespace std;
-using ll = long long;
 template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } return false; }
 template<typename T> T gcd(T a, T b){ if(b==0) return a; return gcd(b, a%b); }
