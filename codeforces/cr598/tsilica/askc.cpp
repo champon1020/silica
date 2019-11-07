@@ -41,7 +41,7 @@ int main(){
     ll must_d = (n - csum)/(m + 1);
     ll rest = (n - csum)%(m + 1);
     if(rest > 0) must_d++;
-    if(must_d > d){
+    if(must_d >= d){
         ans2(false);
         return 0;
     }else{
