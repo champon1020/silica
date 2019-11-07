@@ -29,27 +29,50 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll k, n, s, t;
-    cin >> k;
-    rep(i, k){
-        cin >> n >> s >> t;
-        bool res = true;
-        map<char, int> dist;
-        rep(j, n){
-            dist[s[j]]++;
-            dist[t[j]]++;
-        }
-        for(auto const& d : dist){
-            if(d.second%2 == 1){
-                res = false;
-            }
-        }
-        ans(res);
-        if(!res) continue;
-
-        ll cnt = 0;
-        
+    int n;
+    ll tmpa;
+    list<ll> a;
+    vector<ll> res;
+    cin >> n;
+    rep(i, n){
+        cin >> tmpa;
+        a.push_back(tmpa);
     }
+    
+    a.sort();
+    res.push_back(a.front());
+    a.pop_front();
+
+    int cnt=0;;
+    while(!a.empty()){
+        if(cnt%2 == 0){
+            res.push_back(a.back());
+            a.pop_back();
+
+            if(a.empty()) break;
+
+            res.insert(res.begin(), a.back());
+            a.pop_back();
+        }else{
+            res.push_back(a.front());
+            a.pop_front();
+
+            if(a.empty()) break;
+
+            res.insert(res.begin(), a.front());
+            a.pop_front();
+        }
+        cnt++;
+    }
+
+    //vdebug(res);
+
+    ll answer = 0;
+    rep(i, res.size()-1){
+        answer += abs(res[i+1] - res[i]);
+    }
+
+    cout << answer << endl;
 
     return 0;
 }
