@@ -31,48 +31,54 @@ int main(){
 
     int n;
     ll tmpa;
-    list<ll> a;
-    vector<ll> res;
+    vector<ll> a, res, res2;
     cin >> n;
     rep(i, n){
         cin >> tmpa;
         a.push_back(tmpa);
     }
     
-    a.sort();
-    res.push_back(a.front());
-    a.pop_front();
+    vsort(a);
+    res.push_back(a[0]);
+    res2.push_back(a[n-1]);
 
-    int cnt=0;;
-    while(!a.empty()){
+    int l=1, r=n-1, cnt=0;;
+    while(l <= r){
         if(cnt%2 == 0){
-            res.push_back(a.back());
-            a.pop_back();
-
-            if(a.empty()) break;
-
-            res.insert(res.begin(), a.back());
-            a.pop_back();
+            res.push_back(a[r--]);
+            if(l > r) break;
+            res.insert(res.begin(), a[r--]);
         }else{
-            res.push_back(a.front());
-            a.pop_front();
+            res.push_back(a[l++]);
+            if(l > r) break;
+            res.insert(res.begin(), a[l++]);
+        }
+        cnt++;
+    }
 
-            if(a.empty()) break;
-
-            res.insert(res.begin(), a.front());
-            a.pop_front();
+    l=0, r=n-2, cnt=0;
+    while(l <= r){
+        if(cnt%2 == 1){
+            res2.push_back(a[r--]);
+            if(l > r) break;
+            res2.insert(res2.begin(), a[r--]);
+        }else{
+            res2.push_back(a[l++]);
+            if(l > r) break;
+            res2.insert(res2.begin(), a[l++]);
         }
         cnt++;
     }
 
     //vdebug(res);
 
-    ll answer = 0;
+    ll answer = 0, answer2 = 0;
     rep(i, res.size()-1){
         answer += abs(res[i+1] - res[i]);
+        answer2 += abs(res2[i+1] - res2[i]);
     }
 
-    cout << answer << endl;
+    cout << max(answer, answer2) << endl;
 
     return 0;
 }
