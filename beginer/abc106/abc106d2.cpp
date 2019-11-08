@@ -26,61 +26,36 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-ll h, w, k;
-ll dp[110][10];
-ll mod = 1e9+7;
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    cin >> h >> w >> k;
 
-    Fill(dp, 0);
-    reps(i, 0, w){
-        dp[0][i] = i==1 ? 1 : 0;
+    int a[510][510];
+    ll l, r;
+    ll n, m, Q;
+    cin >> n >> m >> Q;
+
+    Fill(a, 0);
+    rep(i, m){
+        cin >> l >> r;
+        a[l][r]++;
     }
 
-    if(w == 1){
-        cout << 1 << endl;
-        return 0;
-    }
-
-    reps(i, 0, h){
-        reps(j, 1, w){
-            for(ll e=0; e < (1<<(w-1)); e++){
-                bool flg = true;
-                for(int l=0; l<w-2; l++){
-                    if((e & 1<<l) && (e & 1<<(l+1))) flg = false;
-                }
-                if(!flg) continue;
-
-                // h+1, x-1
-                if((1<<(j-2) & e) && j-1 >= 0){
-                    dp[i+1][j-1] += dp[i][j];
-                    dp[i+1][j-1] %= mod;
-                }
-                // h+1, x+1
-                else if((1<<(j-1) & e) && j+1 <= w){
-                    dp[i+1][j+1] += dp[i][j];
-                    dp[i+1][j+1] %= mod;
-                }
-                else{
-                    // h+1, x
-                    dp[i+1][j] += dp[i][j];
-                    dp[i+1][j] %= mod;
-                }
-            }
+    reps(i, 1, n){
+        reps(j, 1, n){
+            a[i][j] += a[i][j-1];
         }
     }
 
-    cout << dp[h][k] << endl;
-
-    // reps(i, 0, h){
-    //     reps(j, 1, w){
-    //         cout << dp[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
+    ll p, q;
+    rep(i, Q){
+        cin >> p >> q;
+        ll sum = 0;
+        reps(j, p, q){
+            sum += a[j][q] - a[j][p-1];
+        }
+        cout << sum << endl;
+    }
 
     return 0;
 }

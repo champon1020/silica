@@ -335,3 +335,8 @@ t = 0, 1, ..., T-1 のそれぞれの時刻について [t, t+1] の間に発電
 
 </pre>
 <br>
+
+
+
+## dp良さげ問題
+[abc113d](https://atcoder.jp/contests/abc113/tasks/abc113_d)

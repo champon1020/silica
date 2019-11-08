@@ -26,58 +26,41 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-ll h, w, k;
-ll dp[110][10];
-ll mod = 1e9+7;
-
+// 二次元累積和
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    cin >> h >> w >> k;
 
-    Fill(dp, 0);
-    reps(i, 0, w){
-        dp[0][i] = i==1 ? 1 : 0;
+    ll n, m, Q;
+    ll l, r;
+    int a[510][510];
+    Fill(a, 0);
+    cin >> n >> m >> Q;
+    rep(i, m){
+        cin >> l >> r;
+        a[l][r]++;
     }
 
-    if(w == 1){
-        cout << 1 << endl;
-        return 0;
+    reps(i, 1, n){
+        reps(j, 1, n){
+            a[i][j] += a[i-1][j];
+        }
     }
-
-    reps(i, 0, h){
-        reps(j, 1, w){
-            for(ll e=0; e < (1<<(w-1)); e++){
-                bool flg = true;
-                for(int l=0; l<w-2; l++){
-                    if((e & 1<<l) && (e & 1<<(l+1))) flg = false;
-                }
-                if(!flg) continue;
-
-                // h+1, x-1
-                if((1<<(j-2) & e) && j-1 >= 0){
-                    dp[i+1][j-1] += dp[i][j];
-                    dp[i+1][j-1] %= mod;
-                }
-                // h+1, x+1
-                else if((1<<(j-1) & e) && j+1 <= w){
-                    dp[i+1][j+1] += dp[i][j];
-                    dp[i+1][j+1] %= mod;
-                }
-                else{
-                    // h+1, x
-                    dp[i+1][j] += dp[i][j];
-                    dp[i+1][j] %= mod;
-                }
-            }
+    reps(i, 1, n){
+        reps(j, 1, n){
+            a[i][j] += a[i][j-1];
         }
     }
 
-    cout << dp[h][k] << endl;
+    ll p, q;
+    rep(i, Q){
+        cin >> p >> q;
+        cout << a[q][q] + a[p-1][p-1] - a[q][p-1] - a[p-1][q] << endl;
+    }
 
-    // reps(i, 0, h){
-    //     reps(j, 1, w){
-    //         cout << dp[i][j] << " ";
+    // reps(i, 1, n){
+    //     reps(j, 1, n){
+    //         cout << a[i][j] << " ";
     //     }
     //     cout << endl;
     // }

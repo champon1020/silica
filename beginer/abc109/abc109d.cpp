@@ -31,27 +31,25 @@ int a[510][510];
 int done[510][510];
 vector<pair<ll, ll>> from;
 vector<pair<ll, ll>> to;
-vector<ll> coin;
-ll sum = 0;
 
 void dfs(int x, int y){
-    done[x][y] = 1;
-    if(a[x][y] == 2) return;
-
     rep(i, 4){
         int dlx = x + dx[i];
         int dly = y + dy[i];
         if(dlx < 0 || dlx >= w || dly < 0 || dly >= h) continue;
         if(done[dlx][dly]) continue;
-        int rest_coin = a[x][y] < 2 ? a[x][y] : a[x][y]-2;
-        if(rest_coin == 0) continue;
-        
-        a[dlx][dly] += rest_coin;
-        a[x][y] -= rest_coin;
-        from.push_back(make_pair(y+1, x+1));
-        to.push_back(make_pair(dly+1, dlx+1));
-        coin.push_back(rest_coin);
-        sum += rest_coin;
+        if(a[x][y]%2 == 0){
+            done[x][y] = 1;
+            dfs(dlx, dly);
+            break;
+        }
+        if(!done[x][y]){
+            a[dlx][dly] += 1;
+            a[x][y] -= 1;
+            done[x][y] = 1;
+            from.push_back(make_pair(y+1, x+1));
+            to.push_back(make_pair(dly+1, dlx+1));
+        }
         dfs(dlx, dly);
     }
 }
@@ -71,11 +69,9 @@ int main(){
 
     dfs(0, 0);
 
-    cout << sum << endl;
+    cout << from.size() << endl;
     rep(i, from.size()){
-        rep(j, coin[i]){
-            cout << from[i].first sp from[i].second sp to[i].first sp to[i].second << endl;
-        }
+        cout << from[i].first sp from[i].second sp to[i].first sp to[i].second << endl;
     }
 
     // cout << endl;
