@@ -30,23 +30,36 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, p[100010];
-    cin >> n;
-    reps(i, 1, n){
-        cin >> p[i];
-    }
+    string s;
+    cin >> s;
 
+    int slen = s.length();
+    int l=0, r=slen-1;
+
+    bool good = true;
     int res = 0;
-    reps(i, 1, n-1){
-        if(p[i] == i){
-            swap(p[i], p[i+1]);
+    while(l <= r){
+        if(s[l] == 'x' && s[r] != 'x'){
+            l++;
             res++;
+            continue;
+        }
+        if(s[l] != 'x' && s[r] == 'x'){
+            r--;
+            res++;
+            continue;
+        }
+        if(s[l] == s[r]){
+            l++;
+            r--;
+        }else{
+            good = false;
+            break;
         }
     }
-    if(p[n] == n){
-        res++;
-    }
-    cout << res << endl;
+
+    if(good) cout << res << endl;
+    else cout << -1 << endl;
 
     return 0;
 }
