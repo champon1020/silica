@@ -35,13 +35,15 @@ int main(){
     rep(i, n){
         cin >> a[i];
     }
+
+    asum[0] = 0;
     reps(i, 0, n-1){
         asum[i+1] = asum[i] + a[i];
     }
 
     map<ll, ll> restmap;
-    reps(i, 1, n){
-        ll rest = a[i-1]%m;
+    reps(i, 0, n){
+        ll rest = asum[i]%m;
         restmap[rest]++;
     }
 
