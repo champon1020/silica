@@ -30,15 +30,18 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, k;
+    ll n, k;
     cin >> n >> k;
     
     ll res = 0;
-    reps(a, k, n){
-        res += n-a;
-        res += a/k-1;
+    if(k == 0) res = n*n;
+    else{
+        reps(b, k+1, n){
+            res += n/b * (b-k) - (k-1)/b * (b-k);
+            res += n%b < k ? 0 : n%b-k+1;
+        }
     }
-
+    
     cout << res << endl;
 
     return 0;

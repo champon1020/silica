@@ -9,46 +9,43 @@ using namespace std;
 
 // from 
 class BellmanFord {
+  public:
     struct edge {
-        int from, to, weight;
-        edge(int f, int t, int w):from(f),to(t),weight(w){}
+        int from;
+        int to;
+        ll weight;
+        edge(int f, int t, ll w) : from(f),to(t),weight(w){}
     };
     vector<edge> es;
-    vector<ll> dist; // 最短距離
-    int n; // 頂点数
+    vector<ll> dist; // minimum distance
+    int n; // num of nodes
+    bool negative = false;
 
     BellmanFord(int nn): n(nn){}
 
-    function<void(int)> dfs = [&](int s){
-        dist[s] = 0;
-        for(auto const& e : es){
-            if(dist[e.from] != inf && dist[e.to] > dist[e.from] + e.weight){
-                dist[e.to] = dist[e.from] + e.weight;
-                dfs(e.to);
-            }
-        }
-    };
-
-    void add(int f, int t, int w){
+    void add(int f, int t, ll w){
         es.push_back(edge(f, t, w));
     }
 
-    void shortest(int s){
-        dist.assign(n, inf);
-        dfs(s);
-    }
-
-    bool shortest_nega(){
-        dist.assign(n, 0);
-        rep(i, n){
+    void query(int s){
+        dist.assign(n+1, inf);
+        dist[s] = 0;
+        int cnt = 1;
+        while(true){
+            bool update = false;
             for(auto const& e : es){
-                if(dist[e.to] > dist[e.from] + e.weight){
+                if(dist[e.from] != inf && dist[e.to] > dist[e.from] + e.weight){
                     dist[e.to] = dist[e.from] + e.weight;
+                    update = true;
                 }
-                if(i == n-1) return true;
             }
+            cnt++;
+            if(cnt == n && update){
+                negative = true;
+                break;
+            }
+            if(!update) break;
         }
-        return false;
     }
 };
 // to
@@ -61,3 +58,5 @@ int main(){
 
     return 0;
 }
+// example
+// https://atcoder.jp/contests/abc061/tasks/abc061_d
