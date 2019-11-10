@@ -30,6 +30,17 @@ class Fanctions {
         }
         return k;
     }
+
+    template<typename T>
+    T powpow(T num1, T num2){
+        T res = 1;
+        while(num2 > 0){
+            res *= num1;
+            res %= mod;
+            num2--;
+        }
+        return res%mod;
+    }
 };
 // to
 
