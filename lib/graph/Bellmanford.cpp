@@ -8,26 +8,25 @@ using namespace std;
 
 
 // from 
+template<typename T>
 class BellmanFord {
-  public:
     struct edge {
-        int from;
-        int to;
-        ll weight;
-        edge(int f, int t, ll w) : from(f),to(t),weight(w){}
+        int from, to;
+        T cost;
+        edge(int f, int t, T c) : from(f),to(t),cost(c){}
     };
+  public:
     vector<edge> es;
     vector<ll> dist; // minimum distance
     int n; // num of nodes
     bool negative = false;
-
     BellmanFord(int nn): n(nn){}
 
-    void add(int f, int t, ll w){
-        es.push_back(edge(f, t, w));
+    void add(int f, int t, T c){
+        es.push_back(edge(f, t, c));
     }
 
-    void query(int s){
+    void build(int s){
         dist.assign(n+1, inf);
         dist[s] = 0;
         int cnt = 1;
