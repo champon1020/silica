@@ -29,12 +29,11 @@ int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 class BellmanFord {
   public:
     struct edge {
-        int from;
         int to;
         ll weight;
-        edge(int f, int t, ll w) : from(f),to(t),weight(w){}
+        edge(int t, ll w) : to(t),weight(w){}
     };
-    vector<edge> es;
+    vector<edge> es[100010];
     vector<ll> dist; // minimum distance
     int n; // num of nodes
     bool negative = false;
@@ -42,27 +41,24 @@ class BellmanFord {
     BellmanFord(int nn): n(nn){}
 
     void add(int f, int t, ll w){
-        es.push_back(edge(f, t, w));
+        es[f].push_back(edge(t, w));
     }
 
     void query(int s){
         dist.assign(n+1, inf);
         dist[s] = 0;
-        int cnt = 1;
-        while(true){
-            bool update = false;
-            for(auto const& e : es){
-                if(dist[e.from] != inf && dist[e.to] > dist[e.from] + e.weight){
-                    dist[e.to] = dist[e.from] + e.weight;
-                    update = true;
+        reps(i, 0, 2*n){
+            reps(j, 1, n){
+                if(dist[j] == inf) continue;
+                for(auto const& e : es[j]){
+                    if(dist[e.to] > dist[j] + e.weight){
+                        dist[e.to] = dist[j] + e.weight;
+                        if(e.to == n && i == 2*n){
+                            negative = true;
+                        }
+                    }
                 }
             }
-            cnt++;
-            if(cnt == n && update){
-                negative = true;
-                break;
-            }
-            if(!update) break;
         }
     }
 };
