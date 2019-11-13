@@ -26,55 +26,49 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-struct Node{
-    int x, y;
-    Node(int x, int y):x(x),y(y){}
-};
-
-bool comp(pair<int, Node> p1, pair<int, Node> p2){
-    return p1.first < p2.first;
-}
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int h, w, d, a;
-    cin >> h >> w >> d;
-    vector<pair<int, Node>> xy[100000];
-    rep(i, h){
-        rep(j, w){
-            cin >> a;
-            xy[a%d].push_back(make_pair(a, Node(j, i)));
-        }
-    }
-
-    ll cost[d][h*w/d+10];
+    ll g, d, p, c;
+    pair<int, int> pc[20];
+    cin >> d >> g;
     rep(i, d){
-        sort(all(xy[i]), comp);
-        cost[i][0] = 0;
-        reps(j, 1, xy[i].size()-1){
-            //if(j == 0) cost[i][j+1] = xy[i][j].second.x + xy[i][j].second.y;
-            cost[i][j] = cost[i][j-1] 
-                + abs(xy[i][j].second.x - xy[i][j-1].second.x) 
-                + abs(xy[i][j].second.y - xy[i][j-1].second.y);
+        cin >> p >> c;
+        pc[i] = make_pair(p, c);
+    }
+
+    ll res = inf;
+    for(int bit=0; bit < (1<<d); bit++){
+        ll cnt = 0;
+        ll sum = 0;
+        for(int i=0; i<d; i++){
+            if(bit & (1<<i)){
+                cnt += pc[i].first;
+                sum += 100*(i+1)*pc[i].first + pc[i].second;
+            }
+        }
+        if(sum >= g){
+            res = min(res, cnt);
+            continue;
+        }
+        for(int i=d-1; i>=0; i--){
+            if(bit & (1<<i)) continue;
+            ll psum = 0;
+            while(psum < pc[i].first && sum < g){
+                sum += 100*(i+1);
+                psum++;
+                cnt++;
+            }
+            //cout << bit sp sum sp cnt << endl;
+            if(sum >= g){
+                res = min(res, cnt);
+                break;
+            }
         }
     }
 
-    int q;
-    int l, r;
-    cin >> q;
-    rep(i, q){
-        cin >> l >> r;
-        int rest = l%d;
-        int quotientl = l/d;
-        int quotientr = r/d;
-        if(rest == 0){
-            quotientr--;
-            quotientl--;
-        }
-        cout << cost[rest][quotientr] - cost[rest][quotientl] << endl;
-    }
+    cout << res << endl;
 
     return 0;
 }

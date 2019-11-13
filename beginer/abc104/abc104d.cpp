@@ -26,55 +26,34 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-struct Node{
-    int x, y;
-    Node(int x, int y):x(x),y(y){}
-};
-
-bool comp(pair<int, Node> p1, pair<int, Node> p2){
-    return p1.first < p2.first;
-}
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int h, w, d, a;
-    cin >> h >> w >> d;
-    vector<pair<int, Node>> xy[100000];
-    rep(i, h){
-        rep(j, w){
-            cin >> a;
-            xy[a%d].push_back(make_pair(a, Node(j, i)));
+    string s;
+    cin >> s;
+    ll mod = 1e9+7;
+    int slen = s.length();
+    int a[100010];
+    int b[100010];
+
+    a[0] = b[0] = 0;
+    rep(i, slen){
+        if(s[i] == 'A') a[i+1] = a[i] + 1;
+        else a[i+1] = a[i];
+        if(s[i] == 'B') b[i+1] = b[i] + 1;
+        else b[i+1] = b[i];
+    }
+
+    ll res = 0;
+    rep(i, slen){
+        if(s[i] == 'C'){
+            res += a[i]*b[i];
+            res %= mod;
         }
     }
 
-    ll cost[d][h*w/d+10];
-    rep(i, d){
-        sort(all(xy[i]), comp);
-        cost[i][0] = 0;
-        reps(j, 1, xy[i].size()-1){
-            //if(j == 0) cost[i][j+1] = xy[i][j].second.x + xy[i][j].second.y;
-            cost[i][j] = cost[i][j-1] 
-                + abs(xy[i][j].second.x - xy[i][j-1].second.x) 
-                + abs(xy[i][j].second.y - xy[i][j-1].second.y);
-        }
-    }
-
-    int q;
-    int l, r;
-    cin >> q;
-    rep(i, q){
-        cin >> l >> r;
-        int rest = l%d;
-        int quotientl = l/d;
-        int quotientr = r/d;
-        if(rest == 0){
-            quotientr--;
-            quotientl--;
-        }
-        cout << cost[rest][quotientr] - cost[rest][quotientl] << endl;
-    }
+    cout << res << endl;
 
     return 0;
 }
