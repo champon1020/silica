@@ -11,6 +11,7 @@ using namespace std;
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
+template<typename A, size_t N, typename T> void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } return false; }
 template<typename T> void vdebug(vector<T> v){ cout << "vdebug" << endl; for(auto vv : v){ cout << vv << " "; } cout << endl; }
@@ -29,49 +30,54 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, tmpa;
-    vector<pair<ll, ll>> a;
-    vector<pair<ll, ll>> group[200010];
+    int n;
+    ll tmpa;
+    vector<pair<ll, int>> a;
     cin >> n;
     rep(i, n){
         cin >> tmpa;
         a.push_back(make_pair(tmpa, i));
     }
-    vsort(a);
 
-    // for(auto const& e : a){
-    //     cout << e.first sp e.second << endl;
-    // }
+    sort(all(a), greater<pair<ll, int>>());
+    for(auto const& e : a){
+        cout << e.second << " ";
+    }for(auto const& e : a){
+        cout << e.first << " ";
+    }
+    cout << endl;
 
-    ll g_ind = 0;
-    ll res = 0;
-    group[g_ind].push_back(a[0]);
-    reps(i, 1, n-2){
-        if(a[i+1].first - a[i].first > a[i].first - a[i-1].first
-            || a[i].first -a[i-1].first == 0
-            || group[g_ind].size() < 3
-            || n-i < 3){
-            //cout << a[i+1].first - a[i].first sp a[i].first - a[i-1].first sp a[i].first << endl;
-            group[g_ind].push_back(a[i]);
+    ll dp[200010];
+    int res[200010];
+    dp[3] = a[0].first - a[2].first;
+    res[a[0].second] = res[a[1].second] = res[a[2].second] = 1;
+    int team_num = 1;
+    reps(i, 3, n-1){
+        //cout << i << endl;
+        if(i+2 <= n-1){
+            // add to team
+            if(dp[i] + a[i-1].first - a[i].first <= dp[i] + a[i].first - a[i+2].first){
+                cout << i << endl;
+                dp[i+1] = dp[i] + a[i-1].first - a[i].first;
+                res[a[i].second] = team_num;
+            // devide team
+            }else{
+                //cout << i << endl;
+                dp[i+1] = dp[i+2] = dp[i+3] = dp[i] + a[i].first - a[i+2].first;
+                res[a[i].second] = res[a[i+1].second] = res[a[i+2].second] = ++team_num;
+                i += 2;
+            }
         }else{
-            group[++g_ind].push_back(a[i]);
+            //cout << i sp i+1 << endl;
+            //cout << a[i].second sp a[i+1].second << endl;
+            res[a[i].second] = res[a[i+1].second] = team_num;
+            break;
         }
     }
-    group[g_ind].push_back(a[n-1]);
 
-    ll resarr[200010];
-    reps(i, 0, g_ind){
-        if(group[i].size() <= 0) continue;
-        for(auto const& g : group[i]){
-            resarr[g.second] = i+1;
-            //cout << g << endl;
-        }
-        res += group[i][group[i].size()-1].first - group[i][0].first;
-    }
-
-    cout << res sp g_ind+1 << endl;
+    cout << team_num << endl;
     rep(i, n){
-        cout << resarr[i] << " ";
+        cout << res[i] << " ";
     }
     cout << endl;
 
