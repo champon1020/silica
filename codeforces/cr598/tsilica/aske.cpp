@@ -39,43 +39,31 @@ int main(){
         a.push_back(make_pair(tmpa, i));
     }
 
-    sort(all(a), greater<pair<ll, int>>());
-    for(auto const& e : a){
-        cout << e.second << " ";
-    }for(auto const& e : a){
-        cout << e.first << " ";
-    }
-    cout << endl;
-
+    vsort(a);
+    ll team_num = 1;
     ll dp[200010];
-    int res[200010];
-    dp[3] = a[0].first - a[2].first;
+    ll res[200010];
+    Fill(dp, inf);
+    dp[0] = 0;
     res[a[0].second] = res[a[1].second] = res[a[2].second] = 1;
-    int team_num = 1;
-    reps(i, 3, n-1){
-        //cout << i << endl;
-        if(i+2 <= n-1){
-            // add to team
-            if(dp[i] + a[i-1].first - a[i].first <= dp[i] + a[i].first - a[i+2].first){
-                cout << i << endl;
-                dp[i+1] = dp[i] + a[i-1].first - a[i].first;
-                res[a[i].second] = team_num;
-            // devide team
-            }else{
-                //cout << i << endl;
-                dp[i+1] = dp[i+2] = dp[i+3] = dp[i] + a[i].first - a[i+2].first;
-                res[a[i].second] = res[a[i+1].second] = res[a[i+2].second] = ++team_num;
-                i += 2;
-            }
-        }else{
-            //cout << i sp i+1 << endl;
-            //cout << a[i].second sp a[i+1].second << endl;
-            res[a[i].second] = res[a[i+1].second] = team_num;
-            break;
-        }
+    reps(i, 0, n-5){
+        if(dp[i+3] > dp[i] + a[i+2].first - a[i].first){
+            dp[i+3] = dp[i] + a[i+2].first - a[i].first;
+            res[a[i+2].second] = res[a[i+1].second];
+        }else res[a[i+2].second] = res[a[i].second]+1;
+
+        if(dp[i+4] > dp[i] + a[i+3].first - a[i].first){
+            dp[i+4] = dp[i] + a[i+3].first - a[i].first;
+            res[a[i+3].second] = res[a[i+2].second];
+        }else res[a[i+3].second] = res[a[i].second]+1;
+
+        if(dp[i+5] > dp[i] + a[i+4].first - a[i].first){
+            dp[i+5] = dp[i] + a[i+4].first - a[i].first;
+            res[a[i+4].second] = res[a[i+3].second];
+        }else res[a[i+4].second] = res[a[i].second]+1;
     }
 
-    cout << team_num << endl;
+    cout << dp[n] sp res[a[n-1].second] << endl;
     rep(i, n){
         cout << res[i] << " ";
     }

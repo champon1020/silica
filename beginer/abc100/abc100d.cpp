@@ -27,63 +27,49 @@ int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
 struct Pair {
-    ll sumx, sumy, sumz;
-    Pair(ll x, ll y, ll z):sumx(x),sumy(y),sumz(z){};
-
-    Pair add(ll x, ll y, ll z){
-        return Pair(sumx + x, sumy + y, sumz + z);
-    }
-
-    ll sum(){
-        return abs(sumx) + abs(sumy) + abs(sumz);
-    }
+    ll x, y, z;
+    Pair(ll x, ll y, ll z):x(x),y(y),z(z){};
 };
-
-bool compare(Pair p1, Pair p2){
-    ll sum1 = abs(p1.sumx) + abs(p1.sumy) + abs(p1.sumz);
-    ll sum2 = abs(p2.sumx) + abs(p2.sumy) + abs(p2.sumz);
-    return sum1 < sum2;
-}
-
-bool compare2(Pair p1, Pair p2, Pair cost){
-    cout << p1.sumx sp p1.sumy sp p1.sumz sp cost.sumx sp cost.sumy sp cost.sumz << endl;
-    ll sum1 = abs(p1.sumx) + abs(p1.sumy) + abs(p1.sumz);
-    ll sum2 = abs(p2.sumx + cost.sumx) + abs(p2.sumy + cost.sumy) + abs(p2.sumz + cost.sumz);
-    return sum1 < sum2;
-}
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
     int n, m;
-    ll x[1010], y[1010], z[1010];
+    vector<Pair> xyz;
+    ll x, y, z;
     cin >> n >> m;
     rep(i, n){
-        cin >> x[i] >> y[i] >> z[i];
+        cin >> x >> y >> z;
+        xyz.push_back(Pair(x, y, z));
     }
 
-    vector<vector<Pair>> dp;
-    dp.assign(1010, vector<Pair>(1010, Pair(0, 0, 0)));
-
-    reps(i, 0, n-1){
-        repr(j, m-1, 0){
-            if(compare2(dp[i][j], dp[i][j+1], Pair(x[i], y[i], z[i]))){
-                dp[i+1][j] = dp[i][j+1].add(x[i], y[i], z[i]);
-            }else{
-                dp[i+1][j] = dp[i][j];
-            }
+    ll max = -inf;
+    for(int bit=0; bit < (1<<3); bit++){
+        vector<ll> sums;
+        for(auto const& e : xyz){
+            ll sum = 0;
+            if(bit & (1<<0)) sum += -e.x;
+            else sum += e.x;
+            if(bit & (1<<1)) sum += -e.y;
+            else sum += e.y;
+            if(bit & (1<<2)) sum += -e.z;
+            else sum += e.z;
+            sums.push_back(sum);
         }
+
+        //vdebug(sums);
+
+        sort(all(sums), greater<ll>());
+
+        ll sum = 0;
+        rep(i, m){
+            sum += sums[i];
+        }
+        chmax(max, sum);
     }
 
-    cout << dp[n][0].sum() << endl;
-
-    // reps(i, 0, n){
-    //     repr(j, m, 0){
-    //         cout << dp[i][j].sumx << " ";
-    //     }
-    //     cout << endl;
-    // }
+    cout << max << endl;
 
     return 0;
 }
