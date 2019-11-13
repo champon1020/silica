@@ -30,46 +30,67 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    string s;
-    cin >> s;
-    int slen = s.length();
+    int n, c;
+    int d[1010][1010];
+    int g[3][40];
+    rep(i, 3){
+        Fill(g[i], 0);
+    }
 
-    ll a[slen+1];
-
-    a[0] = -1;
-    reps(i, 1, slen-1){
-        a[i] = -1;
-        if(s[i-1] == '>' && s[i] == '<'){
-            a[i] = 0;
+    cin >> n >> c;
+    reps(i, 1, c){
+        reps(j, 1, c){
+            cin >> d[i][j];
         }
     }
-    if(s[0] == '<') a[0] = 0;
-    if(s[slen-1] == '>') a[slen] = 0;
-
-    reps(i, 0, slen){
-        if(a[i] == 0){
-            int l = i-1;
-            int r = i+1;
-            while(0 <= l && s[l] == '>'){
-                if(l+1 <= slen) a[l] = max(a[l], a[l+1] + 1);
-                else a[l] = 1;
-                l--;
-            }
-            while(r <= slen && s[r-1] == '<'){
-                a[r] = max(a[r], a[r-1] + 1);
-                r++;
-            }
+    int cc;
+    reps(i, 1, n){
+        reps(j, 1, n){
+            cin >> cc;
+            g[(i+j)%3][cc]++;
         }
     }
 
-    ll sum = 0;
-    reps(i, 0, slen){
-        sum += a[i];
+    ll res = inf;
+    reps(i, 1, c){
+        reps(j, 1, c){
+            if(i==j) continue;
+            reps(k, 1, c){
+                if(j==k || k==i) continue;
+                ll sum = 0;
+                reps(m, 1, c){
+                    if(g[0][m] == 0) continue;
+                    sum += d[m][i] * g[0][m];
+                }
+                reps(m, 1, c){
+                    if(g[1][m] == 0) continue;
+                    sum += d[m][j] * g[1][m];
+                }
+                reps(m, 1, c){
+                    if(g[2][m] == 0) continue;
+                    sum += d[m][k] * g[2][m];
+                }
+                //cout << sum << endl;
+                res = min(res, sum);
+            }
+        }
     }
 
-    //adebug(a, slen);
+    cout << res << endl;
 
-    cout << sum << endl;
+    // rep(i, 3){
+    //     reps(j, 1, 30){
+    //         cout << g[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+    // reps(i, 1, 30){
+    //     reps(j, 1, 30){
+    //         cout << d[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
 
     return 0;
 }
