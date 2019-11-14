@@ -30,8 +30,25 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    double xa, ya, xb, yb, xc, yc;
-    cin >> xa >> ya >> xb >> yb >> xc >> yc;
+    int n;
+    cin >> n;
+
+    int sum = 0;
+    reps(i, 1, 9){
+        reps(j, 1, 9){
+            sum += i*j;
+        }
+    }
+
+    int diff = sum - n;
+    vector<int> elements;
+
+    reps(i, 1, diff){
+        if(i/10 >= 1 || diff/i/10 >= 1) continue;
+        if(diff%i == 0){
+            cout << i sp "x" sp diff/i << endl;
+        }
+    }
 
     return 0;
 }
