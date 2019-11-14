@@ -26,56 +26,31 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-template<typename T>
-class Dijkstra{
-    struct edge {
-        int to;
-        T cost;
-        edge(int t, T c) : to(t),cost(c){}
-    };
-    typedef pair<ll, int> P;
-  public:
-    int n;
-    vector<edge> g[100010];
-    vector<ll> dist;
-    Dijkstra(int nn): n(nn){};
-
-    void add(int f, int t, T c){
-        g[f].push_back(edge(t, c));
-    }
-
-    void build(int s) {
-        priority_queue<P, vector<P>, greater<P>> q;
-        dist.assign(n+1, inf);
-        dist[s] = 0;
-        q.push(P(0, s));
-        while(!q.empty()){
-            P p = q.top();
-            q.pop();
-            int v = p.second;
-            if(dist[v] < p.first) continue;
-            for(auto const& e : g[v]) {
-                if(dist[e.to] < dist[v] + e.cost){
-                    dist[e.to] = dist[v] + e.cost;
-                    q.push(P(dist[e.to], e.to));
-                }
-            }
-        }
-    }
-};
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, m, l, r;
-    ll c;
-    cin >> n >> m;
-    Dijkstra graph(n);
-    rep(i, m){
-        cin >> l >> r >> c;
-        
+    int n;
+    string s;
+    cin >> n >> s;
+
+    int slen = s.length();
+    map<int, int> cnt;
+    reps(i, 1, 4){
+        cnt[i] = 0;
     }
+    
+    rep(i, slen){
+        cnt[s[i]-'0']++;
+    }
+
+    int mini=1e6, maxi=0;
+    for(auto const& e : cnt){
+        chmax(maxi, e.second);
+        chmin(mini, e.second);
+    }
+
+    cout << maxi sp mini << endl;
 
     return 0;
 }
