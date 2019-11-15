@@ -30,20 +30,36 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    string s;
-    cin >> s;
-
     ll res = 0;
-    rep(i, s.length()){
-        if(s[i] == 'U'){
-            res += s.length() - (i+1);
-            res += i*2;
-        }
-        if(s[i] == 'D'){
-            res += (s.length() - (i+1))*2;
-            res += i;
-        }
+    int n;
+    ll tmpa;
+    vector<ll> a;
+
+    cin >> n;
+    rep(i, n){
+        cin >> tmpa;
+        a.push_back(tmpa);
     }
+
+    vsort(a);
+
+    ll asum[100010];
+    asum[0] = 0;
+    reps(i, 0, n-1){
+        asum[i+1] = a[i] + asum[i];
+    }
+
+    reps(i, 1, n-1){
+        if(a[i] <= asum[i]*2){
+            res++;
+            //cout << asum[i] << endl;
+        }
+        else res = 0;
+    }
+    res++;
+
+    //vdebug(a);
+    //adebug(asum, n);
 
     cout << res << endl;
 
