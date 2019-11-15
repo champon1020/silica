@@ -1,0 +1,2 @@
+
+        cout << mark[i].firs
