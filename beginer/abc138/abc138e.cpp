@@ -30,48 +30,11 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    string s1, s2;
-    cin >> n >> s1 >> s2;
+    string s, t;
+    cin >> s >> t;
 
-    int flg = 0;
-    int start = 0;
-    ll res = 1;
-    ll mod = 1e9+7;
-    if(s1[0] == s2[0]){
-        res = 3;
-        start = 1;
-        flg |= 1<<0;
-    }else{
-        res = 6;
-        start = 2;
-        flg |= 1<<1;
-    }
-    int i = start;
-    while(i <= n-1){
-        if(s1[i] == s2[i]){
-            if(flg & 1<<0){
-                res *= 2;
-            }else{
-                flg &= ~(1<<1);
-                flg |= 1<<0;
-                res *= 1;
-            }
-        }else{
-            if(flg & 1<<1){
-                res *= 3;
-            }else{
-                flg &= ~(1<<0);
-                flg |= 1<<1;
-                res *= 2;
-            }
-            i++;
-        }
-        res %= mod;
-        i++;
-    }
-
-    cout << res << endl;
+    int slen = s.length();
+    int tlen = t.length();
 
     return 0;
 }
