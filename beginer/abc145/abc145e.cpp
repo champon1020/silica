@@ -11,6 +11,7 @@ using namespace std;
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
+template<typename A, size_t N, typename T> void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } return false; }
 template<typename T> void vdebug(vector<T> v){ cout << "vdebug" << endl; for(auto vv : v){ cout << vv << " "; } cout << endl; }
@@ -25,55 +26,48 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+bool comp(const pair<int, int> p1, const pair<int, int> p2){
+    if(p1.first == p2.first){
+        return p1.second > p2.second;
+    }
+    return p1.first < p2.first;
+}
+
+ll dp[3010][3010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll k, n;
-    string s, t;
-    cin >> k;
-    rep(i, k){
-        cin >> n >> s >> t;
-        map<char, int> mp;
-        rep(i, n){
-            mp[s[i]]++;
-            mp[t[i]]++;
-        }
-        bool result = true;
-        for(auto const& e : mp){
-            if(e.second % 2 == 1) result = false;
-        }
-        ans(result);
-        if(!result) continue;
+    int n, t, a, b;
+    vector<pair<int, int>> ab;
+    cin >> n >> t;
+    rep(i, n){
+        cin >> a >> b;
+        ab.push_back(make_pair(a, b));
+    }
 
-        int last_ind = -1;
-        vector<pair<int, int>> res;
-        rep(i, n){
-            if(s[i] == t[i]) continue;
-            if(last_ind == -1){
-                last_ind = i;
-                continue;
-            }   
-            if(s[i] == s[last_ind]){
-                res.push_back(make_pair(i+1, last_ind+1));
-                swap(s[i], t[last_ind]);
-                if(s[i] != t[i]) last_ind = i;
-                else last_ind = -1;
+    sort(all(ab));
+
+    ll res = 0;
+    rep(i, n){
+        dp[i][t-1] = 0;
+    }
+    rep(i, n){
+        repr(j, t, 0){
+            if(j - ab[i].first > 0){
+                chmax(dp[i+1][j], dp[i][j - ab[i].first] + ab[i].second);
             }
-            if(s[last_ind] == t[i]){
-                res.push_back(make_pair(i+1, i+1));
-                res.push_back(make_pair(i+1, last_ind+1));
-                swap(s[i], t[i]);
-                swap(s[i], t[last_ind]);
-                if(s[i] != t[i]) last_ind = i;
-                else last_ind = -1;
-            }
-        }
-        cout << res.size() << endl;
-        for(auto const& e : res){
-            cout << e.first sp e.second << endl;
+            chmax(dp[i+1][j], dp[i][j]);
+            chmax(res, dp[i][j] + ab[i].second);
         }
     }
+
+    cout << res << endl;
+
+    // for(auto const& e : ab){
+    //     cout << e.first sp e.second << endl;
+    // }
 
     return 0;
 }

@@ -11,6 +11,7 @@ using namespace std;
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
+template<typename A, size_t N, typename T> void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 template<typename T> inline bool chmax(T &a, T b){ if(a<b){ a=b; return true; } return false; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a){ a=b; return true; } return false; }
 template<typename T> void vdebug(vector<T> v){ cout << "vdebug" << endl; for(auto vv : v){ cout << vv << " "; } cout << endl; }
@@ -29,51 +30,33 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll k, n;
-    string s, t;
-    cin >> k;
-    rep(i, k){
-        cin >> n >> s >> t;
-        map<char, int> mp;
-        rep(i, n){
-            mp[s[i]]++;
-            mp[t[i]]++;
-        }
-        bool result = true;
-        for(auto const& e : mp){
-            if(e.second % 2 == 1) result = false;
-        }
-        ans(result);
-        if(!result) continue;
+    double n;
+    double x[10], y[10];
+    cin >> n;
+    rep(i, n){
+        cin >> x[i] >> y[i];
+    }
 
-        int last_ind = -1;
-        vector<pair<int, int>> res;
-        rep(i, n){
-            if(s[i] == t[i]) continue;
-            if(last_ind == -1){
-                last_ind = i;
-                continue;
-            }   
-            if(s[i] == s[last_ind]){
-                res.push_back(make_pair(i+1, last_ind+1));
-                swap(s[i], t[last_ind]);
-                if(s[i] != t[i]) last_ind = i;
-                else last_ind = -1;
-            }
-            if(s[last_ind] == t[i]){
-                res.push_back(make_pair(i+1, i+1));
-                res.push_back(make_pair(i+1, last_ind+1));
-                swap(s[i], t[i]);
-                swap(s[i], t[last_ind]);
-                if(s[i] != t[i]) last_ind = i;
-                else last_ind = -1;
-            }
-        }
-        cout << res.size() << endl;
-        for(auto const& e : res){
-            cout << e.first sp e.second << endl;
+    double sum = 0.0;
+    reps(i, 0, n-2){
+        reps(j, i+1, n-1){
+            double num = sqrt( (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]) );
+            //cout << num << endl;
+            sum += num;
+            //cout << i sp j << endl;
+            //cout << x[i] sp y[i] sp x[j] sp y[j] sp sum << endl;
         }
     }
+
+    double nn = 1.0;
+    reps(i, 1, n){
+        nn *= i;
+    }
+
+    //cout << sum <<endl;
+    sum *= nn/n*2;
+
+    printf("%.10lf", sum/nn);
 
     return 0;
 }
