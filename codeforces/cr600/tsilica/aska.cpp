@@ -30,30 +30,45 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
+    int n, t, k;
+    cin >> t;
+    rep(i, t){
+        cin >> n;
+        int k = -1, a[100010], b[100010];
+        bool flg = true;
+        bool res = true;
+        rep(i, n){
+            cin >> a[i];
+        }
+        rep(i, n){
+            cin >> b[i];
+        }
+        rep(i, n){
+            if(a[i] == b[i]){
+                if(k != -1) flg = false;
+                continue;
+            }
+            if(b[i] - a[i] < 0){
+                res = false;
+                break;
+            }
 
-    cin >> n;
-    rep(i, n){
-        cin >> a[i];
-    }
-
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
+            if(k == -1){
+                k = b[i] - a[i];
+                continue;
+            }
+            if(!flg){
+                res = false;
+                break;
+            }
+            if(k != b[i] - a[i]){
+                ok;
+                res = false;
+                break;
             }
         }
+        ans2(res);
     }
-
-    cout << res << endl;
-
-    //adebug(a, n-1);
 
     return 0;
 }

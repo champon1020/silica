@@ -114,7 +114,8 @@ int main(){
     Comb<ll> comb;
     comb.build_fact(right_two + up_two + 1);
 
-    cout << comb.fact[right_two+up_two] * (comb.finv[right_two] * comb.finv[up_two] % mod) % mod << endl;
-
+    //cout << comb.fact[right_two+up_two] * (comb.finv[right_two] * comb.finv[up_two] % mod) % mod << endl;
+    cout << comb.result_fact(right_two+up_two, right_two) << endl;
+    
     return 0;
 }
