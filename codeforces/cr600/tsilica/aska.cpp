@@ -62,7 +62,6 @@ int main(){
                 break;
             }
             if(k != b[i] - a[i]){
-                ok;
                 res = false;
                 break;
             }
