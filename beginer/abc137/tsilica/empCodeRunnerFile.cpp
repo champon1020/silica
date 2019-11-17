@@ -1,1 +1,0 @@
-out << buf << endl;

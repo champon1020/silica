@@ -1,2 +1,0 @@
-
-        parset.insert(e);
