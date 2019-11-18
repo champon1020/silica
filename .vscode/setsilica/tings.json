@@ -76,6 +76,9 @@
       "__split_buffer": "cpp",
       "__functional_03": "cpp",
       "__string": "cpp",
-      "filesystem": "cpp"
+      "filesystem": "cpp",
+      "__bit_reference": "cpp",
+      "__hash_table": "cpp",
+      "__tree": "cpp"
     }
 }
