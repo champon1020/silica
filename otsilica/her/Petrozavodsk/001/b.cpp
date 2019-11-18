@@ -39,19 +39,48 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n;
+    int n;
+    ll a[10010], b[10010];
     cin >> n;
-
-    string res = "";
-    while(n != 0){
-        ll r = n%2;
-        n = (n - abs(r)) / (-2);
-        res = char('0'+abs(r)) + res;
+    rep(i, n){
+        cin >> a[i];
+    }
+    rep(i, n){
+        cin >> b[i];
     }
 
-    if(res.length() == 0) res = '0';
+    bool res = true;
+    ll a_than_b[10010];
+    Fill(a_than_b, 0);
+    vector<ll> b_than_a;
+    rep(i, n){
+        if(a[i] > b[i]){
+            a_than_b[i] = a[i]-b[i];
+        }else if(a[i] < b[i]){
+            b_than_a.push_back(b[i]-a[i]);
+        }
+    }
 
-    cout << res << endl;
+    int itr = 0;
+    rep(i, n){
+        if(a_than_b[i] == 0) continue;
+        ll require = a_than_b[i];
+        if(b_than_a.size() == 0){
+            res = false;
+            break;
+        }
+        while(b_than_a[itr] <= require*2){
+            require -= b_than_a[itr]/2;
+            itr++;
+            if(itr >= b_than_a.size()){
+                res = false;
+                break;
+            }
+        }
+        if(!res) break;
+        b_than_a[itr] -= require*2;
+    }
+    ans(res);
 
     return 0;
 }
