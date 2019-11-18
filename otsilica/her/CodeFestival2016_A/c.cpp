@@ -30,30 +30,29 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
+    string s;
+    ll k;
+    cin >> s >> k;
+    int slen = s.length();
 
-    cin >> n;
-    rep(i, n){
-        cin >> a[i];
+    rep(i, slen){
+        if(s[i] == 'a') continue;
+        if(26 - (s[i]-'a') > k) continue;
+        k -= 26 - (s[i]-'a');
+        s[i] = 'a';
     }
 
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
-            }
+    if(k > 0){
+        int rest = k%26;
+        //cout << rest sp s[slen-1] << endl;
+        if(s[slen-1] + rest - 'a' > 25){
+            s[slen-1] = 'a';
+            rest -= 26 - (s[slen-1]-'a');
         }
+        s[s.length()-1] = s[slen-1]+rest;
     }
 
-    cout << res << endl;
-
-    //adebug(a, n-1);
+    cout << s << endl;
 
     return 0;
 }

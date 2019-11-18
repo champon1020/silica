@@ -15,7 +15,7 @@ class Dijkstra{
         T cost;
         edge(int t, T c) : to(t),cost(c){}
     };
-    typedef pair<ll, int> P;
+    typedef pair<T, int> P;
   public:
     int n;
     vector<edge> g[100010];
@@ -37,22 +37,41 @@ class Dijkstra{
             int v = p.second;
             if(dist[v] < p.first) continue;
             for(auto const& e : g[v]) {
-                if(dist[e.to] < dist[v] + e.cost){
+                if(dist[e.to] > dist[v] + e.cost){
                     dist[e.to] = dist[v] + e.cost;
                     q.push(P(dist[e.to], e.to));
                 }
             }
         }
     }
+
+    T result(int s){
+        return dist[s];
+    }
 };
 // to
 
 
+// verify
+// https://atcoder.jp/contests/abc070/tasks/abc070_d
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-
-    
-
+    int n, a, b;
+    ll c;
+    cin >> n;
+    Dijkstra<ll> dk(n);
+    rep(i, n-1){
+        cin >> a >> b >> c;
+        dk.add(a, b, c);
+        dk.add(b, a, c);
+    }
+    int q, k, x, y;
+    cin >> q >> k;
+    dk.build(k);
+    rep(i, q){
+        cin >> x >> y;
+        cout << dk.result(x) + dk.result(y) << endl;
+    }
     return 0;
 }

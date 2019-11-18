@@ -30,30 +30,29 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
-
+    ll n;
     cin >> n;
-    rep(i, n){
-        cin >> a[i];
-    }
 
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
+    vector<ll> elements;
+    for(ll i=1; i*i<=n; i++){
+        if(n%i == 0){
+            elements.push_back(i);
+            if(i*i != n){
+                elements.push_back(n/i);
             }
         }
     }
 
-    cout << res << endl;
+    ll res = 0;
+    for(auto const& e : elements){
+        if(e > 1 && n/(e-1) == n%(e-1)){
+            res += e-1;
+        }
+    }
 
-    //adebug(a, n-1);
+    //vdebug(elements);
+
+    cout << res << endl;
 
     return 0;
 }

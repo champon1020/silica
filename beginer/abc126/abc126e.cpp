@@ -26,34 +26,71 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+template<typename T>
+class UnionFind{
+  public:
+    vector<T> par;
+    vector<T> rank;
+    vector<T> size;
+    UnionFind(int n) : par(n+1, 0),rank(n+1, 0),size(n+1, 1) {
+        iota(par.begin(), par.end(), 0);
+    }
+
+    T find(T x){
+        if(par[x] == x) return x;
+        else return par[x] = find(par[x]);
+    }
+
+    void unite(T x, T y){
+        x = find(x);
+        y = find(y);
+        if(x == y) return;
+        if(rank[x] < rank[y]){
+            par[x] = y;
+            size[y] += size[x];
+        }else{
+            par[y] = x;
+            size[x] += size[y];
+            if(rank[x] == rank[y]) rank[x]++;
+        }
+    }
+
+    bool same(T x, T y){
+        return find(x) == find(y);
+    }
+
+    T getsize(T x){
+        return size[find(x)];
+    }
+
+    int rootCount(int n){
+        int cnt = 0;
+        reps(i, 0, n){
+            if(i == par[i]) cnt++;
+        }
+        return cnt;
+    }
+};
+
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
-
-    cin >> n;
-    rep(i, n){
-        cin >> a[i];
+    int n, m, x, y, z;
+    vector<pair<int, int>> xy;
+    cin >> n >> m;
+    rep(i, m){
+        cin >> x >> y >> z;
+        xy.push_back(make_pair(x, y));
     }
 
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
-            }
-        }
+    UnionFind<int> uf(n);
+    for(auto const& e : xy){
+        uf.unite(e.first, e.second);
     }
 
-    cout << res << endl;
-
-    //adebug(a, n-1);
+    cout << uf.rootCount(n)-1 << endl;
 
     return 0;
 }

@@ -30,30 +30,33 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
-
+    double n;
+    double x[10], y[10];
     cin >> n;
     rep(i, n){
-        cin >> a[i];
+        cin >> x[i] >> y[i];
     }
 
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
-            }
+    double sum = 0.0;
+    reps(i, 0, n-2){
+        reps(j, i+1, n-1){
+            double num = sqrt( (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]) );
+            //cout << num << endl;
+            sum += num;
+            //cout << i sp j << endl;
+            //cout << x[i] sp y[i] sp x[j] sp y[j] sp sum << endl;
         }
     }
 
-    cout << res << endl;
+    double nn = 1.0;
+    reps(i, 1, n){
+        nn *= i;
+    }
 
-    //adebug(a, n-1);
+    //cout << sum <<endl;
+    sum *= nn/n*2;
+
+    printf("%.10lf", sum/nn);
 
     return 0;
 }

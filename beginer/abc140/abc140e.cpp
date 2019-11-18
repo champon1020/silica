@@ -26,67 +26,16 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
-class SegmentTree {
-  public:
-    ll n;
-    vector<pair<ll, ll>> dat;
-
-    void init(ll nn){
-        n = 1;
-        while(n < nn) n*=2;
-        dat.assign(2*n-1, make_pair(0, 0));
-    }
-
-    void update(ll k, ll a){
-        k += n-1;
-        if(a > dat[k].first){
-            dat[k].second = dat[k].first;
-            dat[k].first = a;
-        }else if(dat[k].first >= a && a >= dat[k].second){
-            dat[k].second = a;
-        }else return;
-
-        while(k > 0){
-            k = (k-1)/2;
-            dat[k].first = max(dat[k*2 + 1].first, dat[k*2 + 2].first);
-            dat[k].second = min(dat[k*2 + 1].first, dat[k*2 + 2].second);
-        }
-    }
-
-    ll query(ll a, ll b, ll k, ll l, ll r){
-        if(r <= a || b <= l) return 0;
-        if(a <= l && r <= b) return dat[k].second;
-        else{
-            ll vl = query(a, b, k*2+1, l, (l+r)/2);
-            ll vr = query(a, b, k*2+2, (l+r)/2, r);
-            return min(vl, vr);
-        }
-    }
-
-    ll getquery(ll a, ll b){
-        return query(a, b, 0, 0, n-1);
-    }
-
-    ll operator[](int i){
-        return dat[i + n - 1].second;
-    }
-};
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll p;
-    cin >> n;
-    SegmentTree t(n);
-    rep(i, n){
-        cin >> p;
-        t.update(i, p);
-    }
-
-    ll res = 0;
+    int n, tmpp;
     
+    cin >> n;
+
+
+
 
     return 0;
 }

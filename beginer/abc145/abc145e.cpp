@@ -26,34 +26,48 @@ int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
 int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
 
 
+bool comp(const pair<int, int> p1, const pair<int, int> p2){
+    if(p1.first == p2.first){
+        return p1.second > p2.second;
+    }
+    return p1.first < p2.first;
+}
+
+ll dp[3010][3010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
-
-    cin >> n;
+    int n, t, a, b;
+    vector<pair<int, int>> ab;
+    cin >> n >> t;
     rep(i, n){
-        cin >> a[i];
+        cin >> a >> b;
+        ab.push_back(make_pair(a, b));
     }
 
+    sort(all(ab));
+
+    ll res = 0;
     rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
+        dp[i][t-1] = 0;
+    }
+    rep(i, n){
+        repr(j, t, 0){
+            if(j - ab[i].first > 0){
+                chmax(dp[i+1][j], dp[i][j - ab[i].first] + ab[i].second);
             }
+            chmax(dp[i+1][j], dp[i][j]);
+            chmax(res, dp[i][j] + ab[i].second);
         }
     }
 
     cout << res << endl;
 
-    //adebug(a, n-1);
+    // for(auto const& e : ab){
+    //     cout << e.first sp e.second << endl;
+    // }
 
     return 0;
 }

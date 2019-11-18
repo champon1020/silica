@@ -29,26 +29,50 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll k, n, s, t;
+    ll k, n;
+    string s, t;
     cin >> k;
     rep(i, k){
         cin >> n >> s >> t;
-        bool res = true;
-        map<char, int> dist;
-        rep(j, n){
-            dist[s[j]]++;
-            dist[t[j]]++;
+        map<char, int> mp;
+        rep(i, n){
+            mp[s[i]]++;
+            mp[t[i]]++;
         }
-        for(auto const& d : dist){
-            if(d.second%2 == 1){
-                res = false;
+        bool result = true;
+        for(auto const& e : mp){
+            if(e.second % 2 == 1) result = false;
+        }
+        ans(result);
+        if(!result) continue;
+
+        int last_ind = -1;
+        vector<pair<int, int>> res;
+        rep(i, n){
+            if(s[i] == t[i]) continue;
+            if(last_ind == -1){
+                last_ind = i;
+                continue;
+            }   
+            if(s[i] == s[last_ind]){
+                res.push_back(make_pair(i+1, last_ind+1));
+                swap(s[i], t[last_ind]);
+                if(s[i] != t[i]) last_ind = i;
+                else last_ind = -1;
+            }
+            if(s[last_ind] == t[i]){
+                res.push_back(make_pair(i+1, i+1));
+                res.push_back(make_pair(i+1, last_ind+1));
+                swap(s[i], t[i]);
+                swap(s[i], t[last_ind]);
+                if(s[i] != t[i]) last_ind = i;
+                else last_ind = -1;
             }
         }
-        ans(res);
-        if(!res) continue;
-
-        ll cnt = 0;
-        
+        cout << res.size() << endl;
+        for(auto const& e : res){
+            cout << e.first sp e.second << endl;
+        }
     }
 
     return 0;

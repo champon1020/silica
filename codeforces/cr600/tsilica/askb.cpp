@@ -31,29 +31,60 @@ int main(){
     cin.tie(0);
 
     int n;
-    ll a[100010];
-    ll res = 0;
-
+    int a[100010];
     cin >> n;
-    rep(i, n){
+    reps(i, 1, n){
         cin >> a[i];
     }
 
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
+    if(a[1] < 0){
+        cout << -1 << endl;
+        return 0;
+    }
+
+    bool good = true;
+    int cnt = 0;
+    set<int> visited;
+    set<int> entered;
+    vector<int> events;
+
+    reps(i, 1, n){
         if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
+            if(visited.find(a[i]) != visited.end()){
+                good = false;
+                break;
+            }else{
+                visited.insert(a[i]);
+                entered.insert(a[i]);
             }
+        }else{
+            if(entered.find(abs(a[i])) == entered.end()){
+                good = false;
+                break;
+            }else{
+                entered.erase(abs(a[i]));
+            }
+        }
+        cnt++;
+        if(entered.size() == 0){
+            events.push_back(cnt);
+            cnt = 0;
+            visited.clear();
         }
     }
 
-    cout << res << endl;
+    if(entered.size() != 0) good = false;
 
-    //adebug(a, n-1);
+    if(!good){
+        cout << -1 << endl;
+        return 0;
+    }
+
+    cout << events.size() << endl;
+    for(auto const& e : events){
+        cout << e << " ";
+    }
+    cout << endl;
 
     return 0;
 }

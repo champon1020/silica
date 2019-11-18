@@ -30,30 +30,18 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    ll res = 0;
-
-    cin >> n;
+    int n, m, tmpa;
+    vector<int> a;
+    cin >> n >> m;
     rep(i, n){
-        cin >> a[i];
+        cin >> tmpa;
+        a.push_back(tmpa);
     }
 
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
-            }
-        }
-    }
+    sort(all(a));
 
-    cout << res << endl;
+    
 
-    //adebug(a, n-1);
 
     return 0;
 }

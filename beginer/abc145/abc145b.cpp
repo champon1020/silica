@@ -31,29 +31,19 @@ int main(){
     cin.tie(0);
 
     int n;
-    ll a[100010];
-    ll res = 0;
+    string s;
+    cin >> n >> s;
 
-    cin >> n;
+    string buf="", buf2="";
     rep(i, n){
-        cin >> a[i];
-    }
-
-    rep(i, n){
-        res += a[i]/2;
-        a[i] %= 2;
-        if(a[i] > 0){
-            if(i != n-1 && a[i+1] > 0){
-                res++;
-                a[i]--;
-                a[i+1]--;
-            }
+        if(i < n/2){
+            buf += s[i];
+        }else{
+            buf2 += s[i];
         }
     }
 
-    cout << res << endl;
-
-    //adebug(a, n-1);
+    ans(buf==buf2);
 
     return 0;
 }
