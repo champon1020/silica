@@ -31,15 +31,15 @@ template<typename A, size_t N, typename T>
 void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 void ans(bool b){ cout << (b ? "Yes" : "No") << endl; }
 void ans2(bool b){ cout << (b ? "YES" : "NO") << endl; }
-int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
-int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
+int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
+int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    $1
+    $0
 
     return 0;
 }
