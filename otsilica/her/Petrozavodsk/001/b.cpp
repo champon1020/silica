@@ -49,38 +49,13 @@ int main(){
         cin >> b[i];
     }
 
-    bool res = true;
-    ll a_than_b[10010];
-    Fill(a_than_b, 0);
-    vector<ll> b_than_a;
+    ll a_than_b_sum = 0, b_than_a_sum = 0;
     rep(i, n){
-        if(a[i] > b[i]){
-            a_than_b[i] = a[i]-b[i];
-        }else if(a[i] < b[i]){
-            b_than_a.push_back(b[i]-a[i]);
-        }
+        if(a[i] > b[i]) a_than_b_sum += a[i] - b[i];
+        else if(a[i] < b[i]) b_than_a_sum += (b[i] - a[i]) / 2;
     }
 
-    int itr = 0;
-    rep(i, n){
-        if(a_than_b[i] == 0) continue;
-        ll require = a_than_b[i];
-        if(b_than_a.size() == 0){
-            res = false;
-            break;
-        }
-        while(b_than_a[itr] <= require*2){
-            require -= b_than_a[itr]/2;
-            itr++;
-            if(itr >= b_than_a.size()){
-                res = false;
-                break;
-            }
-        }
-        if(!res) break;
-        b_than_a[itr] -= require*2;
-    }
-    ans(res);
+    ans(a_than_b_sum <= b_than_a_sum);
 
     return 0;
 }
