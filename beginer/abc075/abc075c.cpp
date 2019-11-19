@@ -13,8 +13,8 @@ using namespace std;
 #define sp << " " <<
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a) a=b; return b<a; }
-template<typename T> void vdeb(vector<T> v){
-    cout << "#vdebug" << endl;
+template<typename T> void vdeb(T v){
+    cout << "#vector set debug" << endl;
     for(auto vv : v) cout << vv << " ";
     cout << endl;
 }
@@ -39,23 +39,43 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    int c[1010], s[1010], f[1010];
-    cin >> n;
-    rep(i, n-1){
-        cin >> c[i] >> s[i] >> f[i];
+    int n, m, a, b;
+    vector<int> g[100];
+    vector<pair<int, int>> edges;
+    set<int> visit;
+    ll cnt = 0;
+    int start;
+
+    cin >> n >> m;
+    rep(i, m){
+        cin >> a >> b;
+        if(i == 0) start = a;
+        g[a].push_back(b);
+        g[b].push_back(a);
+        edges.push_back(make_pair(a, b));
     }
 
-    rep(i, n){
-        ll time = 0;
-        reps(j, i, n-2){
-            if(time < s[j]) time = s[j];
-            else if(time % f[j] == 0);
-            else time = time + f[j] - time % f[j];
-            time += c[j];
+    int check1, check2;
+
+    function<void(int)> dfs = [&](int s){
+        visit.insert(s);
+        for(auto const& e : g[s]){
+            if(visit.find(e) != visit.end()) continue;
+            if(e == check1 && s == check2) continue;
+            if(e == check2 && s == check1) continue;
+            dfs(e);
         }
-        cout << time << endl;
+    };
+
+    rep(i, m){
+        visit.clear();
+        check1 = edges[i].first;
+        check2 = edges[i].second;
+        dfs(start);
+        if(visit.size() < n) cnt++;
     }
+
+    cout << cnt << endl;
 
     return 0;
 }

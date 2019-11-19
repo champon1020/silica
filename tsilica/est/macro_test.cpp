@@ -13,7 +13,7 @@ using namespace std;
 #define sp << " " <<
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a) a=b; return b<a; }
-template<typename T> void vdeb(vector<T> v){
+template<typename T> void vdeb(T v){
     cout << "#vdebug" << endl;
     for(auto vv : v) cout << vv << " ";
     cout << endl;
@@ -87,17 +87,20 @@ int test(){
     cout << "  after:  c=" << c << " d=" << d << endl;
 
     vector<int> v;
+    set<int> s;
     int arr[10];
     map<int, int> mp;
     vector<pair<int, int>> vp;
     rep(i, 10){
         v.push_back(i);
+        s.insert(i);
         arr[i] = i;
         mp.insert(make_pair(i, i*i));
         vp.push_back(make_pair(i, i*i));
     }
 
     vdeb(v);
+    vdeb(s);
     adeb(arr, 9);
     mdeb(mp);
     mdeb(vp);

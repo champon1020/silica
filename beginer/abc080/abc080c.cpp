@@ -13,7 +13,7 @@ using namespace std;
 #define sp << " " <<
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a) a=b; return b<a; }
-template<typename T> void vdeb(vector<T> v){
+template<typename T> void vdeb(T v){
     cout << "#vdebug" << endl;
     for(auto vv : v) cout << vv << " ";
     cout << endl;
@@ -31,8 +31,8 @@ template<typename A, size_t N, typename T>
 void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 void ans(bool b){ cout << (b ? "Yes" : "No") << endl; }
 void ans2(bool b){ cout << (b ? "YES" : "NO") << endl; }
-int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
-int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
+int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
+int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
 int main(){
@@ -40,22 +40,34 @@ int main(){
     cin.tie(0);
 
     int n;
-    int c[1010], s[1010], f[1010];
+    ll f[20][110], p[20][110];
+
     cin >> n;
-    rep(i, n-1){
-        cin >> c[i] >> s[i] >> f[i];
+    rep(i, n){
+        rep(j, 10){
+            cin >> f[j][i];
+        }
+    }
+    rep(i, n){
+        reps(j, 0, 10){
+            cin >> p[j][i];
+        }
     }
 
-    rep(i, n){
-        ll time = 0;
-        reps(j, i, n-2){
-            if(time < s[j]) time = s[j];
-            else if(time % f[j] == 0);
-            else time = time + f[j] - time % f[j];
-            time += c[j];
+    ll res = -inf;
+    for(int bit=1; bit < (1<<10); bit++){
+        ll tmp = 0;
+        rep(i, n){
+            ll cnt = 0;
+            for(int j=0; j<10; j++){
+                if((bit & 1<<j) && f[j][i]) cnt++;
+            }
+            tmp += p[cnt][i];
         }
-        cout << time << endl;
+        chmax(res, tmp);
     }
+
+    cout << res << endl;
 
     return 0;
 }
