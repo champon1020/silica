@@ -14,7 +14,7 @@ using namespace std;
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a) a=b; return b<a; }
 template<typename T> void vdeb(T v){
-    cout << "#vdebug" << endl;
+    cout << "#vector set debug" << endl;
     for(auto vv : v) cout << vv << " ";
     cout << endl;
 }
