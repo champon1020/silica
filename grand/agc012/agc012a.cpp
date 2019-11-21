@@ -34,87 +34,27 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-class Math {
-    ll mod = 1e9+7;
-  public:
-    template<typename T> 
-    ll gcd(T a, T b){
-        if(b==0) return a; 
-        return gcd(b, a%b);
-    }
-
-    template<typename T>
-    ll lcm(T a, T b){
-        return a*(b/gcd(a, b));
-    }
-
-    template<typename T>
-    T keta(T num){
-        T k=0; 
-        while(num>0){ 
-            num/=10;
-            k++;
-        }
-        return k;
-    }
-
-    template<typename T>
-    T powpow(T num1, T num2){
-        T res = 1;
-        while(num2 > 0){
-            res *= num1;
-            res %= mod;
-            num2--;
-        }
-        return res%mod;
-    }
-
-    template<typename T1, typename T2>
-    ll powl(T1 a, T2 b){
-        ll res = 1;
-        while(b > 0){
-            res *= a;
-            b--;
-        }
-        return res;
-    }
-
-    template<typename T1, typename T2>
-    ll ceil(T1 a, T2 b){
-        return (a+b-1)/b;
-    }
-};
-
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m;
-    string s, t;
-    Math ma;
-    cin >> n >> m >> s >> t;
-
-    ll g = ma.lcm(n, m);
-
-    ll g_n = g/n;
-    ll g_m = g/m;
-
-    bool res = true;
-    int s_itr = 0;
-    int t_itr = 0;
-    while(true){
-        if(s[s_itr] != t[t_itr]){
-            res = false;
-            break;
-        }
-        s_itr += g_m;
-        t_itr += g_n;
-        if(s_itr >= n || t_itr >= m) break;
+    int n;
+    vector<ll> a;
+    ll tmpa;
+    cin >> n;
+    n *= 3;
+    rep(i, n){
+        cin >> tmpa;
+        a.push_back(tmpa);
     }
 
-    if(!res) cout << -1 << endl;
-    else cout << g << endl;
+    sort(all(a));
+    ll sum = 0;
+    for(int i=n-2; i>=n/3; i-=2){
+        sum += a[i];
+    }
+
+    cout << sum << endl;
 
     return 0;
 }
