@@ -38,7 +38,45 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    int n;
+    vector<ll> a;
+    ll tmpa;
+    cin >> n;
+    reps(i, 0, n-1){
+        cin >> tmpa;
+        a.push_back(tmpa);
+    }
+
+    int itr = 0;
+    while(itr < a.size()-1){
+        if(a[itr] == a[itr+1]){
+            a.erase(a.begin() + itr);
+        }else itr++;
+    }
+
+    // vdeb(a);
+    // cout << a.size() << endl;
+
+    ll cnt = 0;
+    int flg[100010];
+    Fill(flg, 0);
+    reps(i, 1, n-2){
+        if(a[i-1] < a[i] && a[i] > a[i+1]){
+            if(!flg[i-1]){
+                flg[i] = 1;
+                cnt++;
+            }
+        }
+        if(a[i-1] > a[i] && a[i] < a[i+1]){
+            if(!flg[i-1]){
+                flg[i] = 1;
+                cnt++;
+            }
+        }
+        //cout << cnt sp i << endl;
+    }
+
+    cout << cnt+1 << endl;
 
     return 0;
 }

@@ -6,8 +6,6 @@ using namespace std;
 #define reps(i, s, e) for(ll i=s; i<=e; i++)
 #define inf 1e18
 #define all(v) v.begin(),v.end()
-#define vsort(v) sort(v.begin(), v.end())
-#define vsortr(v) sort(v.begin(), v.end(), greater<ll>())
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<

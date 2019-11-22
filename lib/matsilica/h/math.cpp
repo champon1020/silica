@@ -17,7 +17,7 @@ class Math {
         return gcd(b, a%b);
     }
 
-    template<typename T1, typen T2>
+    template<typename T1, typename T2>
     ll lcm(T1 a, T2 b){
         return a*(b/gcd(a, b));
     }
@@ -34,7 +34,7 @@ class Math {
 
     template<typename T1, typename T2>
     ll powpow(T1 num1, T2 num2){
-        T res = 1;
+        ll res = 1;
         while(num2 > 0){
             res *= num1;
             res %= mod;
