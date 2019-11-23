@@ -36,60 +36,31 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    cin >> n;
-    rep(i, n){
-        cin >> a[i];
-    }
+    ll N;
+    cin >> N;
 
-    ll asum[100010];
-    asum[0] = 0;
-    rep(i, n){
-       asum[i+1] = asum[i] + a[i]; 
-    }
-
-    ll sum = 0;
-    ll res = 0;
-    int flg = 1;
-    reps(i, 1, n){
-        if(flg == 1){
-            if(asum[i] + sum >= 0){
-                res += abs(asum[i] + sum) + 1;
-                sum += -abs(asum[i] + sum) - 1;
+    ll resh, resn, resw;
+    bool good = false;
+    reps(h, 1, 3500){
+        reps(n, 1, 3500){
+            if(4*h*n - n*N - h*N > 0){
+                if(h*n*N % (4*h*n - n*N - h*N) == 0){
+                    ll w = h*n*N / (4*h*n - n*N - h*N); 
+                    if(w > 3500) continue;
+                    if(N*(h*n+n*w+w*h) == 4*h*n*w){
+                        resw = w;
+                        resh = h;
+                        resn = n;
+                        good = true;
+                        break;
+                    }
+                }
             }
-            flg = -1;
-        }else if(flg == -1){
-            if(asum[i] + sum <= 0){
-                res += abs(asum[i] + sum) + 1;
-                sum += abs(asum[i] + sum) + 1;
-            }
-            flg = 1;
         }
+        if(good) break;
     }
 
-    sum = 0;
-    ll res2 = 0;
-    flg = -1;
-    reps(i, 1, n){
-        if(flg == 1){
-            if(asum[i] + sum >= 0){
-                res2 += abs(asum[i] + sum) + 1;
-                sum += -abs(asum[i] + sum) - 1;
-            }
-            flg = -1;
-        }else if(flg == -1){
-            if(asum[i] + sum <= 0){
-                res2 += abs(asum[i] + sum) + 1;
-                sum += abs(asum[i] + sum) + 1;
-            }
-            flg = 1;
-        }
-    }
-
-    //adeb(asum, n);
-
-    cout << min(res, res2) << endl;
+    cout << resh sp resn sp resw << endl;
 
     return 0;
 }

@@ -36,60 +36,26 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[100010];
-    cin >> n;
+    int n, a;
+    int x[100];
+    cin >> n >> a;
     rep(i, n){
-        cin >> a[i];
+        cin >> x[i];
+        x[i] -= a;
     }
 
-    ll asum[100010];
-    asum[0] = 0;
+    map<int, int> cnt;
     rep(i, n){
-       asum[i+1] = asum[i] + a[i]; 
+        cnt[x[i]]++;
     }
 
-    ll sum = 0;
     ll res = 0;
-    int flg = 1;
-    reps(i, 1, n){
-        if(flg == 1){
-            if(asum[i] + sum >= 0){
-                res += abs(asum[i] + sum) + 1;
-                sum += -abs(asum[i] + sum) - 1;
-            }
-            flg = -1;
-        }else if(flg == -1){
-            if(asum[i] + sum <= 0){
-                res += abs(asum[i] + sum) + 1;
-                sum += abs(asum[i] + sum) + 1;
-            }
-            flg = 1;
-        }
+    ll mk_zero = 0;
+    for(auto const& e : cnt){
+        
     }
 
-    sum = 0;
-    ll res2 = 0;
-    flg = -1;
-    reps(i, 1, n){
-        if(flg == 1){
-            if(asum[i] + sum >= 0){
-                res2 += abs(asum[i] + sum) + 1;
-                sum += -abs(asum[i] + sum) - 1;
-            }
-            flg = -1;
-        }else if(flg == -1){
-            if(asum[i] + sum <= 0){
-                res2 += abs(asum[i] + sum) + 1;
-                sum += abs(asum[i] + sum) + 1;
-            }
-            flg = 1;
-        }
-    }
-
-    //adeb(asum, n);
-
-    cout << min(res, res2) << endl;
+    cout << res << endl;
 
     return 0;
 }
