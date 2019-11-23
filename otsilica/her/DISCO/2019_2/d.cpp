@@ -36,23 +36,14 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    struct node {
-        int l, r, d;
-        node(int l, int r, int d):l(l),r(r),d(d){}
-    };
-
-    int n, m, l, r, d;
-    vector<node> lrd;
-    ll people[100010];
-    Fill(people, inf);
-    cin >> n >> m;
-
-    bool res = true;
+    int m;
+    cin >> m;
+    ll c[200010], d[200010];
     rep(i, m){
-        cin >> l >> r >> d;
-        lrd.push_back(node(l, r, d));
+        cin >> d[i] >> c[i];
     }
 
+    ll res = 0;
     
 
     return 0;

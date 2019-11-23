@@ -36,24 +36,52 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    struct node {
-        int l, r, d;
-        node(int l, int r, int d):l(l),r(r),d(d){}
-    };
-
-    int n, m, l, r, d;
-    vector<node> lrd;
-    ll people[100010];
-    Fill(people, inf);
-    cin >> n >> m;
-
-    bool res = true;
-    rep(i, m){
-        cin >> l >> r >> d;
-        lrd.push_back(node(l, r, d));
+    int n;
+    ll a[100010];
+    cin >> n;
+    rep(i, n){
+        cin >> a[i];
     }
 
-    
+    ll asum[100010];
+    asum[0] = 0;
+    rep(i, n){
+       asum[i+1] = asum[i] + a[i]; 
+    }
+
+    ll sum = 0;
+    ll res = 0;
+    int flg = 0;
+    int zerocnt = 0;
+    reps(i, 1, n){
+        if(flg == 0){
+            if(asum[i] > 0) flg = 1;
+            else if(asum[i] < 0) flg = -1;
+            else zerocnt++;
+            continue;
+        }
+        if(flg == 1){
+            if(asum[i] + sum >= 0){
+                res += abs(asum[i] + sum) + 1;
+                sum += -abs(asum[i] + sum) - 1;
+            }
+            flg = -1;
+        }else if(flg == -1){
+            if(asum[i] + sum <= 0){
+                res += abs(asum[i] + sum) + 1;
+                sum += abs(asum[i] + sum) + 1;
+            }
+            flg = 1;
+        }
+    }
+
+    if(zerocnt > 0){
+        res += 2*zerocnt-1;
+    }
+
+    //adeb(asum, n);
+
+    cout << res << endl;
 
     return 0;
 }

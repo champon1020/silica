@@ -36,24 +36,28 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    struct node {
-        int l, r, d;
-        node(int l, int r, int d):l(l),r(r),d(d){}
-    };
-
-    int n, m, l, r, d;
-    vector<node> lrd;
-    ll people[100010];
-    Fill(people, inf);
-    cin >> n >> m;
-
-    bool res = true;
-    rep(i, m){
-        cin >> l >> r >> d;
-        lrd.push_back(node(l, r, d));
+    int n;
+    ll a[200010];
+    ll sum = 0;
+    cin >> n;
+    rep(i, n){
+        cin >> a[i];
     }
 
-    
+    ll asum[200010];
+    asum[0] = 0;
+    rep(i, n){
+        asum[i+1] = asum[i] + a[i];
+    }
+
+    ll res = inf;
+    reps(i, 1, n-1){
+        res = min(res, abs(asum[n]-asum[i] - asum[i]));
+    }
+
+    //adeb(asum, n);
+
+    cout << res << endl;
 
     return 0;
 }

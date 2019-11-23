@@ -36,24 +36,70 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    struct node {
-        int l, r, d;
-        node(int l, int r, int d):l(l),r(r),d(d){}
-    };
-
-    int n, m, l, r, d;
-    vector<node> lrd;
-    ll people[100010];
-    Fill(people, inf);
-    cin >> n >> m;
-
-    bool res = true;
-    rep(i, m){
-        cin >> l >> r >> d;
-        lrd.push_back(node(l, r, d));
+    int h, w, k;
+    cin >> h >> w >> k;
+    char in;
+    int g[333][333];
+    rep(i, h){
+        rep(j, w){
+            cin >> in;
+            if(in == '.') g[i][j] = 0;
+            if(in == '#') g[i][j] = 1;
+        }
     }
 
-    
+    set<int> aftercare;
+    int res[333][333];
+    int cnt = 1;
+    int now = 0;
+    rep(i, h){
+        rep(j, w){
+            if(!g[i][j]){
+                res[i][j] = cnt;
+                continue;
+            }
+            if(now == 0 && g[i][j]){
+                now++;
+                res[i][j] = cnt;
+                continue;
+            }
+            if(now >= 1 && g[i][j]){
+                now++;
+                res[i][j] = ++cnt;
+                continue;
+            }
+        }
+        if(now == 0){
+            rep(j, w){
+                res[i][j] = 0;
+            }
+        }else{
+            cnt++;
+        }
+        now = 0;
+    }
+
+    reps(i, 1, h-1){
+        rep(j, w){
+            if(res[i][j] == 0){
+                res[i][j] = res[i-1][j];
+            }
+        }
+    }
+    repr(i, h-2, 0){
+        rep(j, w){
+            if(res[i][j] == 0){
+                res[i][j] = res[i+1][j]; 
+            }
+        }
+    }
+
+    rep(i, h){
+        rep(j, w){
+            cout << res[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }

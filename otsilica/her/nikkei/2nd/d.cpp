@@ -68,14 +68,23 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
+    struct span {
+        int left;
+        int right;
+        ll cost;
+        edge(int l, int r, ll c):left(l),right(r),cost(c){}
+    };
+
     int n, m, l, r;
     ll c;
     cin >> n >> m;
-    Dijkstra graph(n);
+    vector<span> e;
     rep(i, m){
         cin >> l >> r >> c;
-        
+        e.push_back(span(l, r, c));
     }
+
+    
 
     return 0;
 }

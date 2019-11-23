@@ -36,24 +36,30 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    struct node {
-        int l, r, d;
-        node(int l, int r, int d):l(l),r(r),d(d){}
-    };
+    int x, y;
+    cin >> x >> y;
 
-    int n, m, l, r, d;
-    vector<node> lrd;
-    ll people[100010];
-    Fill(people, inf);
-    cin >> n >> m;
-
-    bool res = true;
-    rep(i, m){
-        cin >> l >> r >> d;
-        lrd.push_back(node(l, r, d));
+    ll res = 0;
+    if(x == 1){
+        res += 300000;
+    }else if(x == 2){
+        res += 200000;
+    }else if(x == 3){
+        res += 100000;
     }
 
-    
+    if(y == 1){
+        res += 300000;
+    }else if(y == 2){
+        res += 200000;
+    }else if(y == 3){
+        res += 100000;
+    }
+
+    if(x==1 && y == 1){
+        res += 400000;
+    }
+    cout << res << endl;
 
     return 0;
 }
