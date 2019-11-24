@@ -6,15 +6,13 @@ using namespace std;
 #define reps(i, s, e) for(ll i=s; i<=e; i++)
 #define inf 1e18
 #define all(v) v.begin(),v.end()
-#define vsort(v) sort(v.begin(), v.end())
-#define vsortr(v) sort(v.begin(), v.end(), greater<ll>())
 #define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
 template<typename T> inline bool chmin(T &a, T b){ if(b<a) a=b; return b<a; }
-template<typename T> void vdeb(vector<T> v){
-    cout << "#vdebug" << endl;
+template<typename T> void vdeb(T v){
+    cout << "#vector set debug" << endl;
     for(auto vv : v) cout << vv << " ";
     cout << endl;
 }
@@ -31,15 +29,15 @@ template<typename A, size_t N, typename T>
 void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 void ans(bool b){ cout << (b ? "Yes" : "No") << endl; }
 void ans2(bool b){ cout << (b ? "YES" : "NO") << endl; }
-int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
-int dy[] = {0, 0, 1, -1, 1, -1, -1, 1};
+int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
+int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    $1
+    $0
 
     return 0;
 }
@@ -87,17 +85,20 @@ int test(){
     cout << "  after:  c=" << c << " d=" << d << endl;
 
     vector<int> v;
+    set<int> s;
     int arr[10];
     map<int, int> mp;
     vector<pair<int, int>> vp;
     rep(i, 10){
         v.push_back(i);
+        s.insert(i);
         arr[i] = i;
         mp.insert(make_pair(i, i*i));
         vp.push_back(make_pair(i, i*i));
     }
 
     vdeb(v);
+    vdeb(s);
     adeb(arr, 9);
     mdeb(mp);
     mdeb(vp);

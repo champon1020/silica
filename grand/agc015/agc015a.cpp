@@ -32,17 +32,8 @@ int main(){
     ll n, a, b;
     cin >> n >> a >> b;
 
-    ll dup = n - (b-a+1);
-
-    if(b < a){
-        cout << 0 << endl;
-    }else if(n < b-a+1){
-        cout << 0 << endl;
-    }else if(dup <= 0){
-        cout << 1 << endl;
-    }else{
-        cout << (b-a+1)*n << endl;
-    }
+    ll num = (n-2)*b - (n-2)*a + 1;
+    cout << (num < 0 ? 0 : num) << endl;
 
     return 0;
 }

@@ -42,6 +42,7 @@ int main(){
     ll n;
     cin >> n;
 
+<<<<<<< HEAD
     int k = 0;
     int bufn = abs(n);
     while(pow(2, k) <= bufn) k++;
@@ -62,6 +63,18 @@ int main(){
         cout << e;
     }
     cout << endl;
+=======
+    string res = "";
+    while(n != 0){
+        ll r = n%2;
+        n = (n - abs(r)) / (-2);
+        res = char('0'+abs(r)) + res;
+    }
+
+    if(res.length() == 0) res = '0';
+
+    cout << res << endl;
+>>>>>>> 89c6dd77f6639c3a037c460cce91f179a13f0236
 
     return 0;
 }
