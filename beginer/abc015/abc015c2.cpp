@@ -37,51 +37,25 @@ int main(){
     cin.tie(0);
 
     int n, k;
-    int t[10][10];
     cin >> n >> k;
+    int t[20][20];
     rep(i, n){
         rep(j, k){
             cin >> t[i][j];
         }
     }
 
-    ll sum = 0;
-    bool res = true;
-    rep(i, k){
-        sum ^= t[0][i];
-        if(n >= 2){
-            rep(j, k){
-                sum ^= t[1][j];
-                if(n >= 3){
-                    rep(l, k){
-                        sum ^= t[2][l];
-                        if(n >= 4){
-                            rep(m, k){
-                                sum ^= t[3][m];
-                                if(n >= 5){
-                                    rep(o, k){
-                                        sum ^= t[4][o];
-                                        if(sum == 0) res = false;
-                                        sum ^= t[4][o];
-                                    }
-                                }
-                                if(n <= 4 && sum == 0) res = false;
-                                sum ^= t[3][m];
-                            }
-                        }
-                        if(n <= 3 && sum == 0) res = false;
-                        sum ^= t[2][l];
-                    }
-                }
-                if(n <= 2 && sum == 0) res = false;
-                sum ^= t[1][j];
-            }
+    function<bool(int, int)> dfs = [&](int s, int sum){
+        if(s == n) return sum==0;
+        rep(i, k){
+            bool res = dfs(s+1, sum^t[s][i]);
+            if(res) return true;
         }
-        if(n <= 1 && sum == 0) res = false;
-        sum ^= t[0][i];
-    }
+        return false;
+    };
 
-    if(!res) cout << "Found" << endl;
+    bool good = dfs(0, 0);
+    if(good) cout << "Found" << endl;
     else cout << "Nothing" << endl;
 
     return 0;
