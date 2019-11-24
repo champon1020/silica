@@ -36,28 +36,30 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m;
-    cin >> n >> m;
-
-    ll baby=-1, old=-1, grown=-1;
-    reps(i, 0, n){
-        ll m_ = m - 3*i;
-        if(m_ % 2 != 0) continue;
-
-        ll x = m_ / 2 - n + i;
-        ll y = 2*n - 2*i - m_ / 2;
-
-        if(x + y + i != n || 4*x + 3*i + 2*y != m) continue;
-        else if(x < 0 || y < 0) continue;
-        else{
-            old = i;
-            grown = y;
-            baby = x;
-            break;
-        }
+    int n, k, tmpr;
+    vector<int> r;
+    cin >> n >> k;
+    rep(i, n){
+        cin >> tmpr;
+        r.push_back(tmpr);
     }
 
-    cout << grown sp old sp baby << endl;
+    sort(all(r));
+
+    double taka = 0;
+    int cnt = 0;
+    int start = r.size()-k;
+    while(true){
+        if(cnt >= k) break;
+        auto itr = upper_bound(r.begin()+start, r.end(), taka);
+        int ind = distance(r.begin(), itr);
+        if(ind == r.size()) break;
+        taka = double((taka + r[ind]) / 2.0);
+        r.erase(r.begin() + ind);
+        cnt++;
+    }
+
+    printf("%.10lf", taka);
 
     return 0;
 }

@@ -36,28 +36,34 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m;
-    cin >> n >> m;
+    int n;
+    ll c[110];
+    ll g[110];
+    cin >> n;
+    rep(i, n){
+        cin >> c[i];
+    }
 
-    ll baby=-1, old=-1, grown=-1;
-    reps(i, 0, n){
-        ll m_ = m - 3*i;
-        if(m_ % 2 != 0) continue;
-
-        ll x = m_ / 2 - n + i;
-        ll y = 2*n - 2*i - m_ / 2;
-
-        if(x + y + i != n || 4*x + 3*i + 2*y != m) continue;
-        else if(x < 0 || y < 0) continue;
-        else{
-            old = i;
-            grown = y;
-            baby = x;
-            break;
+    Fill(g, 0);
+    rep(i, n){
+        rep(j, n){
+            if(i == j) continue;
+            if(c[i] % c[j] == 0){
+                g[i]++;
+            }
         }
     }
 
-    cout << grown sp old sp baby << endl;
+    double res = 0.0;
+    rep(i, n){
+        if(g[i] % 2 == 1){
+            res += 0.5;
+        }else{
+            res += (g[i] + 2.0) / (2.0 * (g[i] + 1.0));
+        }
+    }
+
+    printf("%.10lf\n", res);
 
     return 0;
 }

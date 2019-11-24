@@ -33,5 +33,15 @@ int main(){
     double xa, ya, xb, yb, xc, yc;
     cin >> xa >> ya >> xb >> yb >> xc >> yc;
 
+    xb -= xa;
+    xc -= xa;
+    xa = 0;
+    yb -= ya;
+    yc -= ya;
+    ya = 0;
+
+    double s = abs(xb*yc - xc*yb) / 2;
+    printf("%.5lf", s);
+
     return 0;
 }

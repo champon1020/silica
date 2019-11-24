@@ -36,28 +36,52 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m;
-    cin >> n >> m;
+    int n, ng1, ng2, ng3;
+    cin >> n >> ng1 >> ng2 >> ng3;
 
-    ll baby=-1, old=-1, grown=-1;
-    reps(i, 0, n){
-        ll m_ = m - 3*i;
-        if(m_ % 2 != 0) continue;
-
-        ll x = m_ / 2 - n + i;
-        ll y = 2*n - 2*i - m_ / 2;
-
-        if(x + y + i != n || 4*x + 3*i + 2*y != m) continue;
-        else if(x < 0 || y < 0) continue;
-        else{
-            old = i;
-            grown = y;
-            baby = x;
-            break;
-        }
+    if(n == ng1 || n == ng2 || n == ng3){
+        ans2(false);
+        return 0;
     }
 
-    cout << grown sp old sp baby << endl;
+    ll cnt = 0;
+    ll sum = n;
+    while(sum > 0){
+        if(sum-3 == ng1 || sum-3 == ng2 || sum-3 == ng3){
+            if(sum-2 != ng1 && sum-2 != ng2 && sum-2 != ng3){
+                if(sum-5 != ng1 && sum-5 != ng2 && sum-5 != ng3){
+                    sum -= 5;
+                    cnt += 2;
+                }else if(sum-4 != ng1 && sum-4 != ng2 && sum-4 != ng3){
+                    sum -= 4;
+                    cnt += 2;
+                }else{
+                    ans2(false);
+                    return 0;
+                }
+            }else if(sum-1 != ng1 && sum-1 != ng2 && sum-1 != ng3){
+                if(sum-4 != ng1 && sum-4 != ng2 && sum-4 != ng3){
+                    sum -= 4;
+                    cnt += 2;
+                }else{
+                    ans2(false);
+                    return 0;
+                }
+            }else{
+                ans2(false);
+                return 0;
+            }
+        }else{
+            sum -= 3;
+            cnt++;
+        }
+        //cout << sum << endl;
+    }
+
+    if(cnt > 100) ans2(false);
+    else ans2(true);
+
+    //cout << cnt << endl;
 
     return 0;
 }

@@ -36,28 +36,23 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m;
-    cin >> n >> m;
+    int n, ng1, ng2, ng3;
+    cin >> n >> ng1 >> ng2 >> ng3;
 
-    ll baby=-1, old=-1, grown=-1;
-    reps(i, 0, n){
-        ll m_ = m - 3*i;
-        if(m_ % 2 != 0) continue;
+    int dp[333];
+    Fill(dp, 1000);
 
-        ll x = m_ / 2 - n + i;
-        ll y = 2*n - 2*i - m_ / 2;
-
-        if(x + y + i != n || 4*x + 3*i + 2*y != m) continue;
-        else if(x < 0 || y < 0) continue;
-        else{
-            old = i;
-            grown = y;
-            baby = x;
-            break;
+    dp[n] = 0;
+    repr(i, n, 1){
+        if(i == ng1 | i == ng2 || i == ng3) continue;
+        reps(j, 1, 3){
+            if(i-j < 0) continue;
+            dp[i-j] = min(dp[i-j], dp[i] + 1);
         }
     }
 
-    cout << grown sp old sp baby << endl;
+    if(dp[0] <= 100) ans2(true);
+    else ans2(false);
 
     return 0;
 }

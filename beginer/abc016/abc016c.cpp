@@ -36,28 +36,40 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n, m;
+    int n, m, a, b;
+    vector<int> ab[20];
     cin >> n >> m;
+    rep(i, m){
+        cin >> a >> b;
+        ab[a].push_back(b);
+        ab[b].push_back(a);
+    }
 
-    ll baby=-1, old=-1, grown=-1;
-    reps(i, 0, n){
-        ll m_ = m - 3*i;
-        if(m_ % 2 != 0) continue;
+    reps(i, 1, n){
+        sort(all(ab[i]));
+    }
 
-        ll x = m_ / 2 - n + i;
-        ll y = 2*n - 2*i - m_ / 2;
-
-        if(x + y + i != n || 4*x + 3*i + 2*y != m) continue;
-        else if(x < 0 || y < 0) continue;
-        else{
-            old = i;
-            grown = y;
-            baby = x;
-            break;
+    set<int> res[20];
+    reps(i, 1, n){
+        for(auto const& e : ab[i]){
+            for(auto const& ee : ab[e]){
+                auto itr = lower_bound(all(ab[i]), ee);
+                int ind = distance(ab[i].begin(), itr);
+                if(ind >= ab[i].size() && ee != i){
+                    res[i].insert(ee);
+                    continue;
+                }
+                if(ab[i][ind] != ee && ee != i){
+                    res[i].insert(ee);
+                }
+            }
         }
     }
 
-    cout << grown sp old sp baby << endl;
+    reps(i, 1, n){
+        cout << res[i].size() << endl;
+        //vdeb(res[i]);
+    }
 
     return 0;
 }
