@@ -36,35 +36,33 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    vector<pair<ll, int>> a;
-    ll tmpa;
-    cin >> n;
-    rep(i, n){
-        cin >> tmpa;
-        a.push_back(make_pair(tmpa, i));
+    string s;
+    cin >> s;
+
+    int res;
+    if(s == "SAT"){
+        res = 1;
+    }
+    if(s == "SUN"){
+        res = 7;
+    }
+    if(s == "MON"){
+        res = 6;
+    }
+    if(s == "TUE"){
+        res = 5;
+    }
+    if(s == "WED"){
+        res = 4;
+    }
+    if(s == "THU"){
+        res = 3;
+    }
+    if(s == "FRI"){
+        res = 2;
     }
 
-    sort(all(a));
-
-    ll now = -1;
-    ll new_num = 0;
-    rep(i, n){
-        if(a[i].first != now){
-            if(i != 0) new_num = a[i-1].first + 1;
-            now = a[i].first;
-        }
-        a[i].first = new_num;
-    }
-
-    ll res[100010];
-    for(auto const& e : a){
-        res[e.second] = e.first;
-    }
-
-    rep(i, n){
-        cout << res[i] << endl;
-    }
+    cout << res << endl;
 
     return 0;
 }

@@ -37,33 +37,43 @@ int main(){
     cin.tie(0);
 
     int n;
-    vector<pair<ll, int>> a;
-    ll tmpa;
     cin >> n;
-    rep(i, n){
-        cin >> tmpa;
-        a.push_back(make_pair(tmpa, i));
+    vector<int> g[100010];
+    vector<pair<int, int>> vp;
+    int a, b;
+    rep(i, n-1){
+        cin >> a >> b;
+        g[a].push_back(b);
+        g[b].push_back(a);
+        vp.push_back(make_pair(a, b));
     }
 
-    sort(all(a));
-
-    ll now = -1;
-    ll new_num = 0;
-    rep(i, n){
-        if(a[i].first != now){
-            if(i != 0) new_num = a[i-1].first + 1;
-            now = a[i].first;
+    int k=0;
+    int colors[100010];
+    map<pair<int, int>, int> mp;
+    queue<int> q;
+    q.push(1);
+    int visit[100010];
+    visit[1] = 1;
+    while(!q.empty()){
+        int v = q.front();
+        q.pop();
+        if(k < g[v].size()) k = g[v].size();
+        int color = 1;
+        for(auto const& e : g[v]){
+            if(visit[e]) continue;
+            if(colors[v] == color) color++;
+            colors[e] = color;
+            mp[make_pair(e, v)] = mp[make_pair(v, e)] = color++;
+            visit[e] = 1;
+            q.push(e);
         }
-        a[i].first = new_num;
     }
 
-    ll res[100010];
-    for(auto const& e : a){
-        res[e.second] = e.first;
-    }
+    cout << k << endl;
+    rep(i, n-1){
+        cout << mp[vp[i]] << endl;
 
-    rep(i, n){
-        cout << res[i] << endl;
     }
 
     return 0;

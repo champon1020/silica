@@ -37,34 +37,23 @@ int main(){
     cin.tie(0);
 
     int n;
-    vector<pair<ll, int>> a;
-    ll tmpa;
+    int a[100010];
     cin >> n;
     rep(i, n){
-        cin >> tmpa;
-        a.push_back(make_pair(tmpa, i));
+        cin >> a[i];
     }
 
-    sort(all(a));
-
-    ll now = -1;
-    ll new_num = 0;
+    ll dp[100010];
+    Fill(dp, inf);
+    dp[0] = 0;
     rep(i, n){
-        if(a[i].first != now){
-            if(i != 0) new_num = a[i-1].first + 1;
-            now = a[i].first;
-        }
-        a[i].first = new_num;
+        dp[i+1] = min(dp[i+1], dp[i] + abs(a[i+1]-a[i]));
+        dp[i+2] = min(dp[i+2], dp[i] + abs(a[i+2]-a[i]));
     }
 
-    ll res[100010];
-    for(auto const& e : a){
-        res[e.second] = e.first;
-    }
+    //adeb(dp, n);
 
-    rep(i, n){
-        cout << res[i] << endl;
-    }
+    cout << dp[n-1] << endl;
 
     return 0;
 }

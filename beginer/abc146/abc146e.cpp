@@ -36,35 +36,40 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    vector<pair<ll, int>> a;
-    ll tmpa;
-    cin >> n;
+    ll n, k;
+    ll a[200010];
+    cin >> n >> k;
     rep(i, n){
-        cin >> tmpa;
-        a.push_back(make_pair(tmpa, i));
+        cin >> a[i];
+        a[i] %= k;
     }
 
-    sort(all(a));
-
-    ll now = -1;
-    ll new_num = 0;
+    ll asum[200010];
+    asum[0] = 0;
     rep(i, n){
-        if(a[i].first != now){
-            if(i != 0) new_num = a[i-1].first + 1;
-            now = a[i].first;
+        asum[i+1] = asum[i] + a[i];
+        //asum[i+1] %= k;
+    }
+
+    adeb(asum, n);
+
+    int l=0, r=1;
+    ll res = 0;
+    while(r <= n && l <= n){
+        if((asum[r] - asum[l])%k == r-l){
+            res++;
+            r++;
+        }else{
+            if((asum[r] - asum[l])%k < r-l){
+                l++;
+            }else{
+                r++;
+            }
         }
-        a[i].first = new_num;
+        //cout << r sp l sp res << endl;
     }
 
-    ll res[100010];
-    for(auto const& e : a){
-        res[e.second] = e.first;
-    }
-
-    rep(i, n){
-        cout << res[i] << endl;
-    }
+    cout << res << endl;
 
     return 0;
 }
