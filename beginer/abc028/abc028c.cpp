@@ -6,6 +6,7 @@ using namespace std;
 #define reps(i, s, e) for(ll i=s; i<=e; i++)
 #define inf 1e18
 #define all(v) v.begin(),v.end()
+#define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
@@ -36,33 +37,37 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    string s;
-    cin >> s;
-    int slen = s.length();
+    int a, b, c, d, e;
+    cin >> a >> b >> c >> d >> e;
 
-    bool flg = false;
-    int double_white, black_num=0;
-    rep(i, slen){
-        if(!flg && s[i] == s[i+1]){
-            flg = true;
-            double_white = i;
-            continue;
-        }
-        if(flg && s[i] == s[i+1]) break;
-        if(flg){
-            if(s[i] == 'B') black_num++;
+    vector<int> el;
+    el.push_back(a);
+    el.push_back(b);
+    el.push_back(c);
+    el.push_back(d);
+    el.push_back(e);
+
+    set<int> sums;
+    rep(i, 5){
+        rep(j, 5){
+            if(i == j) continue;
+            rep(k, 5){
+                if(i == j || j == k || k == i) continue;
+                sums.insert(el[i] + el[j] + el[k]);
+            }
         }
     }
 
-    string kenban1[] = {"Mi", "Re", "Do"};
-    string kenban2[] = {"Si", "La", "So", "Fa"};
-    if(black_num == 2){
-        cout << kenban2[double_white/2] << endl;
-    }else if(black_num == 3){
-        cout << kenban1[double_white/2] << endl;
-    }
+    //vdeb(sums);
 
-    //cout << double_white sp black_num << endl;
+    int cnt = 0;
+    for(auto const& e : sums){
+        cnt++;
+        if(cnt == sums.size()-2){
+            cout << e << endl;
+            return 0;
+        }
+    }
 
     return 0;
 }

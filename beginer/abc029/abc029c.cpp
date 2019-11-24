@@ -6,6 +6,7 @@ using namespace std;
 #define reps(i, s, e) for(ll i=s; i<=e; i++)
 #define inf 1e18
 #define all(v) v.begin(),v.end()
+#define ceil(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
@@ -32,37 +33,32 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
+vector<string> res;
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    string s;
-    cin >> s;
-    int slen = s.length();
+    int n;
+    cin >> n;
 
-    bool flg = false;
-    int double_white, black_num=0;
-    rep(i, slen){
-        if(!flg && s[i] == s[i+1]){
-            flg = true;
-            double_white = i;
-            continue;
+    function<void(string, int)> rec = [&](string s, int num){
+        if(num == n){
+            res.push_back(s);
+            return;
         }
-        if(flg && s[i] == s[i+1]) break;
-        if(flg){
-            if(s[i] == 'B') black_num++;
-        }
-    }
+        rec(s + 'a', num+1);
+        rec(s + 'b', num+1);
+        rec(s + 'c', num+1);
+    };
 
-    string kenban1[] = {"Mi", "Re", "Do"};
-    string kenban2[] = {"Si", "La", "So", "Fa"};
-    if(black_num == 2){
-        cout << kenban2[double_white/2] << endl;
-    }else if(black_num == 3){
-        cout << kenban1[double_white/2] << endl;
-    }
+    rec("", 0);
 
-    //cout << double_white sp black_num << endl;
+    sort(all(res));
+
+    for(auto const& e : res){
+        cout << e << endl;
+    }
 
     return 0;
 }
