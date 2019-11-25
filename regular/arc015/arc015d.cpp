@@ -38,32 +38,21 @@ int main(){
     cin.tie(0);
 
     int n;
-    set<string> used;
-    string sin;
+    int res[10];
+    Fill(res, 0);
+    double maxi, mini;
     cin >> n;
-
-    int res = 0;
-    string last = "";
     rep(i, n){
-        cin >> sin;
-        if(used.find(sin) != used.end()){
-            res = i%2==0 ? -1 : 1;
-            break;
-        }
-        used.insert(sin);
-        if(i == 0) last = sin;
-        else{
-            if(last[last.length()-1] != sin[0]){
-                res = i%2==0 ? -1 : 1;
-                break;
-            }
-        }
-        last = sin;
+        cin >> maxi >> mini;
+        if(35 <= maxi) res[1]++;
+        if(30 <= maxi && maxi < 35) res[2]++;
+        if(25 <= maxi && maxi < 30) res[3]++;
+        if(25 <= mini) res[4]++;
+        if(mini < 0 && maxi >= 0) res[5]++;
+        if(maxi < 0) res[6]++;
     }
 
-    if(res == -1) cout << "LOSE" << endl;
-    else if(res == 0) cout << "DRAW" << endl;
-    else cout << "WIN" << endl;
+    cout << res[1] sp res[2] sp res[3] sp res[4] sp res[5] sp res[6] << endl;
 
     return 0;
 }

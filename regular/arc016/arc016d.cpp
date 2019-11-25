@@ -38,32 +38,30 @@ int main(){
     cin.tie(0);
 
     int n;
-    set<string> used;
-    string sin;
+    char x[110][20];
     cin >> n;
-
-    int res = 0;
-    string last = "";
     rep(i, n){
-        cin >> sin;
-        if(used.find(sin) != used.end()){
-            res = i%2==0 ? -1 : 1;
-            break;
+        rep(j, 9){
+            cin >> x[i][j];
         }
-        used.insert(sin);
-        if(i == 0) last = sin;
-        else{
-            if(last[last.length()-1] != sin[0]){
-                res = i%2==0 ? -1 : 1;
-                break;
-            }
-        }
-        last = sin;
     }
 
-    if(res == -1) cout << "LOSE" << endl;
-    else if(res == 0) cout << "DRAW" << endl;
-    else cout << "WIN" << endl;
+    int res = 0;
+    bool push_long = false;
+    rep(j, 9){
+        rep(i, n){
+            if(x[i][j] == 'o'){
+                if(!push_long) res++;
+                push_long = true;
+            }else{
+                push_long = false;
+                if(x[i][j] == 'x') res++;
+            }
+        }
+        push_long = false;
+    }
+
+    cout << res << endl;
 
     return 0;
 }
