@@ -37,35 +37,17 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    ll n;
-    cin >> n;
+    string date;
+    cin >> date;
 
-    vector<int> bank;
-    bank.push_back(1);
-    ll buf = 6;
-    while(buf < 100000){
-        bank.push_back(buf);
-        buf *= 6;
-    }
-    buf = 9;
-    while(buf < 100000){
-        bank.push_back(buf);
-        buf *= 9;
-    }
+    int res = 0;
+    if(date == "Monday") res = 5;
+    if(date == "Tuesday") res = 4;
+    if(date == "Wednesday") res = 3;
+    if(date == "Thursday") res = 2;
+    if(date == "Friday") res = 1;
 
-    int dp[100010];
-    Fill(dp, 1000000);
-    dp[0] = 0;
-    reps(i, 1, n){
-        for(auto const& e : bank){
-            if(i - e < 0) continue;
-            dp[i] = min(dp[i], dp[i - e] + 1);
-        }
-    }
-
-    //adeb(dp, n);
-
-    cout << dp[n] << endl;
+    cout << res << endl;
 
     return 0;
 }
