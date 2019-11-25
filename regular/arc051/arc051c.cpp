@@ -37,23 +37,24 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    double l, x, y, s, d;
-    cin >> l >> x >> y >> s >> d;
+    double x1, y1, r;
+    double x2, y2, x3, y3;
+    cin >> x1 >> y1 >> r;
+    cin >> x2 >> y2 >> x3 >> y3;
 
-    double res = inf;
-    double cw, ccw;
-    if(d > s){
-        cw = (d - s) / (x + y);
-        ccw = (s + l - d) / (y - x);
-    }else{
-        cw = (d + l - s) / (x + y);
-        ccw = (s - d) / (y - x);
-    }
-    if(cw < 0) res = ccw;
-    else if(ccw < 0) res = cw;
-    else res = min(cw, ccw);
+    double lu = sqrt(pow(x1 - x2, 2) + pow(y1 - y3, 2));
+    double ld = sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+    double ru = sqrt(pow(x1 - x3, 2) + pow(y1 - y3, 2));
+    double rd = sqrt(pow(x1 - x3, 2) + pow(y1 - y2, 2));
 
-    printf("%.10lf", res);
+    //cout << lu sp ld sp ru sp rd << endl;
+
+    bool blue = true, red = true;
+    if(x2 <= x1 - r && x1 + r <= x3 && y2 <= y1 - r && y1 + r <= y3) red = false;
+    if(lu <= r && ld <= r && ru <= r && rd <= r) blue = false;
+
+    ans2(red);
+    ans2(blue);
 
     return 0;
 }

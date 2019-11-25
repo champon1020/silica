@@ -37,23 +37,38 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    double l, x, y, s, d;
-    cin >> l >> x >> y >> s >> d;
+    ll n;
+    cin >> n;
 
-    double res = inf;
-    double cw, ccw;
-    if(d > s){
-        cw = (d - s) / (x + y);
-        ccw = (s + l - d) / (y - x);
-    }else{
-        cw = (d + l - s) / (x + y);
-        ccw = (s - d) / (y - x);
+    bool prime = true;
+    reps(i, 2, sqrt(n)){
+        if(n % i == 0) prime = false;
     }
-    if(cw < 0) res = ccw;
-    else if(ccw < 0) res = cw;
-    else res = min(cw, ccw);
+    if(n == 1){
+        cout << "Not Prime" << endl;
+        return 0;
+    }
 
-    printf("%.10lf", res);
+    if(prime){
+        cout << "Prime" << endl;
+        return 0;
+    }
+
+    int bufn = n;
+    int sum = 0;
+    while(n > 0){
+        sum += n%10;
+        n /= 10;
+    }
+
+    //cout << sum << endl;
+
+    if(bufn%2 == 0 || bufn%5 == 0) prime = false;
+    else if(sum % 3 == 0) prime = false;
+    else prime = true;
+
+    if(prime) cout << "Prime" << endl;
+    else cout << "Not Prime" << endl;
 
     return 0;
 }

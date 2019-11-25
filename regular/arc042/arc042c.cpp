@@ -37,23 +37,29 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    double l, x, y, s, d;
-    cin >> l >> x >> y >> s >> d;
-
-    double res = inf;
-    double cw, ccw;
-    if(d > s){
-        cw = (d - s) / (x + y);
-        ccw = (s + l - d) / (y - x);
-    }else{
-        cw = (d + l - s) / (x + y);
-        ccw = (s - d) / (y - x);
+    int n, m;
+    cin >> n >> m;
+    vector<int> res;
+    vector<int> writen(n+1, 0);
+    int a[100010];
+    rep(i, m){
+        cin >> a[i];
     }
-    if(cw < 0) res = ccw;
-    else if(ccw < 0) res = cw;
-    else res = min(cw, ccw);
 
-    printf("%.10lf", res);
+    repr(i, m-1, 0){
+        if(writen[a[i]])continue;
+        res.push_back(a[i]);
+        writen[a[i]] = 1;
+    }
+
+    reps(i, 1, n){
+        if(writen[i])continue;
+        res.push_back(i);
+    }
+
+    for(auto const& e : res){
+        cout << e << endl;
+    }
 
     return 0;
 }

@@ -37,23 +37,22 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    double l, x, y, s, d;
-    cin >> l >> x >> y >> s >> d;
-
-    double res = inf;
-    double cw, ccw;
-    if(d > s){
-        cw = (d - s) / (x + y);
-        ccw = (s + l - d) / (y - x);
-    }else{
-        cw = (d + l - s) / (x + y);
-        ccw = (s - d) / (y - x);
+    string a, b;
+    cin >> a >> b;
+    
+    int res = stoi(a) - stoi(b);
+    rep(i, 3){
+        int num_a = a[i]-'0';
+        int num_b = b[i]-'0';
+        string buf_a = a, buf_b = b;
+        buf_a[i] = '9';
+        buf_b[i] = i == 0 ? '1' : '0';
+        //cout << buf_a sp buf_b << endl;
+        int candidate = max(stoi(a)-stoi(buf_b), stoi(buf_a)-stoi(b));
+        chmax(res, candidate);
     }
-    if(cw < 0) res = ccw;
-    else if(ccw < 0) res = cw;
-    else res = min(cw, ccw);
 
-    printf("%.10lf", res);
+    cout << res << endl;
 
     return 0;
 }

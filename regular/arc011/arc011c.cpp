@@ -37,23 +37,19 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    double l, x, y, s, d;
-    cin >> l >> x >> y >> s >> d;
+    int n, m, N;
+    cin >> m >> n >> N;
 
-    double res = inf;
-    double cw, ccw;
-    if(d > s){
-        cw = (d - s) / (x + y);
-        ccw = (s + l - d) / (y - x);
-    }else{
-        cw = (d + l - s) / (x + y);
-        ccw = (s - d) / (y - x);
+    ll res = N;
+    ll num = N;
+    while(num > 0){
+        res += num/m * n;
+        num = num / m * n + num%m;
+        if(num / m == 0) break;
+        //cout << num << endl;
     }
-    if(cw < 0) res = ccw;
-    else if(ccw < 0) res = cw;
-    else res = min(cw, ccw);
 
-    printf("%.10lf", res);
+    cout << res << endl;
 
     return 0;
 }
