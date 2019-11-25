@@ -37,24 +37,31 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int c;
-    ll res = 0;
-    int xmax=0, ymax=0, zmax=0;
-    int x, y, z;
-    cin >> c;
-    rep(i, c){
-        cin >> x >> y >> z;
-        vector<int> xyz;
-        xyz.push_back(x);
-        xyz.push_back(y);
-        xyz.push_back(z);
-        sort(all(xyz));
-        chmax(xmax, xyz[0]);
-        chmax(ymax, xyz[1]);
-        chmax(zmax, xyz[2]);
+    string s;
+    map<char, int> cnt;
+    cin >> s;
+    int slen = s.length();
+    rep(i, slen){
+        cnt[s[i]]++;
     }
 
-    res = xmax * ymax * zmax;
+    int pal = 0;
+    int doub = 0;
+    for(auto const& e : cnt){
+        if(e.second % 2 == 1) pal++;
+        doub += e.second / 2;
+    }
+
+    //mdeb(cnt);
+    //cout << pal sp doub << endl;
+
+    int res = 0;
+    if(pal <= 1){
+        res = pal + doub * 2;
+    }else{
+        res = 1 + doub / pal * 2;
+    }
+
     cout << res << endl;
 
     return 0;

@@ -37,25 +37,28 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int c;
-    ll res = 0;
-    int xmax=0, ymax=0, zmax=0;
-    int x, y, z;
-    cin >> c;
-    rep(i, c){
-        cin >> x >> y >> z;
-        vector<int> xyz;
-        xyz.push_back(x);
-        xyz.push_back(y);
-        xyz.push_back(z);
-        sort(all(xyz));
-        chmax(xmax, xyz[0]);
-        chmax(ymax, xyz[1]);
-        chmax(zmax, xyz[2]);
+    int na, nb;
+    ll tmp;
+    set<ll> a, b, both;
+    cin >> na >> nb;
+    rep(i, na){
+        cin >> tmp;
+        a.insert(tmp);
+        both.insert(tmp);
+    }
+    rep(i, nb){
+        cin >> tmp;
+        b.insert(tmp);
+        both.insert(tmp);
     }
 
-    res = xmax * ymax * zmax;
-    cout << res << endl;
+    int cnt = 0;
+    for(auto const& e : a){
+        if(b.find(e) != b.end()) cnt++;
+    }
+
+    double res = double(cnt) / double(both.size());
+    printf("%.10lf\n", res);
 
     return 0;
 }
