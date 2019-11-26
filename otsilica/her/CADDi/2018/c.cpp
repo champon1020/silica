@@ -33,27 +33,37 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
+template<typename T1, typename T2> 
+ll gcd(T1 a, T2 b){
+    if(b==0) return a; 
+    return gcd(b, a%b);
+}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, d;
-    int sum = 0;
-    vector<int> d_v;
-    cin >> n;
-    rep(i, n){
-        cin >> d;
-        d_v.push_back(d);
-        sum += d;
+    ll n, p;
+    cin >> n >> p;
+    ll bufp = p;
+    map<ll, int> element;
+    reps(i, 2, sqrt(p)){
+        while(p%i == 0){
+            element[i]++;
+            p /= i;
+        }
     }
 
-    sort(all(d_v), greater<int>());
+    ll res = 1;
+    for(auto const& e : element){
+        if(e.second >= n) res *= pow(e.first, e.second/n);
+    }
 
-    int maxi = d_v[0];
-    int others = sum - maxi;
-    
-    cout << sum << endl;
-    cout << max(maxi-others, 0) << endl;
+    if(n == 1) res = bufp;
+
+    cout << res << endl;
+
+    //mdeb(element);
 
     return 0;
 }

@@ -37,23 +37,40 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, d;
-    int sum = 0;
-    vector<int> d_v;
+    int n;
     cin >> n;
-    rep(i, n){
-        cin >> d;
-        d_v.push_back(d);
-        sum += d;
+
+    string res;
+
+    cout << 0 << endl << flush;
+    cin >> res;
+    if(res == "Vacant"){
+        exit(0);
+        return 0;
     }
 
-    sort(all(d_v), greater<int>());
+    cout << n-1 << endl << flush;
+    cin >> res;
+    if(res == "Vacant"){
+        exit(0);
+        return 0;
+    }
 
-    int maxi = d_v[0];
-    int others = sum - maxi;
-    
-    cout << sum << endl;
-    cout << max(maxi-others, 0) << endl;
+    function<void(int, int)> rec = [&](int left, int right){
+        int mid = (left + right) / 2;
+        cout << mid << endl << flush;
+        cin >> res;
+        if(res == "Vacant"){
+            exit(0);
+            return;
+        }
+        if(left >= right) return;
+        rec(mid, right);
+        rec(left, mid);
+    };
 
+    rec(0, n-1);
+
+    exit(0);
     return 0;
 }

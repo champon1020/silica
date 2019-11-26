@@ -37,23 +37,17 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, d;
-    int sum = 0;
-    vector<int> d_v;
+    int n;
+    ll a;
     cin >> n;
+    bool second = true;
     rep(i, n){
-        cin >> d;
-        d_v.push_back(d);
-        sum += d;
+        cin >> a;
+        if(a % 2 == 1) second = false;
     }
 
-    sort(all(d_v), greater<int>());
-
-    int maxi = d_v[0];
-    int others = sum - maxi;
-    
-    cout << sum << endl;
-    cout << max(maxi-others, 0) << endl;
+    if(second) cout << "second" << endl;
+    else cout << "first" << endl;
 
     return 0;
 }
