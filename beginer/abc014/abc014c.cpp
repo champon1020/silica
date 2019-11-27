@@ -32,24 +32,41 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
+int l[1000010], r[1000010];
+int l_sum[1000010], r_sum[1000010];
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[1000010];
-    int mod = 10007;
+    int n, a, b;
     cin >> n;
 
-    a[1] = 0;
-    a[2] = 0;
-    a[3] = 1;
-    reps(i, 4, 1000000){
-        a[i] = a[i-1] + a[i-2] + a[i-3];
-        a[i] %= mod;
+    Fill(l, 0);
+    Fill(r, 0);
+    rep(i, n){
+        cin >> a >> b;
+        l[a]++;
+        r[b+1]++;
+    }
+    l_sum[0] = 0;
+    r_sum[0] = 0;
+    reps(i, 0, 1000001){
+        l_sum[i+1] = l_sum[i] + l[i];
+        r_sum[i+1] = r_sum[i] + r[i];
     }
 
-    cout << a[n]%mod << endl;
+    int res = 0;
+    reps(i, 0, 1000001){
+        chmax(res, l_sum[i] - r_sum[i]);
+    }
+
+    cout << res << endl;
+
+    // adeb(l, 6);
+    // adeb(r, 6);
+    // adeb(l_sum, 7);
+    // adeb(r_sum, 7);
 
     return 0;
 }

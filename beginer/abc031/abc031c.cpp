@@ -37,19 +37,43 @@ int main(){
     cin.tie(0);
 
     int n;
-    ll a[1000010];
-    int mod = 10007;
+    int a[100];
     cin >> n;
-
-    a[1] = 0;
-    a[2] = 0;
-    a[3] = 1;
-    reps(i, 4, 1000000){
-        a[i] = a[i-1] + a[i-2] + a[i-3];
-        a[i] %= mod;
+    rep(i, n){
+        cin >> a[i];
     }
 
-    cout << a[n]%mod << endl;
+    ll taka_max = -100000;
+    rep(i, n){
+        pair<ll, int> aoki_max = make_pair(-100000, -1);
+        ll aoki_sum;
+        rep(j, n){
+            if(i == j) continue;
+            aoki_sum = 0;
+            int start = j < i ? j : i;
+            int end = j < i ? i : j;
+            reps(k, start, end){
+                if(k%2 == start%2) continue;
+                aoki_sum += a[k];
+            }
+            if(aoki_sum > aoki_max.first){
+                aoki_max = make_pair(aoki_sum, j);
+            }
+        }
+
+        ll taka_sum = 0;
+        int start = i < aoki_max.second ? i : aoki_max.second;
+        int end = i < aoki_max.second ? aoki_max.second : i;
+        reps(j, start, end){
+            if(j%2 != start%2) continue;
+            taka_sum += a[j];
+        }
+
+        //cout << i sp aoki_max.second sp aoki_max.first sp taka_sum << endl;
+        chmax(taka_max, taka_sum);
+    }
+
+    cout << taka_max << endl;
 
     return 0;
 }

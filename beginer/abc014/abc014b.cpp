@@ -36,20 +36,19 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[1000010];
-    int mod = 10007;
-    cin >> n;
-
-    a[1] = 0;
-    a[2] = 0;
-    a[3] = 1;
-    reps(i, 4, 1000000){
-        a[i] = a[i-1] + a[i-2] + a[i-3];
-        a[i] %= mod;
+    int n, a[100];
+    ll x;
+    cin >> n >> x;
+    rep(i, n){
+        cin >> a[i];
     }
 
-    cout << a[n]%mod << endl;
+    ll res = 0;
+    rep(i, n){
+        if(x & 1<<i) res += a[i];
+    }
+
+    cout << res << endl;
 
     return 0;
 }
