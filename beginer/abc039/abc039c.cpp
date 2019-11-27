@@ -40,7 +40,29 @@ int main(){
     cin >> s;
     int slen = s.length();
 
-    
+    bool flg = false;
+    int double_white, black_num=0;
+    rep(i, slen){
+        if(!flg && s[i] == s[i+1]){
+            flg = true;
+            double_white = i;
+            continue;
+        }
+        if(flg && s[i] == s[i+1]) break;
+        if(flg){
+            if(s[i] == 'B') black_num++;
+        }
+    }
+
+    string kenban1[] = {"Mi", "Re", "Do"};
+    string kenban2[] = {"Si", "La", "So", "Fa"};
+    if(black_num == 2){
+        cout << kenban2[double_white/2] << endl;
+    }else if(black_num == 3){
+        cout << kenban1[double_white/2] << endl;
+    }
+
+    //cout << double_white sp black_num << endl;
 
     return 0;
 }

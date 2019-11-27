@@ -42,6 +42,28 @@ int main(){
     ll n;
     cin >> n;
 
+<<<<<<< HEAD
+    int k = 0;
+    int bufn = abs(n);
+    while(pow(2, k) <= bufn) k++;
+
+    rep(i, k){
+        if(bufn & 1<<i) bufn &= ~(1<<i);
+        else bufn |= (1<<i);  
+    }
+    cout << bufn << endl;
+
+    vector<int> binary;
+    repr(i, k-1, 0){
+        if(bufn & 1<<i) binary.push_back(1);
+        else binary.push_back(0);
+    }
+
+    for(auto const& e : binary){
+        cout << e;
+    }
+    cout << endl;
+=======
     string res = "";
     while(n != 0){
         ll r = n%2;
@@ -52,6 +74,7 @@ int main(){
     if(res.length() == 0) res = '0';
 
     cout << res << endl;
+>>>>>>> 89c6dd77f6639c3a037c460cce91f179a13f0236
 
     return 0;
 }
