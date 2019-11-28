@@ -36,20 +36,43 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    ll a[1000010];
-    int mod = 10007;
-    cin >> n;
+    string s;
+    cin >> s;
 
-    a[1] = 0;
-    a[2] = 0;
-    a[3] = 1;
-    reps(i, 4, 1000000){
-        a[i] = a[i-1] + a[i-2] + a[i-3];
-        a[i] %= mod;
+    int slen = s.length();
+    bool res = false;
+    int marker = 0;
+    rep(i, slen){
+        if(i >= 1 && s[i] == s[i-1]){
+            res = false;
+            break;
+        }
+        if(marker == (1<<5)-1 && s[i] != 'A'){
+            res = false;
+            break;
+        }
+        if(marker == 1<<0 && s[i] == 'A'){
+            res = false;
+            break;
+        }
+        if(marker == (1<<2)-1 && s[i] == 'A'){
+            res = false;
+            break;
+        }
+
+        if(s[i] == 'K' && marker == 0) marker |= 1<<0;
+        else if(s[i] == 'I' && marker & 1<<0) marker |= 1<<1;
+        else if(s[i] == 'H' && marker & 1<<1) marker |= 1<<2;
+        else if(s[i] == 'B' && marker & 1<<2) marker |= 1<<3;
+        else if(s[i] == 'R' && marker & 1<<3){
+            marker |= 1<<4;
+            res = true;
+        }else{
+            if(s[i] != 'A') marker = 0;
+        }
     }
 
-    cout << a[n]%mod << endl;
+    ans2(res);
 
     return 0;
 }

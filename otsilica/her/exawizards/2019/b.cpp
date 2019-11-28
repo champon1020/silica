@@ -37,19 +37,16 @@ int main(){
     cin.tie(0);
 
     int n;
-    ll a[1000010];
-    int mod = 10007;
-    cin >> n;
+    string s;
+    cin >> n >> s;
 
-    a[1] = 0;
-    a[2] = 0;
-    a[3] = 1;
-    reps(i, 4, 1000000){
-        a[i] = a[i-1] + a[i-2] + a[i-3];
-        a[i] %= mod;
+    int red=0, blue=0;
+    rep(i, s.length()){
+        if(s[i] == 'R') red++;
+        else blue++;
     }
 
-    cout << a[n]%mod << endl;
+    ans(red > blue);
 
     return 0;
 }
