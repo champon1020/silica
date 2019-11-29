@@ -37,21 +37,18 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, m, k;
-    cin >> n >> m >> k;
-    set<int> flip;
+    ll a, b, x;
+    cin >> a >> b >> x;
 
-    reps(i, 0, n){
-        reps(j, 0, m){
-            int num = (m-j)*i + (n-i)*j;
-            flip.insert(num);
-        }
-    }
+    ll res = 0;
+    ll l = (a+x-1)/x;
+    ll r = b/x;
 
-    if(flip.find(k) != flip.end()) ans(true);
-    else ans(false);
+    res = r - l + 1;
 
-    vdeb(flip);
+    //cout << l sp r << endl;
+
+    cout << res << endl;
 
     return 0;
 }

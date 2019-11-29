@@ -37,21 +37,37 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, m, k;
-    cin >> n >> m >> k;
-    set<int> flip;
-
-    reps(i, 0, n){
-        reps(j, 0, m){
-            int num = (m-j)*i + (n-i)*j;
-            flip.insert(num);
-        }
+    int n, q;
+    int l[200010], r[200010];
+    Fill(l, 0);
+    Fill(r, 0);
+    int tmpl, tmpr;
+    cin >> n >> q;
+    rep(i, q){
+        cin >> tmpl >> tmpr;
+        l[tmpl]++;
+        r[tmpr+1]++;
     }
 
-    if(flip.find(k) != flip.end()) ans(true);
-    else ans(false);
+    int l_[200010], r_[200010];
+    l_[0] = r_[0] = 0;
+    reps(i, 1, n){
+        l_[i] = l_[i-1] + l[i];
+        r_[i] = r_[i-1] + r[i];
+    }
 
-    vdeb(flip);
+    string res = "";
+    reps(i, 1, n){
+        if((l_[i] - r_[i])%2 == 0) res += '0';
+        else res+='1';
+    }
+
+    cout << res << endl;
+
+    // adeb(l, n+1);
+    // adeb(r, n+1);
+    // adeb(l_, n+1);
+    // adeb(r_, n+1);
 
     return 0;
 }
