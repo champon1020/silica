@@ -36,7 +36,7 @@ int main() {
 	std::cout << std::fixed;
 	double maxTime = 0.0;
 	for(const jhelper::Test& test: tests ) {
-		std::cout << "Test #" << ++testID << std::endl;
+		std::cout << "\033[4m" << "Test #" << ++testID << "\033[m" << std::endl;
 		std::cout << "Input: \n" << test.input << std::endl;
 		if (test.has_output) {
 			std::cout << "Expected output: \n" << test.output << std::endl;

@@ -43,7 +43,7 @@ for filename in ./tasks/*.cpp; do
     continue
   fi
   NEW_FILENAME=$(echo "${FILENAME:0:1}" | tr '[A-Z]' '[a-z]').cpp
-  mv "$filename" "${DIR}${NEW_FILENAME}"
+  cp "$filename" "${DIR}${NEW_FILENAME}"
   echo "Message: Moved '$filename' to './${TO_DIR}${NEW_FILENAME}'"
 done
 
