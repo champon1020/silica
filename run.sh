@@ -22,7 +22,7 @@ case $1 in
 	"b" )
 		DIR=~/ipad/silica/beginer/;;
   "o" )
-    DIR=~/ipad/silica/other/;;
+    DIR=~/ipad/silica/company/;;
 esac
 
 

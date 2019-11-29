@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="B. Obtain Two Zeroes" type="name.admitriev.jhelper.configuration.TaskConfigurationType" factoryName="Task" className="BObtainTwoZeroes" cppPath="tasks/main.cpp/BObtainTwoZeroes.cpp" inputType="STANDARD" outputType="STANDARD" testType="SINGLE">
+    <tests>
+      <test input="3&#10;6 9&#10;1 1&#10;1 2&#10;" output="YES&#10;NO&#10;YES&#10;" active="true" />
+    </tests>
+    <method v="2" />
+  </configuration>
+</component>
