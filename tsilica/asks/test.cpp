@@ -1,4 +1,4 @@
-#include "../tasks/AHeating.cpp"
+#include "/Users/macuser/CLionProjects/silica/tasks/ACantWaitForHoliday.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -29,7 +29,7 @@ bool check(std::string expected, std::string actual) {
 
 int main() {
 	std::vector<jhelper::Test> tests = {
-		{"4\n1 10000\n10000 1\n2 6\n4 6\n", "100000000\n1\n18\n10\n", true, true},
+		{"SAT\n", "1\n", true, true},{"SUN\n", "7\n", true, true},
 	};
 	bool allOK = true;
 	int testID = 0;
@@ -48,7 +48,7 @@ int main() {
 			std::stringstream in(test.input);
 			std::ostringstream out;
 			std::clock_t start = std::clock();
-			AHeating solver;
+			ACantWaitForHoliday solver;
 			solver.solve(in, out);
 			std::clock_t finish = std::clock();
 			double currentTime = double(finish - start) / CLOCKS_PER_SEC;

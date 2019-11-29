@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="F. Colored Tree" type="name.admitriev.jhelper.configuration.TaskConfigurationType" factoryName="Task" className="FColoredTree" cppPath="tasks/main.cpp/FColoredTree.cpp" inputType="STANDARD" outputType="STANDARD" testType="SINGLE">
-    <tests>
-      <test input="4&#10;1 1&#10;1 2&#10;1 1&#10;1 2&#10;1 2&#10;1 3&#10;3 4&#10;" output="22&#10;" active="true" />
-    </tests>
-    <method v="2" />
-  </configuration>
-</component>

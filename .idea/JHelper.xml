@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Configurator">
     <option name="author" value="champon" />
-    <option name="tasksDirectory" value="tasks/" />
+    <option name="outputFile" value="tasks/out.cpp" />
+    <option name="runFile" value="tasks/test.cpp" />
   </component>
 </project>
