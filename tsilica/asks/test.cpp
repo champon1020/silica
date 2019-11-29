@@ -1,4 +1,4 @@
-#include "/Users/macuser/CLionProjects/silica/tasks/BPCAS.cpp"
+#include "/Users/macuser/CLionProjects/silica/tasks/C.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -29,7 +29,7 @@ bool check(std::string expected, std::string actual) {
 
 int main() {
 	std::vector<jhelper::Test> tests = {
-		{"\n3 5 R\n790319030\n091076399\n143245946\n590051196\n398226115\n442567154\n112705290\n716433235\n221041645\n\n", "8226\n\n\n\n\n	\n\n", true, true},{"\n8 9 LU\n206932999\n471100777\n973172688\n108989704\n246954192\n399039569\n944715218\n003664867\n219006823\n\n", "2853\n\n\n\n\n	\n\n", true, true},{"\n5 7 D\n271573743\n915078603\n102553534\n996473623\n595593497\n573572507\n340348994\n253066837\n643845096\n\n", "4646\n\n\n\n\n	\n\n", true, true},{"\n2 2 LU\n729142134\n509607882\n640003027\n215270061\n214055727\n745319402\n777708131\n018697986\n277156993\n\n", "0700\n\n\n\n\n	\n\n", true, true},{"\n8 7 RD\n985877833\n469488482\n218647263\n856777094\n012249580\n845463670\n919136580\n011130808\n874387671\n\n", "8878\n\n\n\n\n	\n\n", true, true},
+		{"2750 628\n\n\n", "W 5\n\n", true, true},{"161 8\n\n", "C 0\n\n", true, true},{"3263 15\n\n", "NNW 1", true, true},{"1462 1959\n\n", "SE 12\n\n", true, true},{"1687 1029\n\n", "SSE 8\n\n", true, true},{"2587 644\n\n", "WSW 5\n", true, true},{"113 201\n\n", "NNE 3\n\n", true, true},{"2048 16\n\n", "SSW 1\n\n", true, true},
 	};
 	bool allOK = true;
 	int testID = 0;
@@ -48,7 +48,7 @@ int main() {
 			std::stringstream in(test.input);
 			std::ostringstream out;
 			std::clock_t start = std::clock();
-			BPCAS solver;
+			C solver;
 			solver.solve(in, out);
 			std::clock_t finish = std::clock();
 			double currentTime = double(finish - start) / CLOCKS_PER_SEC;

@@ -33,16 +33,6 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
-    $0
-
-    return 0;
-}
-
-
 int test(){
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -126,7 +116,9 @@ int test(){
 }
 
 
-//int main(){
-//    test();
-//    return 0;
-//}
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    test();
+    return 0;
+}

@@ -42,54 +42,66 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-class BPCAS {
+class C {
 public:
 	void solve(std::istream& in, std::ostream& out) {
-	    string w, tmp;
-	    int c[10][10];
-	    int x, y;
-	    in >> x >> y >> w;
-	    reps(i, 1, 9){
-            in >> tmp;
-	        reps(j, 1, 9){
-	            c[j][i] = tmp[j-1] - '0';
-	        }
-	    }
+        double deg, dis;
+        in >> deg >> dis;
+        deg /= 10;
+        string dir = "N";
+        double dist = 11.25;
+        if(deg >= dist) dir = "NNE";
+        dist += 22.5;
+        if(deg >= dist) dir = "NE";
+        dist += 22.5;
+        if(deg >= dist) dir = "ENE";
+        dist += 22.5;
+        if(deg >= dist) dir = "E";
+        dist += 22.5;
+        if(deg >= dist) dir = "ESE";
+        dist += 22.5;
+        if(deg >= dist) dir = "SE";
+        dist += 22.5;
+        if(deg >= dist) dir = "SSE";
+        dist += 22.5;
+        if(deg >= dist) dir = "S";
+        dist += 22.5;
+        if(deg >= dist) dir = "SSW";
+        dist += 22.5;
+        if(deg >= dist) dir = "SW";
+        dist += 22.5;
+        if(deg >= dist) dir = "WSW";
+        dist += 22.5;
+        if(deg >= dist) dir = "W";
+        dist += 22.5;
+        if(deg >= dist) dir = "WNW";
+        dist += 22.5;
+        if(deg >= dist) dir = "NW";
+        dist += 22.5;
+        if(deg >= dist) dir = "NNW";
+        dist += 22.5;
+        if(deg >= dist) dir = "N";
 
-//	    reps(i, 1, 9){
-//	        reps(j, 1, 9){
-//	            out << c[j][i];
-//	        }
-//	        out << endl;
-//	    }
-//	    out << endl;
+        double w[] = {0.0, 0.3, 1.6, 3.4, 5.5, 8.0, 10.8, 13.9, 17.2, 20.8, 24.5, 28.5, 32.7};
+        int wres = -1;
+        double num = dis / 60.0;
 
-	    int dx=0, dy=0;
-	    rep(i, w.length()) {
-            if (w[i] == 'R') dx = 1;
-            if (w[i] == 'L') dx = -1;
-            if (w[i] == 'U') dy = -1;
-            if (w[i] == 'D') dy = 1;
+        num = round(num * 10.0) / 10.0;
+
+        //out << num << endl;
+        rep(i, 13){
+            if(w[i] <= num) wres++;
         }
 
-        int cnt = 0;
-	    string res = "";
-	    while(cnt < 4){
-	        res += to_string(c[x][y]);
-            if(x + dx < 1 || x + dx > 9) dx *= -1;
-            if(y + dy < 1 || y + dy > 9) dy *= -1;
-            x += dx;
-            y += dy;
-            cnt++;
-	    }
+        if(wres == 0) dir = "C";
 
-	    out << res << endl;
+        out << dir sp wres << endl;
 	}
 };
 
 
 int main() {
-	BPCAS solver;
+	C solver;
 	std::istream& in(std::cin);
 	std::ostream& out(std::cout);
 	solver.solve(in, out);
