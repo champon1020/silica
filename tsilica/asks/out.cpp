@@ -42,66 +42,23 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-class C {
+class FIntervalRunning {
 public:
 	void solve(std::istream& in, std::ostream& out) {
-        double deg, dis;
-        in >> deg >> dis;
-        deg /= 10;
-        string dir = "N";
-        double dist = 11.25;
-        if(deg >= dist) dir = "NNE";
-        dist += 22.5;
-        if(deg >= dist) dir = "NE";
-        dist += 22.5;
-        if(deg >= dist) dir = "ENE";
-        dist += 22.5;
-        if(deg >= dist) dir = "E";
-        dist += 22.5;
-        if(deg >= dist) dir = "ESE";
-        dist += 22.5;
-        if(deg >= dist) dir = "SE";
-        dist += 22.5;
-        if(deg >= dist) dir = "SSE";
-        dist += 22.5;
-        if(deg >= dist) dir = "S";
-        dist += 22.5;
-        if(deg >= dist) dir = "SSW";
-        dist += 22.5;
-        if(deg >= dist) dir = "SW";
-        dist += 22.5;
-        if(deg >= dist) dir = "WSW";
-        dist += 22.5;
-        if(deg >= dist) dir = "W";
-        dist += 22.5;
-        if(deg >= dist) dir = "WNW";
-        dist += 22.5;
-        if(deg >= dist) dir = "NW";
-        dist += 22.5;
-        if(deg >= dist) dir = "NNW";
-        dist += 22.5;
-        if(deg >= dist) dir = "N";
+        ll a1, a2, b1, b2;
+        int t1, t2;
+        in >> t1 >> t2;
+        in >> a1 >> a2 >> b1 >> b2;
 
-        double w[] = {0.0, 0.3, 1.6, 3.4, 5.5, 8.0, 10.8, 13.9, 17.2, 20.8, 24.5, 28.5, 32.7};
-        int wres = -1;
-        double num = dis / 60.0;
+        ll diff1 = a1 - b1;
+        ll diff2 = a2 - b2;
 
-        num = round(num * 10.0) / 10.0;
-
-        //out << num << endl;
-        rep(i, 13){
-            if(w[i] <= num) wres++;
-        }
-
-        if(wres == 0) dir = "C";
-
-        out << dir sp wres << endl;
 	}
 };
 
 
 int main() {
-	C solver;
+	FIntervalRunning solver;
 	std::istream& in(std::cin);
 	std::ostream& out(std::cout);
 	solver.solve(in, out);

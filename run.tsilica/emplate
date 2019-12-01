@@ -36,7 +36,7 @@ int main() {
 	std::cout << std::fixed;
 	double maxTime = 0.0;
 	for(const jhelper::Test& test: tests ) {
-		std::cout << "\033[4m" << "Test #" << ++testID << "\033[m" << std::endl;
+		std::cout << "\033[32m" << "Test #" << ++testID << "\033[m" << std::endl;
 		std::cout << "Input: \n" << test.input << std::endl;
 		if (test.has_output) {
 			std::cout << "Expected output: \n" << test.output << std::endl;
@@ -57,7 +57,7 @@ int main() {
 			if (test.has_output) {
 				bool result = jhelper::check(test.output, out.str());
 				allOK = allOK && result;
-				std::cout << "Result: " << (result ? "OK" : "Wrong answer") << std::endl;
+				std::cout << "Result: " << (result ? "\033[34m OK \033[m" : "\033[31m Wrong answer \033[m") << std::endl;
 			}
 			std::cout << "Time: " << currentTime << std::endl;
 		}
@@ -69,10 +69,10 @@ int main() {
 
 	}
 	if(allOK) {
-		std::cout << "All OK" << std::endl;
+		std::cout << "\033[34m All OK \033[m" << std::endl;
 	}
 	else {
-		std::cout << "Some cases failed" << std::endl;
+		std::cout << "\033[31m Some cases failed \033[m" << std::endl;
 	}
 	std::cout << "Maximal time: " << maxTime << "s." << std::endl;
 	return 0;
