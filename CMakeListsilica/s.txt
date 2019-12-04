@@ -9,5 +9,3 @@ add_executable(test ${TASKS} ${HEADERS})
 
 
 add_executable(macro_test macro.cpp)
-add_executable(abc002c beginer/abc002/abc002c.cpp)
-add_executable(agc001a grand/agc001/agc001a.cpp)
