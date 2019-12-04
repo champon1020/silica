@@ -52,11 +52,6 @@ class Math {
         }
         return res;
     }
-
-    template<typename T1, typename T2>
-    ll ceill(T1 a, T2 b){
-        return (a+b-1)/b;
-    }
 };
 // to
 
