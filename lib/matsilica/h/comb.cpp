@@ -16,23 +16,11 @@ class Comb {
     vector<T> fact;
     vector<T> finv;
     vector<T> inv;
-    Comb(){};
+    Comb(int n){
+        build(n);
+    };
 
-    void build_comb(int n){
-        comb.assign(n, vector<T>(n, 0));
-        rep(i, n){
-            comb[i][0] = 1;
-            comb[i][i] = 1;
-        }
-        reps(i, 1, n-1){
-            reps(j, 1, i-1){
-                comb[i][j] = comb[i-1][j-1] + comb[i-1][j];
-                comb[i][j] %= mod;
-            }
-        }
-    }
-
-    void build_fact(ll n){
+    void build(int n){
         inv.assign(n+1, 0);
         fact.assign(n+1, 0);
         finv.assign(n+1, 0);
@@ -46,12 +34,6 @@ class Comb {
     }
 
     T result(int n, int k){
-        if(n < k) return 0;
-        if(n < 0 || k < 0) return 0;
-        return comb[n][k];
-    }
-
-    T result_fact(ll n, ll k){
         if(n < k) return 0;
         if(n < 0 || k < 0) return 0;
         return fact[n]*(finv[k]*finv[n-k]%mod)%mod;
@@ -73,9 +55,9 @@ int main(){
     int k = min(w, h);
 
     Comb<ll> c;
-    c.build_fact(n+k);
+    c.build(n+k);
 
-    cout << c.result_fact(n-1+k-1, k-1) << endl;
+    cout << c.result(n-1+k-1, k-1) << endl;
 
     return 0; 
 }

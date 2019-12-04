@@ -33,7 +33,7 @@ class Math {
     }
 
     template<typename T1, typename T2>
-    ll powpow(T1 num1, T2 num2){
+    ll powmod(T1 num1, T2 num2){
         ll res = 1;
         while(num2 > 0){
             res *= num1;
@@ -54,7 +54,7 @@ class Math {
     }
 
     template<typename T1, typename T2>
-    ll ceil(T1 a, T2 b){
+    ll ceill(T1 a, T2 b){
         return (a+b-1)/b;
     }
 };

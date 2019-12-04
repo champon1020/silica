@@ -15,11 +15,15 @@ using namespace std;
 #define reps(i, s, e) for(ll i=s; i<=e; i++)
 #define inf 1e18
 #define all(v) v.begin(),v.end()
-#define ceil(a, b) (a+b-1)/b
+#define ceill(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
-template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }
-template<typename T> inline bool chmin(T &a, T b){ if(b<a) a=b; return b<a; }
+template<typename T> inline bool chmax(T &a, T b){
+    if(a<b) a=b; return a<b;
+}
+template<typename T> inline bool chmin(T &a, T b){
+    if(b<a) a=b; return b<a;
+}
 template<typename T> void vdeb(T v){
     cout << "#vector set debug" << endl;
     for(auto vv : v) cout << vv << " ";
@@ -35,25 +39,109 @@ template<typename T1> void mdeb(T1 mp){
     for(auto const& m : mp) cout << m.first sp m.second << endl;
 }
 template<typename A, size_t N, typename T>
-void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
+void Fill(A (&array)[N], const T &val){
+    fill((T*)array, (T*)(array+N), val);
+}
 void ans(bool b){ cout << (b ? "Yes" : "No") << endl; }
 void ans2(bool b){ cout << (b ? "YES" : "NO") << endl; }
 int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-class FIntervalRunning {
-public:
-    void solve(std::istream& in, std::ostream& out) {
-        int t1, t2, a1, a2, b1, b2;
-        in >> t1 >> t2 >> a1 >> a2 >> b1 >> b2;
-        out << "test" << endl;
+template<typename T>
+class Dijkstra{
+    struct edge {
+        int to;
+        T cost;
+        edge(int t, T c) : to(t),cost(c){}
+    };
+    typedef pair<T, int> P;
+  public:
+    int n;
+    vector<edge> g[100010];
+    vector<ll> dist;
+    Dijkstra(int nn): n(nn){};
+
+    void add(int f, int t, T c){
+        g[f].push_back(edge(t, c));
     }
+
+    void build(int s) {
+        priority_queue<P, vector<P>, greater<P>> q;
+        dist.assign(n+1, inf);
+        dist[s] = 0;
+        q.push(P(0, s));
+        while(!q.empty()){
+            P p = q.top();
+            q.pop();
+            int v = p.second;
+            if(dist[v] < p.first) continue;
+            for(auto const& e : g[v]) {
+                if(dist[e.to] > dist[v] + e.cost){
+                    dist[e.to] = dist[v] + e.cost;
+                    q.push(P(dist[e.to], e.to));
+                }
+            }
+        }
+    }
+
+    T result(int s){
+        return dist[s];
+    }
+};
+
+class C {
+public:
+	void solve(std::istream& in, std::ostream& out) {
+        int n, a, b, m, x, y;
+        in >> n >> a >> b >> m;
+        Dijkstra<int> d(n);
+        vector<int> g[1000];
+        rep(i, m){
+            in >> x >> y;
+            d.add(x, y, 1);
+            d.add(y, x, 1);
+            g[x].push_back(y);
+            g[y].push_back(x);
+        }
+
+        d.build(a);
+        ll dist = d.result(b);
+
+        int visit[1000], rescnt[1000];
+        Fill(visit, 0);
+        Fill(rescnt, 0);
+        function<void(int, ll)> dfs = [&](int u, ll cnt) {
+            //out << u sp d.result(u) sp cnt << endl;
+            if(d.result(u) > cnt) return;
+            if(u == a) return;
+            rescnt[cnt]++;
+            visit[u] = 1;
+            for(auto const& e : g[u]){
+                if(visit[e]) continue;
+                dfs(e, cnt-1);
+            }
+        };
+
+        dfs(b, dist);
+
+        ll res = 1;
+        ll mod = 1e9+7;
+        reps(i, 1, dist){
+            res *= rescnt[i];
+            res %= mod;
+        }
+
+        out << res << endl;
+
+        //adeb(rescnt, n);
+        //vdeb(d.dist);
+	}
 };
 
 
 int main() {
-	FIntervalRunning solver;
+	C solver;
 	std::istream& in(std::cin);
 	std::ostream& out(std::cout);
 	solver.solve(in, out);
