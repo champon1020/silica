@@ -1,2 +1,2 @@
 # silica
-This is AtCoder Practice.
+Competitive Programming.

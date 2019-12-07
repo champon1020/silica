@@ -1,4 +1,4 @@
-#include "/home/champon1020/repos/CLionWorkspace/silica/tasks/DMenagerie.cpp"
+#include "/home/champon1020/repos/CLionWorkspace/silica/tasks/EStringsOfImpurity.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -29,7 +29,7 @@ bool check(std::string expected, std::string actual) {
 
 int main() {
 	std::vector<jhelper::Test> tests = {
-		{"6\nooxoox\n", "SSSWWS\n", true, true},{"3\noox\n", "-1\n", true, true},{"10\noxooxoxoox\n", "SSWWSSSWWS\n", true, true},{"32\nooxxoooooxxxoxoooxxxoooxoooxoxxx", "SWWWWSWWSWSSWWWSWWWWWSWWWSWWWSSW", true, true},
+		{"contest\nson\n", "10\n", true, true},{"contest\nprogramming\n", "-1\n", true, true},{"contest\nsentence\n", "33\n", true, true},
 	};
 	bool allOK = true;
 	int testID = 0;
@@ -48,7 +48,7 @@ int main() {
 			std::stringstream in(test.input);
 			std::ostringstream out;
 			std::clock_t start = std::clock();
-			DMenagerie solver;
+			EStringsOfImpurity solver;
 			solver.solve(in, out);
 			std::clock_t finish = std::clock();
 			double currentTime = double(finish - start) / CLOCKS_PER_SEC;

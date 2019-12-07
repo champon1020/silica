@@ -44,47 +44,113 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-ll dp[60][60][2510];
-
-class CTakAndCards {
+class DMenagerie {
 public:
 	void solve(std::istream& in, std::ostream& out) {
-        int n, a;
-        int x[100];
-        in >> n >> a;
-        rep(i, n){
-            in >> x[i];
+        int n;
+        string s;
+        in >> n >> s;
+        vector<char> animal(n, '0');
+        int slen = s.length();
+
+        bool res = true;
+        rep(i, slen){
+            int next = (i+1) % n;
+            int pre = i==0 ? n-1 : i-1;
+            if(animal[i] == 'S'){
+                if(s[i] == 'o'){
+                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
+                        res = false;
+                        break;
+                    }
+                    animal[next] = animal[pre];
+                }else{
+                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
+                        res = false;
+                        break;
+                    }
+                    animal[next] = animal[pre]=='S' ? 'W' : 'S';
+                }
+            }else if(animal[i] == 'W'){
+                if(s[i] == 'x'){
+                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
+                        res = false;
+                        break;
+                    }
+                    animal[next] = animal[pre];
+                }else{
+                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
+                        res = false;
+                        break;
+                    }
+                    animal[next] = animal[pre]=='S' ? 'W' : 'S';
+                }
+            }else{
+                animal[i] = 'S';
+                animal[next] = 'S';
+                animal[pre] = 'S';
+            }
+
+            // debug
+//            for(auto const& e : animal) out << e;
+//            out << endl;
         }
 
-        Fill(dp, 0);
-        reps(i, 0, n){
-            dp[i][0][0] = 1;
-        }
-        reps(i, 0, n-1){
-            reps(j, 1, n){
-                reps(k, 1, 2500){
-                    dp[i + 1][j][k] += dp[i][j][k];
-                    if (k - x[i] >= 0) {
-                        dp[i + 1][j][k] += dp[i][j - 1][k - x[i]];
+        if(!res){
+            res = true;
+            animal.assign(n, '0');
+            rep(i, slen){
+                int next = (i+1) % n;
+                int pre = i==0 ? n-1 : i-1;
+                if(animal[i] == 'S'){
+                    if(s[i] == 'o'){
+                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
+                            res = false;
+                            break;
+                        }
+                        animal[next] = animal[pre];
+                    }else{
+                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
+                            res = false;
+                            break;
+                        }
+                        animal[next] = animal[pre]=='S' ? 'W' : 'S';
                     }
+                }else if(animal[i] == 'W'){
+                    if(s[i] == 'x'){
+                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
+                            res = false;
+                            break;
+                        }
+                        animal[next] = animal[pre];
+                    }else{
+                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
+                            res = false;
+                            break;
+                        }
+                        animal[next] = animal[pre]=='S' ? 'W' : 'S';
+                    }
+                }else{
+                    animal[i] = 'S';
+                    animal[next] = 'W';
+                    animal[pre] = 'W';
                 }
+//                // debug
+//                for(auto const& e : animal) out << e;
+//                out << endl;
             }
         }
 
-        ll res = 0;
-        reps(j, 1, n){
-            res += dp[n][j][j*a];
-            //out << j sp dp[n][j][j*a] << endl;
-        }
-        out << res << endl;
-
-        //adeb(dp[n][1], 12);
+        if(res){
+            for(auto const& e : animal) out << e;
+            out << endl;
+        }else out << -1 << endl;
 	}
 };
 
 
 int main() {
-	CTakAndCards solver;
+	DMenagerie solver;
 	std::istream& in(std::cin);
 	std::ostream& out(std::cout);
 	solver.solve(in, out);
