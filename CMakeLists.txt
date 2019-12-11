@@ -6,7 +6,3 @@ file(GLOB TASKS "tasks/*.cpp")
 file(GLOB_RECURSE HEADERS "library/*.hpp" )
 ADD_DEFINITIONS(-std=c++11)
 add_executable(test ${TASKS} ${HEADERS})
-
-
-add_executable(macro_test macro.cpp lib/algorithm/binarysearch.cpp)
-add_executable(WarshallFloyd lib/graph/WarshallFloyd.cpp)
