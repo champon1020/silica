@@ -1,0 +1,8 @@
+vsc_run
+.vscode/*
+.DS_Store
+/src/test*
+/bin/win/test*
+/bin/osx/test*
+
+**/bin
