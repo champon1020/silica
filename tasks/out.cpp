@@ -44,113 +44,16 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 
-class DMenagerie {
+class ABeautifulString {
 public:
 	void solve(std::istream& in, std::ostream& out) {
-        int n;
-        string s;
-        in >> n >> s;
-        vector<char> animal(n, '0');
-        int slen = s.length();
 
-        bool res = true;
-        rep(i, slen){
-            int next = (i+1) % n;
-            int pre = i==0 ? n-1 : i-1;
-            if(animal[i] == 'S'){
-                if(s[i] == 'o'){
-                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
-                        res = false;
-                        break;
-                    }
-                    animal[next] = animal[pre];
-                }else{
-                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
-                        res = false;
-                        break;
-                    }
-                    animal[next] = animal[pre]=='S' ? 'W' : 'S';
-                }
-            }else if(animal[i] == 'W'){
-                if(s[i] == 'x'){
-                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
-                        res = false;
-                        break;
-                    }
-                    animal[next] = animal[pre];
-                }else{
-                    if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
-                        res = false;
-                        break;
-                    }
-                    animal[next] = animal[pre]=='S' ? 'W' : 'S';
-                }
-            }else{
-                animal[i] = 'S';
-                animal[next] = 'S';
-                animal[pre] = 'S';
-            }
-
-            // debug
-//            for(auto const& e : animal) out << e;
-//            out << endl;
-        }
-
-        if(!res){
-            res = true;
-            animal.assign(n, '0');
-            rep(i, slen){
-                int next = (i+1) % n;
-                int pre = i==0 ? n-1 : i-1;
-                if(animal[i] == 'S'){
-                    if(s[i] == 'o'){
-                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
-                            res = false;
-                            break;
-                        }
-                        animal[next] = animal[pre];
-                    }else{
-                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
-                            res = false;
-                            break;
-                        }
-                        animal[next] = animal[pre]=='S' ? 'W' : 'S';
-                    }
-                }else if(animal[i] == 'W'){
-                    if(s[i] == 'x'){
-                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] != animal[pre]){
-                            res = false;
-                            break;
-                        }
-                        animal[next] = animal[pre];
-                    }else{
-                        if(animal[next] != '0' && animal[pre] != '0' && animal[next] == animal[pre]){
-                            res = false;
-                            break;
-                        }
-                        animal[next] = animal[pre]=='S' ? 'W' : 'S';
-                    }
-                }else{
-                    animal[i] = 'S';
-                    animal[next] = 'W';
-                    animal[pre] = 'W';
-                }
-//                // debug
-//                for(auto const& e : animal) out << e;
-//                out << endl;
-            }
-        }
-
-        if(res){
-            for(auto const& e : animal) out << e;
-            out << endl;
-        }else out << -1 << endl;
 	}
 };
 
 
 int main() {
-	DMenagerie solver;
+	ABeautifulString solver;
 	std::istream& in(std::cin);
 	std::ostream& out(std::cout);
 	solver.solve(in, out);
