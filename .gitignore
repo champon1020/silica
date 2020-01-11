@@ -1,5 +1,6 @@
 **/bin/
 **/tempCodeRunnerFile.cpp
 cmake-build-debug/
-tasks/out.cpp
-tasks/test.cpp
+/tasks/out.cpp
+/tasks/test.cpp
+/.idea/
