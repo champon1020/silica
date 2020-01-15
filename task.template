@@ -9,6 +9,7 @@ using namespace std;
 #define ceill(a, b) (a+b-1)/b
 #define ok cout << "ok" << endl;
 #define sp << " " <<
+ll mod = 1e9+7;
 void ans(bool b){ cout << (b ? "Yes" : "No") << endl; }
 void ans2(bool b){ cout << (b ? "YES" : "NO") << endl; }
 template<typename T> inline bool chmax(T &a, T b){ if(a<b) a=b; return a<b; }

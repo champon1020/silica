@@ -33,6 +33,7 @@ class Comb {
         }
     }
 
+    // return nCk
     T result(int n, int k){
         if(n < k) return 0;
         if(n < 0 || k < 0) return 0;
