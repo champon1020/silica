@@ -6,8 +6,11 @@
 #define inf 1e18
 using namespace std;
 
-
-class BinarySearch {
-public:
-
+auto bs = [&](ll n) {
+    ll left=-1, right=n+1;
+    while(left + 1 < right){
+        ll mid = left + (right - left) / 2;
+        if() right = mid;   // good
+        else left = mid;    // bad
+    }
 };
