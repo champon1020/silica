@@ -5,7 +5,7 @@
 using namespace std;
 usind ll = long long;
 ll inf = 1e18;
-#include "../math/comb.hpp"
+#include "../math/combination.hpp"
 
 int main(){
     int w, h;
