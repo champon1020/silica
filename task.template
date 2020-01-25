@@ -14,7 +14,8 @@ template<typename A, size_t N, typename T> void Fill(A (&array)[N], const T &val
 int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
-#include "../library/debug.hpp"
+#include "../debug/debug.hpp"
+
 debug dbg;
 
 class %ClassName% {
