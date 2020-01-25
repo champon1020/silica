@@ -2,7 +2,8 @@
 #define DEFINE_WARSHALLFLOYD_HPP
 
 template<typename T>
-class WarshallFloyd {
+class WarshallFloyd
+{
 public:
     int n;
     vector<vector<T>> g;
@@ -13,6 +14,8 @@ public:
     void build();
     T result(int from, int to);
 };
+
+#endif //DEFINE_WARSHALLFLOYD_HPP
 
 template<typename T>
 WarshallFloyd<T>::WarshallFloyd(int n, T mx):n(n)
@@ -46,8 +49,6 @@ T WarshallFloyd<T>::result(int from, int to)
 {
     return g[from][to];
 }
-
-#endif //DEFINE_WARSHALLFLOYD_HPP
 
 // verify
 // https://atcoder.jp/contests/abc012/tasks/abc012_4
