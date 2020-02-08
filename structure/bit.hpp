@@ -1,6 +1,9 @@
 #ifndef DEFINE_BIT_HPP
 #define DEFINE_BIT_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class Bit
 {

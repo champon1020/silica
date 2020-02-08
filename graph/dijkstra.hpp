@@ -1,9 +1,15 @@
 #ifndef DEFINE_DIJKSTRA_HPP
 #define DEFINE_DIJKSTRA_HPP
 
+#include <vector>
+#include <queue>
+using namespace std;
+
 template<typename T>
 class Dijkstra
 {
+    typedef long long ll;
+    const ll inf = 9e18;
     struct edge {
         int to;
         T cost;

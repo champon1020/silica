@@ -1,6 +1,9 @@
 #ifndef DEFINE_WARSHALLFLOYD_HPP
 #define DEFINE_WARSHALLFLOYD_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class WarshallFloyd
 {

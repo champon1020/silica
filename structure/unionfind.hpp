@@ -1,6 +1,9 @@
 #ifndef DEFINE_UNIONFIND_HPP
 #define DEFINE_UNIONFIND_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class UnionFind
 {

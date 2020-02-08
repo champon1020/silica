@@ -1,9 +1,14 @@
 #ifndef DEFINE_SEGTREE_HPP
 #define DEFINE_SEGTREE_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class SegmentTree
 {
+    typedef long long ll;
+    const ll inf = 9e18;
   public:
     T n;
     vector<T> dat;
@@ -38,7 +43,7 @@ void SegmentTree<T>::update(T k, T a)
 }
 
 template<typename T>
-T query(T a, T b, T k, T l, T r)
+T SegmentTree<T>::query(T a, T b, T k, T l, T r)
 {
     if(r <= a || b <= l) return inf;
     if(a <= l && r <= b) return dat[k];
@@ -50,12 +55,13 @@ T query(T a, T b, T k, T l, T r)
 }
 
 template<typename T>
-T getquery(T a, T b)
+T SegmentTree<T>::getquery(T a, T b)
 {
     return query(a, b, 0, 0, n-1);
 }
 
-T operator[](int i)
+template<typename T>
+T SegmentTree<T>::operator[](int i)
 {
     return dat[i+n-1];
 }

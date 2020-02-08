@@ -1,9 +1,13 @@
 #ifndef DEFINE_PERMUTATION_HPP
 #define DEFINE_PERMUTATION_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class Perm
 {
+    typedef long long ll;
 public:
     ll n;
     vector<T> p;

@@ -1,13 +1,13 @@
 #ifndef INCLUDE_MINT_HPP
 #define INCLUDE_MINT_HPP
 
-const int mod = 1e9+7;
-typedef ll long long
 class mint
 {
 public:
+    const int mod = 1e9+7;
+    typedef long long ll;
     ll a;
-    mint(ll x=0):a((a%mod + mod)%mod){}
+    mint(ll a=0):a((a%mod + mod)%mod){}
     mint operator-() const { return mint(-a); }
     mint operator+(const mint rhs) const {
         mint res(*this);
@@ -53,4 +53,4 @@ public:
     }
 };
 
-#endif INCLUDE_MINT_HPP
+#endif //INCLUDE_MINT_HPP

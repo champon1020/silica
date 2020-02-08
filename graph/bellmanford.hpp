@@ -1,9 +1,14 @@
 #ifndef DEFINE_BELLMANFORD_HPP
 #define DEFINE_BELLMANFORD_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class BellmanFord
 {
+    typedef long long ll;
+    const ll inf = 9e18;
     struct edge{
         int from, to;
         T cost;

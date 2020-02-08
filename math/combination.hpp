@@ -1,9 +1,13 @@
 #ifndef DEFINE_COMBINATION_HPP
 #define DEFINE_COMBINATION_HPP
 
+#include <vector>
+using namespace std;
+
 template<typename T>
 class Comb
 {
+    typedef long long ll;
     ll mod = 1e9+7;
   public:
     vector<vector<T>> comb;

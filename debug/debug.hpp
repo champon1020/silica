@@ -1,13 +1,14 @@
 #ifndef INCLUDE_DEBUG_HPP
 #define INCLUDE_DEBUG_HPP
 
-#include <iostream>
 #include <vector>
+#include <map>
 using namespace std;
-typedef long long ll;
+
 class debug
 {
 public:
+    typedef long long ll;
     template<typename T> void vd(vector<T> vec);
     template<typename T> void vd2(vector<vector<T>> vec);
     template<typename T> void vpd(vector<pair<int, int>> vec);
@@ -30,7 +31,7 @@ template<typename T> void debug::vd2(vector<vector<T>> vec)
     cout << endl;
 }
 
-template<typename T> void debug::vdp(vector<pair<int, int>> vec) {
+template<typename T> void debug::vpd(vector<pair<int, int>> vec) {
     for(auto const& vv : vec) {
         cout << vv.first << " " << vv.second << endl;
     }
