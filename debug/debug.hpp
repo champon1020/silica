@@ -1,32 +1,57 @@
 #ifndef INCLUDE_DEBUG_HPP
 #define INCLUDE_DEBUG_HPP
 
+#include <iostream>
+#include <vector>
+using namespace std;
+typedef long long ll;
 class debug
 {
 public:
-    template<typename T> void vdeb(T vec);
-    template<typename T1, typename T2> void adeb(T1 *arr, T2 n);
-    template<typename T> void mdeb(T mp);
+    template<typename T> void vd(vector<T> vec);
+    template<typename T> void vd2(vector<vector<T>> vec);
+    template<typename T> void vpd(vector<pair<int, int>> vec);
+    template<typename T> void ad(T *arr, ll n);
+    template<typename T, size_t N> void ad2(T (&arr)[N], ll n);
+    template<typename T> void md(T mp);
 };
 
 #endif //INCLUDE_DEBUG_HPP
 
-template<typename T> void debug::vdeb(T vec)
+template<typename T> void debug::vd(vector<T> vec)
 {
-    cout << "#vector set debug" << endl;
     for(auto vv : vec) cout << vv << " ";
     cout << endl;
 }
 
-template<typename T1, typename T2> void debug::adeb(T1 *arr, T2 n)
+template<typename T> void debug::vd2(vector<vector<T>> vec)
 {
-    cout << "#adebug" << endl;
+    for(auto vv : vec) for(auto vvv : vv) cout << vvv << " ";
+    cout << endl;
+}
+
+template<typename T> void debug::vdp(vector<pair<int, int>> vec) {
+    for(auto const& vv : vec) {
+        cout << vv.first << " " << vv.second << endl;
+    }
+    cout << endl;
+}
+
+template<typename T> void debug::ad(T *arr, ll n)
+{
     for(int i=0; i<=n; i++) cout << arr[i] << " ";
     cout << endl;
 }
 
-template<typename T> void debug::mdeb(T mp)
+template<typename T, size_t N> void debug::ad2(T (&arr)[N], ll n)
 {
-    cout << "#map pair debug" << endl;
-    for(auto const& m : mp) cout << m.first sp m.second << endl;
+    for(int i=0; i<=N; i++) for(int j=0; j<=n; j++) cout << arr[i][j] << " ";
+    cout << endl;
+}
+
+template<typename T> void debug::md(T mp)
+{
+    cout << "key : value" << endl;
+    for(auto const& m : mp) cout << m.first << " : " << m.second << endl;
+    cout << endl;
 }
