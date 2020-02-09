@@ -1,6 +1,7 @@
 #ifndef INCLUDE_DEBUG_HPP
 #define INCLUDE_DEBUG_HPP
 
+#include <iostream>
 #include <vector>
 #include <map>
 using namespace std;

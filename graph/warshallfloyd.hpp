@@ -4,39 +4,37 @@
 #include <vector>
 using namespace std;
 
-template<typename T>
 class WarshallFloyd
 {
+    typedef long long ll;
+    const ll inf = 4e18;
 public:
     int n;
-    vector<vector<T>> g;
+    vector<vector<ll>> g;
 
-    WarshallFloyd(int n, T mx);
+    WarshallFloyd(int n);
 
-    void add(int from, int to, T cost);
+    void add(int from, int to, ll cost);
     void build();
-    T result(int from, int to);
+    ll result(int from, int to);
 };
 
 #endif //DEFINE_WARSHALLFLOYD_HPP
 
-template<typename T>
-WarshallFloyd<T>::WarshallFloyd(int n, T mx):n(n)
+WarshallFloyd::WarshallFloyd(int n):n(n)
 {
-    g.assign(n, vector<T>(n, mx));
+    g.assign(n, vector<ll>(n, inf));
     for(int i=0; i<n; i++){
         g[i][i] = 0;
     }
 }
 
-template<typename T>
-void WarshallFloyd<T>::add(int from, int to, T cost)
+void WarshallFloyd::add(int from, int to, ll cost)
 {
     g[from][to] = cost;
 }
 
-template<typename T>
-void WarshallFloyd<T>::build()
+void WarshallFloyd::build()
 {
     for(int k=0; k<n; k++){
         for(int i=0; i<n; i++){
@@ -47,8 +45,7 @@ void WarshallFloyd<T>::build()
     }
 }
 
-template<typename T>
-T WarshallFloyd<T>::result(int from, int to)
+ll WarshallFloyd::result(int from, int to)
 {
     return g[from][to];
 }

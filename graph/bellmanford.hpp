@@ -8,7 +8,7 @@ template<typename T>
 class BellmanFord
 {
     typedef long long ll;
-    const ll inf = 9e18;
+    const ll inf = 4e18;
     struct edge{
         int from, to;
         T cost;

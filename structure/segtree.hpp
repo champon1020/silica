@@ -8,7 +8,7 @@ template<typename T>
 class SegmentTree
 {
     typedef long long ll;
-    const ll inf = 9e18;
+    const ll inf = 4e18;
   public:
     T n;
     vector<T> dat;

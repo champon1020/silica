@@ -15,6 +15,7 @@ class Comb
     vector<T> finv;
     vector<T> inv;
     Comb(){};
+    Comb(int n) { build(n); }
 
     void build(int n);
     T result(int n, int k); // return nCk

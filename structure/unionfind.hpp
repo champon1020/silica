@@ -8,6 +8,7 @@ template<typename T>
 class UnionFind
 {
   public:
+    ll n;
     vector<T> par;
     vector<T> rank;
     vector<T> size;
@@ -18,13 +19,13 @@ class UnionFind
     void unite(T x, T y);
     bool same(T x, T y);
     T getsize(T x);
-    int rootCount(int n);
+    int rootCount();
 };
 
 #endif //DEFINE_UNIONFIND_HPP
 
 template<typename T>
-UnionFind<T>::UnionFind(int n):par(n, 0),rank(n, 0),size(n, 1)
+UnionFind<T>::UnionFind(int n):n(n),par(n, 0),rank(n, 0),size(n, 1)
 {
     iota(par.begin(), par.end(), 0);
 }
@@ -58,14 +59,16 @@ bool UnionFind<T>::same(T x, T y)
     return find(x) == find(y);
 }
 
+// get size of tree
 template<typename T>
 T UnionFind<T>::getsize(T x)
 {
     return size[find(x)];
 }
 
+// get the number of roots
 template<typename T>
-int UnionFind<T>::rootCount(int n)
+int UnionFind<T>::rootCount()
 {
     int cnt = 0;
     for(int i=0; i<n; i++){
