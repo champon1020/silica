@@ -17,8 +17,18 @@ int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 #include "../debug/debug.hpp"
 debug debug;
 
-class %ClassName% {
+class DKnapsack1 {
 public:
 	void solve(std::istream& in, std::ostream& out)
-	{}
+	{
+	    int n, W;
+	    in >> n;
+	    vector<int> w(n), v(n);
+	    for(int i=0; i<n; i++){
+	        in >> w[i] >> v[i];
+	    }
+
+	    ll dp[110][100010];
+	    Fill(dp, 0LL);
+	}
 };
