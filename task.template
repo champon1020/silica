@@ -10,7 +10,7 @@ void ans(bool b, ostream& out=cout){ out << (b ? "Yes" : "No") << endl; }
 void ans2(bool b, ostream& out=cout){ out << (b ? "YES" : "NO") << endl; }
 template<typename T> inline bool chmax(T &a, T b){ if(a<b){a=b; return true;} return false; }
 template<typename T> inline bool chmin(T &a, T b){ if(a>b){a=b; return true;} return false; }
-template<typename A, size_t N, typename T> void Fill(A (&array)[N], const T &val){fill((T*)array, (T*)(array+N), val);}
+template<typename A, size_t N, typename T> void Fill(A (&array)[N], const T &val){ fill((T*)array, (T*)(array+N), val); }
 int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
