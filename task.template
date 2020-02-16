@@ -3,8 +3,8 @@
 #define sp << " " <<
 using namespace std;
 typedef long long ll;
-const ll mod = 1e9+7;
-const ll inf = 9e18;
+const ll mod = ll(1e9)+7;
+const ll inf = ll(5e18);
 template<typename T1, typename T2> ll ceill(T1 a, T2 b){ return (a+b-1)/b; }
 void ans(bool b, ostream& out=cout){ out << (b ? "Yes" : "No") << endl; }
 void ans2(bool b, ostream& out=cout){ out << (b ? "YES" : "NO") << endl; }
