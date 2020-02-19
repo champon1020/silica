@@ -3,6 +3,7 @@
 
 class Math
 {
+    typedef long long ll;
     ll mod = 1e9+7;
   public:
     template<typename T> int keta(T num);
