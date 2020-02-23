@@ -16,7 +16,8 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 #include "../debug/debug.hpp"
-debug debug;
+using dbg::Debug;
+Debug debug;
 
 class %ClassName% {
 public:
