@@ -14,12 +14,12 @@ public:
     vector<T> finv;
     vector<T> inv;
 
-    Finv(int n) { build(n); }
-    void build(int n);
+    Finv(ll n) { build(n); }
+    void build(ll n);
 };
 
 template<typename T>
-void Finv<T>::build(int n)
+void Finv<T>::build(ll n)
 {
     inv.assign(n+1, 0);
     fact.assign(n+1, 0);
