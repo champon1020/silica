@@ -2,81 +2,74 @@
 #define DEFINE_UNIONFIND_HPP
 
 #include <vector>
+#include <numeric>
+
 using namespace std;
 
-template<typename T>
-class UnionFind
-{
-  public:
-    ll n;
-    vector<T> par;
-    vector<T> rank;
-    vector<T> size;
+namespace unionfind {
 
-    UnionFind(int n);
+    using ll = long long;
 
-    T find(T x);
-    void unite(T x, T y);
-    bool same(T x, T y);
-    T getsize(T x);
-    int rootCount();
-};
+    class UnionFind {
+    public:
+        ll n;
+        vector<ll> par;
+        vector<ll> rank;
+        vector<ll> size;
 
-#endif //DEFINE_UNIONFIND_HPP
+        UnionFind(int n);
+        ll find(ll x);
+        void unite(ll x, ll y);
+        bool same(ll x, ll y);
+        ll getsize(ll x);
+        int rootCount();
+    };
 
-template<typename T>
-UnionFind<T>::UnionFind(int n):n(n),par(n, 0),rank(n, 0),size(n, 1)
-{
-    iota(par.begin(), par.end(), 0);
-}
-
-template<typename T>
-T UnionFind<T>::find(T x)
-{
-    if(par[x] == x) return x;
-    else return par[x] = find(par[x]);
-}
-
-template<typename T>
-void UnionFind<T>::unite(T x, T y)
-{
-    x = find(x);
-    y = find(y);
-    if(x == y) return;
-    if(rank[x] < rank[y]){
-        par[x] = y;
-        size[y] += size[x];
-    }else{
-        par[y] = x;
-        size[x] += size[y];
-        if(rank[x] == rank[y]) rank[x]++;
+    UnionFind::UnionFind(int n):n(n), par(n, 0), rank(n, 0), size(n, 1) {
+        iota(par.begin(), par.end(), 0);
     }
-}
 
-template<typename T>
-bool UnionFind<T>::same(T x, T y)
-{
-    return find(x) == find(y);
-}
+    ll UnionFind::find(ll x) {
+        if (par[x] == x) return x;
+        else return par[x] = find(par[x]);
+    }
+
+    void UnionFind::unite(ll x, ll y) {
+        x = find(x);
+        y = find(y);
+        if (x == y) return;
+        if (rank[x] < rank[y]) {
+            par[x] = y;
+            size[y] += size[x];
+        } else {
+            par[y] = x;
+            size[x] += size[y];
+            if (rank[x] == rank[y]) rank[x]++;
+        }
+    }
+
+    bool UnionFind::same(ll x, ll y) {
+        return find(x) == find(y);
+    }
 
 // get size of tree
-template<typename T>
-T UnionFind<T>::getsize(T x)
-{
-    return size[find(x)];
-}
+    ll UnionFind::getsize(ll x) {
+        return size[find(x)];
+    }
 
 // get the number of roots
-template<typename T>
-int UnionFind<T>::rootCount()
-{
-    int cnt = 0;
-    for(int i=0; i<n; i++){
-        if(i == par[i]) cnt++;
+    int UnionFind::rootCount() {
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == par[i]) cnt++;
+        }
+        return cnt;
     }
-    return cnt;
-}
 
 
 // verify
 // https://atc001.contest.atcoder.jp/tasks/unionfind_a
+
+}
+
+#endif //DEFINE_UNIONFIND_HPP

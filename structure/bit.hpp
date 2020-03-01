@@ -4,40 +4,38 @@
 #include <vector>
 using namespace std;
 
-template<typename T>
-class Bit
-{
-  public:
-    T n;
-    vector<T> bit;
+namespace bit {
 
-    Bit(T nn, T e);
+    using ll = long long;
 
-    T sum(T i);
-    void add(T i, T x);
-};
+    class Bit {
+    public:
+        ll n;
+        vector<ll> bit;
+
+        Bit(ll nn, ll e);
+        ll sum(ll i);
+        void add(ll i, ll x);
+    };
+
+    Bit::Bit(ll nn, ll e):n(nn), bit(nn + 1, e) {}
+
+    ll Bit::sum(ll i) {
+        ll s = 0LL;
+        while (i > 0) {
+            s += bit[i];
+            i -= i & -i;
+        }
+        return s;
+    }
+
+    void Bit::add(ll i, ll x) {
+        while (i <= n) {
+            bit[i] += x;
+            i += i & -i;
+        }
+    }
+
+}
 
 #endif //DEFINE_BIT_HPP
-
-template<typename T>
-Bit<T>::Bit(T nn, T e):n(nn),bit(nn+1, e){}
-
-template<typename T>
-T Bit<T>::sum(T i)
-{
-    T s = 0;
-    while(i > 0){
-        s += bit[i];
-        i -= i&-i;
-    }
-    return s;
-}
-
-template<typename T>
-void Bit<T>::add(T i, T x)
-{
-    while(i <= n){
-        bit[i] += x;
-        i += i&-i;
-    }
-}

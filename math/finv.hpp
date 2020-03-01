@@ -9,19 +9,17 @@ namespace finv {
     using ll = long long;
     ll mod = 1e9 + 7;
 
-    template<typename T>
     class Finv {
     public:
-        vector<T> fact;
-        vector<T> finv;
-        vector<T> inv;
+        vector<ll> fact;
+        vector<ll> finv;
+        vector<ll> inv;
 
         Finv(ll n) { build(n); }
         void build(ll n);
     };
 
-    template<typename T>
-    void Finv<T>::build(ll n) {
+    void Finv::build(ll n) {
         inv.assign(n + 1, 0);
         fact.assign(n + 1, 0);
         finv.assign(n + 1, 0);
