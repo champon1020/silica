@@ -5,9 +5,9 @@
 #ifndef INCLUDE_Z_HPP
 #define INCLUDE_Z_HPP
 
-namespace Z {
+#include <vector>
 
-    #include <vector>
+namespace Z {
 
     class Z_Algorithm {
     public:
@@ -40,5 +40,7 @@ namespace Z {
     }
 
 }
+
+// https://atcoder.jp/contests/abc141/tasks/abc141_e
 
 #endif //INCLUDE_Z_HPP
