@@ -4,7 +4,7 @@
 namespace math {
 
     using ll = long long;
-    ll mod = 1e9 + 7;
+    ll mod = ll(1e9) + 7;
 
     class Math {
     public:

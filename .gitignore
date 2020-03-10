@@ -4,3 +4,4 @@ cmake-build-debug/
 /tasks/out.cpp
 /tasks/test.cpp
 /.idea/
+/tasks/*.cpp
