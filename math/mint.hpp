@@ -4,7 +4,7 @@
 namespace mint {
 
     using ll = long long;
-    const ll mod = 1e9+7;
+    const ll mod = ll(1e9) + 7;
 
     class mint {
     public:

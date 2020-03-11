@@ -7,7 +7,7 @@ using namespace std;
 namespace bellman {
 
     using ll = long long;
-    const ll inf = 5e18;
+    const ll inf = 1e18;
 
     class BellmanFord {
     private:

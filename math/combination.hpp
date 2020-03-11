@@ -7,7 +7,7 @@ using namespace std;
 namespace comb {
 
     using ll = long long;
-    ll mod = 1e9 + 7;
+    ll mod = ll(1e9) + 7;
 
     class Comb {
     private:

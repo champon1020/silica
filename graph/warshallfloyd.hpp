@@ -7,7 +7,7 @@ using namespace std;
 namespace warshall {
 
     using ll = long long;
-    const ll inf = 5e18;
+    const ll inf = 1e18;
 
     class WarshallFloyd {
     public:
@@ -35,6 +35,7 @@ namespace warshall {
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
+                    if(g[i][k] == inf || g[k][j] == inf) continue;
                     g[i][j] = min(g[i][j], g[i][k] + g[k][j]);
                 }
             }

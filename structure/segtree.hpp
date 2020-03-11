@@ -7,7 +7,7 @@ using namespace std;
 namespace seg {
 
     using ll = long long;
-    const ll inf = 4e18;
+    const ll inf = 1e18;
 
     class SegmentTree {
     public:
