@@ -2,8 +2,8 @@
 #define se cout << "test ok" << endl;
 #define sp << " " <<
 using namespace std;
-using ll = long long;
-using ld = long double;
+using ll=long long;
+using ld=long double;
 ll mod = ll(1e9)+7;
 ll inf = ll(1e18);
 template<typename T1, typename T2> ll ceill(T1 a, T2 b){ return (a+b-1)/b; }
