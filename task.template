@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define se cout << "test ok" << endl;
 #define sp << " " <<
+#define enl "\n";
 using namespace std;
 using ll=long long;
 using ld=long double;
