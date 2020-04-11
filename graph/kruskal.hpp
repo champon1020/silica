@@ -52,6 +52,7 @@ namespace kruskal {
     public:
         vector<edge> es;
         int v, e;   // n: 頂点数, e: 辺数
+        Kruskal();
         Kruskal(int v, int e):v(v), e(e){};
         void add(int u, int v, ll cost);
         ll compute();
@@ -78,3 +79,7 @@ namespace kruskal {
 #define INCLUDE_KRUSKAL_HPP
 
 #endif //INCLUDE_KRUSKAL_HPP
+
+
+// verify
+// https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A
