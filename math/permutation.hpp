@@ -18,30 +18,18 @@ namespace perm {
         vector<vector<int>> p_v;
 
         Perm(int n) : n(n) {}
-        void build();
-        void build_v();
+        void build(int v);
     };
 
-    void Perm::build() {
+    void Perm::build(int initv = 1) {
         vector<int> v(n);
-        iota(v.begin(), v.end(), 1);
+        iota(v.begin(), v.end(), initv);
         do {
             ll num = 0;
-            for (ll i = 0; i < v.size(); i++) num += pow(10, v.size() - (i + 1)) * v[i];
+            for(int i=0; i<v.size(); i++){
+                // some process
+            }
             p.push_back(num);
-        } while (next_permutation(v.begin(), v.end()));
-    }
-
-    void Perm::build_v() {
-        ll size = 1;
-        for (ll i = 0; i <= n; i++) size *= i;
-        p_v.assign(size);
-        vector<int> v(n);
-        iota(v.begin(), v.end(), 1);
-        ll ind = 0;
-        do {
-            for (auto const e : v) p_v[ind].push_back(e);
-            ind++;
         } while (next_permutation(v.begin(), v.end()));
     }
 

@@ -6,6 +6,8 @@
 #define INCLUDE_Z_HPP
 
 #include <vector>
+#include <string>
+using namespace std;
 
 namespace Z {
 

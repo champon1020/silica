@@ -5,3 +5,4 @@ cmake-build-debug/
 /tasks/test.cpp
 /.idea/
 /tasks/*.cpp
+kmyk/online-judge-tools
