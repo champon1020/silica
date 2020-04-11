@@ -6,6 +6,7 @@
 #define INCLUDE_TOPOLOGICAL_HPP
 
 #include <vector>
+#include <stack>
 using namespace std;
 
 namespace topo {
