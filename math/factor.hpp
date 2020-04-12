@@ -16,6 +16,9 @@ namespace factor {
         // 素因数分解(Map)
         template<typename T>map<ll, ll> factorMap(T n);
 
+        template<typename T>
+        void factorMapAdd(T n, map<T, T> *mp);
+
         // 素因数分解(Vector)
         template<typename T> vector<ll> factorVec(T n);
 
@@ -35,6 +38,18 @@ namespace factor {
         }
         if(buf > 1) res[buf]++;
         return res;
+    }
+
+    template<typename T>
+    void Factor::factorMapAdd(T n, map<T, T> *mp) {
+        ll buf = n;
+        for (ll i = 2; i*i<=n; i++) {
+            while (buf % i == 0) {
+                (*mp)[i]++;
+                buf /= i;
+            }
+        }
+        if(buf > 1) (*mp)[buf]++;
     }
 
     template<typename T>
