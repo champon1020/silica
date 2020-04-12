@@ -15,7 +15,6 @@ namespace perm {
     public:
         int n;
         vector<int> p;
-        vector<vector<int>> p_v;
 
         Perm(int n) : n(n) {}
         void build(int v);

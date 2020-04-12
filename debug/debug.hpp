@@ -32,8 +32,10 @@ namespace dbg {
 
     template<typename T>
     void Debug::vd2(vector<vector<T>> vec) {
-        for (auto vv : vec) for (auto vvv : vv) cout << vvv << " ";
-        cout << endl;
+        for (auto vv : vec) {
+            for (auto vvv : vv) cout << vvv << " ";
+            cout << endl;
+        }
     }
 
     template<typename T>

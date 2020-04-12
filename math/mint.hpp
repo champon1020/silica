@@ -6,52 +6,52 @@ namespace mint {
     using ll = long long;
     const ll mod = ll(1e9) + 7;
 
-    class mint {
+    class Mint {
     public:
         ll v;
 
-        mint(ll a = 0) : v((v % mod + mod) % mod) {}
+        Mint(ll v = 0) : v((v % mod + mod) % mod) {}
 
-        mint operator-() const { return mint(-v); }
-        mint operator+(const mint rhs) const {
-            mint res(*this);
-            return res += v;
+        Mint operator-() const { return Mint(-v); }
+        Mint operator+(const Mint rhs) const {
+            Mint res(*this);
+            return res += rhs;
         }
-        mint operator-(const mint rhs) const {
-            mint res(*this);
-            return res -= v;
+        Mint operator-(const Mint rhs) const {
+            Mint res(*this);
+            return res -= rhs;
         }
-        mint operator*(const mint rhs) const {
-            mint res(*this);
-            return res *= v;
+        Mint operator*(const Mint rhs) const {
+            Mint res(*this);
+            return res *= rhs;
         }
-        mint &operator+=(const mint rhs) {
+        Mint &operator+=(const Mint rhs) {
             if ((v += rhs.v) >= mod) v -= mod;
             return *this;
         }
-        mint &operator-=(const mint rhs) {
+        Mint &operator-=(const Mint rhs) {
             if ((v += mod - rhs.v) >= mod) v -= mod;
             return *this;
         }
-        mint &operator*=(const mint rhs) {
+        Mint &operator*=(const Mint rhs) {
             (v *= rhs.v) %= mod;
             return *this;
         }
-        mint pow(ll t) const {
+        Mint pow(ll t) const {
             if (!t) return 1;
-            mint b = pow(t >> 1);
+            Mint b = pow(t >> 1);
             b *= b;
             if (t & 1) b *= *this;
             return b;
         }
-        mint inv() const {
+        Mint inv() const {
             return pow(mod - 2);
         }
-        mint &operator/=(const mint rhs) {
+        Mint &operator/=(const Mint rhs) {
             return (*this) *= rhs.inv();
         }
-        mint operator/(const mint rhs) const {
-            mint res(*this);
+        Mint operator/(const Mint rhs) const {
+            Mint res(*this);
             return res /= rhs;
         }
     };
