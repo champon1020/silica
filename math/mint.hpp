@@ -4,13 +4,13 @@
 namespace mint {
 
     using ll = long long;
-    const ll mod = ll(1e9) + 7;
 
     class Mint {
     public:
         ll v;
+        ll mod;
 
-        Mint(ll v = 0) : v((v % mod + mod) % mod) {}
+        Mint(ll v=0, ll mod=ll(1e9)+7) : mod(mod), v((v % mod + mod) % mod) {}
 
         Mint operator-() const { return Mint(-v); }
         Mint operator+(const Mint rhs) const {

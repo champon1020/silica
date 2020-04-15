@@ -1,10 +1,19 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #define se cout << "test ok" << endl;
 #define sp << " " <<
-#define enl "\n";
+#define enl "\n"
 using namespace std;
 using ll=long long;
 using ld=long double;
+using vi = vector<int>;
+using vii = vector<vector<int>>;
+using vl = vector<ll>;
+using vll = vector<vector<ll>>;
+using vlll = vector<vector<vector<ll>>>;
+using vc = vector<char>;
+using vcc = vector<vector<char>>;
+using pi = pair<int, int>;
+using pl = pair<ll, ll>;
 ll mod = ll(1e9)+7;
 ll inf = ll(1e18);
 void bl(bool b, ostream& out=cout){ out << (b ? "Yes" : "No") << endl; }
