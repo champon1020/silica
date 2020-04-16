@@ -13,6 +13,7 @@ namespace math {
         ll gcd(ll a, ll b);
         ll lcm(ll a, ll b);
         ll powm(ll num1, ll num2);
+        bool isPrime(ll n);
     };
 
     ll Math::gcd(ll a, ll b) {
@@ -41,6 +42,17 @@ namespace math {
             b >>= 1;
         }
         return res;
+    }
+
+    bool Math::isPrime(ll n) {
+        bool flg = true;
+        for(ll i=2; i*i<=n; i++){
+            if(n%i == 0) {
+                flg = false;
+                break;
+            }
+        }
+        return flg;
     }
 
 }

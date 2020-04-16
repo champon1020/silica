@@ -11,13 +11,18 @@ namespace factor {
 
     class Factor {
     public:
-        // Get factors with map
+        Factor()= default;
+
+        // 素因数分解(Map)
         template<typename T>map<ll, ll> factorMap(T n);
 
-        // Get factors with vector
+        template<typename T>
+        void factorMapAdd(T n, map<T, T> *mp);
+
+        // 素因数分解(Vector)
         template<typename T> vector<ll> factorVec(T n);
 
-        // Get divisors
+        // 約数(Vector)
         template<typename T> vector<ll> divisor(T n);
     };
 
@@ -33,6 +38,18 @@ namespace factor {
         }
         if(buf > 1) res[buf]++;
         return res;
+    }
+
+    template<typename T>
+    void Factor::factorMapAdd(T n, map<T, T> *mp) {
+        ll buf = n;
+        for (ll i = 2; i*i<=n; i++) {
+            while (buf % i == 0) {
+                (*mp)[i]++;
+                buf /= i;
+            }
+        }
+        if(buf > 1) (*mp)[buf]++;
     }
 
     template<typename T>
@@ -52,7 +69,7 @@ namespace factor {
     template<typename T>
     vector<ll> Factor::divisor(T n){
         vector<ll> res;
-        for(ll i=2; i*i<=n; i++){
+        for(ll i=1; i*i<=n; i++){
             if(n%i == 0){
                 if(i*i == n) res.push_back(i);
                 else{
