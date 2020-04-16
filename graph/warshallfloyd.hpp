@@ -12,12 +12,14 @@ namespace warshall {
     class WarshallFloyd {
     public:
         int n;
+        bool negative = false;
         vector<vector<ll>> g;
 
         WarshallFloyd(int n);
         void add(int from, int to, ll cost);
         void build();
         ll result(int from, int to);
+        bool isNegative() const;
     };
 
     WarshallFloyd::WarshallFloyd(int n) : n(n) {
@@ -38,12 +40,20 @@ namespace warshall {
                     if(g[i][k] == inf || g[k][j] == inf) continue;
                     g[i][j] = min(g[i][j], g[i][k] + g[k][j]);
                 }
+                if(g[i][i] < 0) {
+                    negative = true;
+                    return;
+                }
             }
         }
     }
 
     ll WarshallFloyd::result(int from, int to) {
         return g[from][to];
+    }
+
+    bool WarshallFloyd::isNegative() const {
+        return negative;
     }
 
 }
