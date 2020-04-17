@@ -51,15 +51,16 @@ namespace kruskal {
 
     public:
         vector<edge> es;
-        int v, e;   // n: 頂点数, e: 辺数
-        Kruskal();
-        Kruskal(int v, int e):v(v), e(e){};
+        int v, e;   // v: 頂点数, e: 辺数
+        Kruskal(int v, int e);
         void add(int u, int v, ll cost);
         ll compute();
     };
 
-    void Kruskal::add(int u, int v, ll cost) {
-        es.emplace_back(u, v, cost);
+    Kruskal::Kruskal(int v, int e):v(v),e(e) {}
+
+    void Kruskal::add(int from, int to, ll cost) {
+        es.emplace_back(from, to, cost);
     }
 
     ll Kruskal::compute() {
