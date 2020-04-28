@@ -22,7 +22,7 @@ namespace topo {
         int n;
         vector<int> sorted;
 
-        Topological_Sort(int n):n(n) {
+        explicit Topological_Sort(int n):n(n) {
             g.assign(n, vector<int>());
             indeg.assign(n, 0);
         }
