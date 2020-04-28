@@ -15,10 +15,10 @@ namespace warshall {
         bool negative = false;
         vector<vector<ll>> g;
 
-        WarshallFloyd(int n);
+        explicit WarshallFloyd(int n);
         void add(int from, int to, ll cost);
         void build();
-        ll result(int from, int to);
+        ll res(int from, int to);
         bool isNegative() const;
     };
 
@@ -48,7 +48,7 @@ namespace warshall {
         }
     }
 
-    ll WarshallFloyd::result(int from, int to) {
+    ll WarshallFloyd::res(int from, int to) {
         return g[from][to];
     }
 

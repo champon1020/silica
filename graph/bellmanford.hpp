@@ -22,13 +22,13 @@ namespace bellman {
         int n;  // num of nodes
         bool negative = false;
 
-        BellmanFord(int n) : n(n) {}
+        explicit BellmanFord(int n) : n(n) {}
         void add(int from, int to, ll cost);
         void build(int s);
     };
 
     void BellmanFord::add(int from, int to, ll cost) {
-        es.push_back(edge(from, to, cost));
+        es.emplace_back(from, to, cost);
     }
 
     void BellmanFord::build(int s) {

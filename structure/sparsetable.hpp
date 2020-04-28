@@ -12,7 +12,7 @@ namespace sparse {
 		template<typename T>
 		SparseTable(vector<T> vec) {
 			int sz = vec.size();
-			int logn = 32 - __builtin_clz(sz);	// sz <= 2^(logn) を満たす logn
+			int logn = 31 - __builtin_clz(sz);	// sz <= 2^(logn) を満たす logn
 			table = vector<vector<ll>>(sz, vector<ll>(logn+1, inf));
 
 			for(int i=0; i<sz; i++) table[i][0] = vec[i];
@@ -24,11 +24,13 @@ namespace sparse {
 			}
 		}
 
-		int query(int l, int r){
-			int bit = 32 - __builtin_clz(r-l);
-			return min(table[l][bit], table[r-(1<<bit)][bit]);
-		}
+		int query(int l, int r);
 	};
+
+	int SparseTable::query(int l, int r){
+		int bit = 31 - __builtin_clz(r-l);
+		return min(table[l][bit], table[r-(1<<bit)][bit]);
+	}
 }
 
 #endif //INCLUDE_SPARSETABLE_HPP
