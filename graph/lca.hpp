@@ -32,6 +32,7 @@ namespace lca_nsp {
 		LCA(int n):n(n){
 			g = vector<vector<int>>(n);
 		}
+		void addg(vector<vector<int>> &g);
 		void add(int from, int to);
 		void build(int root);
 		void dfs(int u, int par, int d, int &cnt);
@@ -56,6 +57,10 @@ namespace lca_nsp {
 	int LCA::query(int l, int r){
 		int bit = 31 - __builtin_clz(r-l);
 		return min(table[l][bit], table[r-(1<<bit)][bit]).idx;
+	}
+
+	void LCA::addg(vector<vector<int>> &g_){
+		g = g_;
 	}
 
 	void LCA::add(int from, int to) {
