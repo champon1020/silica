@@ -13,17 +13,18 @@ namespace dijkstra {
     class Dijkstra {
     private:
         struct edge {
-            int to;
-            ll cost;
+            int to; ll cost;
             edge(int t, ll c) : to(t), cost(c) {}
         };
         typedef pair<ll, int> P;
     public:
         int n;
-        vector<edge> g[100010];
+        vector<vector<edge>> g;
         vector<ll> dist;
 
-        explicit Dijkstra(int n) : n(n) {};
+        explicit Dijkstra(int n) : n(n) {
+            g = vector<vector<edge>>(n);
+        };
         void add(int from, int to, ll cost);
         void build(int s);
         ll res(int s);
@@ -35,7 +36,7 @@ namespace dijkstra {
 
     void Dijkstra::build(int s) {
         priority_queue<P, vector<P>, greater<>> q;
-        dist.assign(n, inf);
+        dist = vector<ll>(n, inf);
         dist[s] = 0;
         q.push(P(0, s));
         while (!q.empty()) {
