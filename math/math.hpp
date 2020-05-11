@@ -4,11 +4,11 @@
 namespace math {
 
     using ll = long long;
-    ll mod = ll(1e9) + 7;
 
     class Math {
+        ll mod;
     public:
-        Math() {}
+        Math(ll mod = 1e9+7):mod(mod){}
         ll keta(ll num);
         ll gcd(ll a, ll b);
         ll lcm(ll a, ll b);

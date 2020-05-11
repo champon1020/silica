@@ -23,6 +23,7 @@ namespace segtree {
 		void update(int k, ll a);
 		ll rmq(int a, int b, int k, int l, int r);
 		ll query(int a, int b);
+		ll get(int k);
 	};
 
 	void SegTree::update(int k, ll a) {
@@ -46,6 +47,10 @@ namespace segtree {
 
 	ll SegTree::query(int a, int b) {
 		return rmq(a, b, 0, 0, n - 1);
+	}
+
+	ll SegTree::get(int k) {
+	    return dat[k+n-1];
 	}
 
 }
