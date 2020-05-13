@@ -1,6 +1,9 @@
 #ifndef INCLUDE_SPARSETABLE_HPP
 #define INCLUDE_SPARSETABLE_HPP
 
+#include <vector>
+using namespace std;
+
 namespace sparse {
 	using ll = long long;
 	ll inf = ll(1e18);
@@ -10,7 +13,7 @@ namespace sparse {
 		vector<vector<ll>> table;	// table[i][j]: i番目から2^j個見たときのRMQ
 
 		template<typename T>
-		SparseTable(vector<T> vec) {
+		explicit SparseTable(vector<T> vec) {
 			int sz = vec.size();
 			int logn = 31 - __builtin_clz(sz);	// sz <= 2^(logn) を満たす logn
 			table = vector<vector<ll>>(sz, vector<ll>(logn+1, inf));

@@ -1,6 +1,7 @@
 #ifndef INCLUDE_DEBUG_HPP
 #define INCLUDE_DEBUG_HPP
 
+#define TO_STRING(varName) # varName
 #include <iostream>
 #include <vector>
 #include <map>
@@ -10,50 +11,115 @@ namespace dbg {
     using ll = long long;
 
     class Debug {
+        void prefix(string s){
+            cout << "\033[7m\033[35m" << " DEBUG " << "\033[0m\033[35m"
+            << " " << s << "\033[0m" << endl;
+        }
     public:
         Debug(){}
+        // vector d1
         template<typename T>
-        void vd(vector<T> vec);
+        void print(vector<T> &vec);
+
+        // vector tuple
+        template<typename T1, typename T2>
+        void print(vector<pair<T1, T2>>& vec, int idx = 0);
+
+        // vector d2
         template<typename T>
-        void vd2(vector<vector<T>> vec);
+        void print(vector<vector<T>>& vec);
+
+        // vector d2
         template<typename T>
-        void ad(T *arr, ll n);
-        template<typename T, size_t N>
-        void ad2(T (&arr)[N], ll n);
+        void print(vector<vector<vector<T>>>& vec);
+
+        // vector array d1
         template<typename T>
-        void md(T mp);
+        void print(T *arr, ll n);
+
+        // vector array d2
+        template<typename T>
+        void print(T *arr, int n, int m);
+
+        // set
+        template<typename T>
+        void print(set<T>& st);
+
+        // vector map or set
+        template<typename T>
+        void print(T cont);
     };
 
     template<typename T>
-    void Debug::vd(vector<T> vec) {
-        for (auto vv : vec) cout << vv << " ";
+    void Debug::print(vector<T>& vec) {
+        prefix("vector");
+        for (auto& v : vec) cout << v << " ";
+        cout << endl;
+    }
+
+    template<typename T1, typename T2>
+    void Debug::print(vector<pair<T1, T2>>& vec, int idx) {
+        prefix("vector pair");
+        for (auto& v : vec) cout << (!idx ? get<0>(v) : get<1>(v)) << " ";
         cout << endl;
     }
 
     template<typename T>
-    void Debug::vd2(vector<vector<T>> vec) {
-        for (auto vv : vec) {
-            for (auto vvv : vv) cout << vvv << " ";
+    void Debug::print(vector<vector<T>>& vec) {
+        prefix("vector d2");
+        for (auto& vv : vec) {
+            for (auto& v : vv) cout << v << " ";
             cout << endl;
         }
     }
 
     template<typename T>
-    void Debug::ad(T *arr, ll n) {
-        for (int i = 0; i <= n; i++) cout << arr[i] << " ";
-        cout << endl;
+    void Debug::print(vector<vector<vector<T>>>& vec) {
+        prefix("vector d3");
+        for(auto& vvv : vec) {
+            cout << "[";
+            for(int i=0; i<vvv.size(); i++) {
+                if(i) cout << " ";
+                for(int j=0; j<vvv[i].size(); j++) {
+                    if(j) cout << " ";
+                    cout << vvv[i][j];
+                }
+                if(i != vvv.size()-1) cout << endl;
+            }
+            cout << "]" << endl;
+        }
     }
 
-    template<typename T, size_t N>
-    void Debug::ad2(T (&arr)[N], ll n) {
-        for (int i = 0; i <= N; i++) for (int j = 0; j <= n; j++) cout << arr[i][j] << " ";
+    template<typename T>
+    void Debug::print(T *arr, ll n) {
+        prefix("array");
+        for (int i = 0; i < n; i++) cout << arr[i] << " ";
         cout << endl;
     }
 
     template<typename T>
-    void Debug::md(T mp) {
-        cout << "key : value" << endl;
-        for (auto const &m : mp) cout << m.first << " : " << m.second << endl;
+    void Debug::print(T *arr, int n, int m) {
+        prefix("array d2");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    template<typename T>
+    void Debug::print(set<T>& st) {
+        prefix("set");
+        for(auto& e : st) cout << e << " ";
+        cout << endl;
+    }
+
+    template<typename T>
+    void Debug::print(T cont) {
+        prefix("key value");
+        for (auto& e : cont)
+            cout << e.first << " : " << e.second << endl;
         cout << endl;
     }
 

@@ -8,6 +8,7 @@ using ll=long long;
 using ld=long double;
 using vi = vector<int>;
 using vii = vector<vector<int>>;
+using viii = vector<vector<vector<int>>>;
 using vl = vector<ll>;
 using vll = vector<vector<ll>>;
 using vlll = vector<vector<vector<ll>>>;
