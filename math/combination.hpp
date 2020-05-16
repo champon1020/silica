@@ -7,10 +7,11 @@ using namespace std;
 namespace comb {
 
     using ll = long long;
-    ll mod = ll(1e9) + 7;
 
     class Comb {
     private:
+        ll mod;
+
         ll powm(ll a, ll b) {
             ll res = 1;
             while(b > 0){
@@ -26,8 +27,8 @@ namespace comb {
         vector<ll> finv;
         vector<ll> inv;
 
-        Comb() {};
-        Comb(int n) { build(n); }
+        Comb(ll mod = 1e9+7):mod(mod) {};
+        Comb(int n, ll mod = 1e9+7):mod(mod) { build(n); }
         void build(int n);
         ll res(int n, int k); // return nCk
         ll resone(ll n, ll k);

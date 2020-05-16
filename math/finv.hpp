@@ -7,15 +7,15 @@ using namespace std;
 namespace finv {
 
     using ll = long long;
-    ll mod = ll(1e9) + 7;
 
     class Finv {
+        ll mod;
     public:
         vector<ll> fact;
         vector<ll> finv;
         vector<ll> inv;
 
-        Finv(ll n) { build(n); }
+        Finv(ll n, ll mod = 1e9+7):mod(mod) { build(n); }
         void build(ll n);
     };
 
