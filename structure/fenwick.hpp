@@ -15,6 +15,7 @@ namespace fenwick {
 		Fenwick(int nn, ll init);
         ll sum(int i);
         void add(int i, ll x);
+        int get(long long k);
     };
 
     Fenwick::Fenwick(int n, ll init=0):n(n), bit(n + 1, init) {}
@@ -33,6 +34,19 @@ namespace fenwick {
             bit[i] += x;
             i += i & -i;
         }
+    }
+
+    int Fenwick::get(long long k) {
+        ++k;
+        int res = 0;
+        int N = 1; while (N < (int)bit.size()) N *= 2;
+        for (int i = N / 2; i > 0; i /= 2) {
+            if (res + i < (int)bit.size() && bit[res + i] < k) {
+                k = k - bit[res + i];
+                res = res + i;
+            }
+        }
+        return res + 1;
     }
 }
 

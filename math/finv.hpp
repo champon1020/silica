@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-namespace finv {
+namespace finvnsp {
 
     using ll = long long;
 
@@ -15,6 +15,7 @@ namespace finv {
         vector<ll> finv;
         vector<ll> inv;
 
+        Finv(ll mod=1e9+7):mod(mod){}
         Finv(ll n, ll mod = 1e9+7):mod(mod) { build(n); }
         void build(ll n);
     };

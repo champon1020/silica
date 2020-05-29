@@ -26,10 +26,11 @@ int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
 #include "../debug/debug.hpp"
-dbg::Debug db;
+dbg::Debug debug;
 //</editor-fold>
 
 class %ClassName% {
 public:
-	void solve(std::istream& in, std::ostream& out) {}
+	void solve(std::istream& in, std::ostream& out){
+	}
 };
