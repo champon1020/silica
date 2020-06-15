@@ -1,6 +1,8 @@
 #ifndef INCLUDE_MINT_HPP
 #define INCLUDE_MINT_HPP
 
+#include <ostream>
+
 namespace mint {
 
     using ll = long long;
@@ -11,6 +13,11 @@ namespace mint {
         ll mod;
 
         Mint(ll v=0, ll mod=ll(1e9)+7) : mod(mod), v((v % mod + mod) % mod) {}
+
+        friend std::ostream& operator<<(std::ostream& os, const Mint& val) {
+            os << val.v;
+            return os;
+        }
 
         Mint operator-() const { return Mint(-v); }
         Mint operator+(const Mint rhs) const {

@@ -31,6 +31,6 @@ dbg::Debug debug;
 
 class %ClassName% {
 public:
-	void solve(std::istream& in, std::ostream& out){
-	}
+  void solve(std::istream& in, std::ostream& out){
+  }
 };
