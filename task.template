@@ -6,16 +6,18 @@
 using namespace std;
 using ll=long long;
 using ld=long double;
+using pi = pair<int, int>;
+using pl = pair<ll, ll>;
 using vi = vector<int>;
 using vii = vector<vector<int>>;
 using viii = vector<vector<vector<int>>>;
 using vl = vector<ll>;
 using vll = vector<vector<ll>>;
 using vlll = vector<vector<vector<ll>>>;
-using vc = vector<char>;
-using vcc = vector<vector<char>>;
-using pi = pair<int, int>;
-using pl = pair<ll, ll>;
+template<class T> using vc = vector<T>;
+template<class T> using vvc = vector<vector<T>>;
+template<class T> using vvvc = vector<vector<vector<T>>>;
+template<class T1, class T2> using P = pair<T1, T2>;
 ll mod = ll(1e9)+7;
 ll inf = ll(1e18);
 void bl(bool b, ostream& out=cout){ out << (b ? "Yes" : "No") << endl; }

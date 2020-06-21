@@ -9,28 +9,28 @@ using namespace std;
 
 namespace perm {
 
-    using ll = long long;
+using ll = long long;
 
-    class Perm {
-    public:
-        int n;
-        vector<int> p;
+class Perm {
+public:
+  int n;
+  vector<int> p;
 
-        Perm(int n) : n(n) {}
-        void build(int v);
-    };
+  Perm(int n) : n(n) {}
+  void build(int v);
+};
 
-    void Perm::build(int initv = 1) {
-        vector<int> v(n);
-        iota(v.begin(), v.end(), initv);
-        do {
-            ll num = 0;
-            for(int i=0; i<v.size(); i++){
-                // some process
-            }
-            p.push_back(num);
-        } while (next_permutation(v.begin(), v.end()));
+void Perm::build(int initv = 1) {
+  vector<int> v(n);
+  iota(v.begin(), v.end(), initv);
+  do {
+    ll num = 0;
+    for(int i=0; i<v.size(); i++){
+        // some process
     }
+    p.push_back(num);
+  } while (next_permutation(v.begin(), v.end()));
+}
 
 }
 
