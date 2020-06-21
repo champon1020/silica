@@ -1,6 +1,9 @@
 #ifndef DEFINE_MATH_HPP
 #define DEFINE_MATH_HPP
 
+#include <vector>
+using namespace std;
+
 namespace math {
 
 using ll = long long;
@@ -14,6 +17,7 @@ public:
   ll lcm(ll a, ll b);
   ll powm(ll num1, ll num2);
   bool isPrime(ll n);
+  vector<ll> changeBase(ll n, int b);
 };
 
 ll Math::gcd(ll a, ll b) {
@@ -53,6 +57,17 @@ bool Math::isPrime(ll n) {
       }
   }
   return flg;
+}
+
+vector<ll> Math::changeBase(ll n, int b){
+  vector<ll> v;
+  while(n > 0){
+    ll r = n%b;
+    if(r == 0) --n;
+    n /= n;
+    v.push_back((r-1+b)%b);
+  }
+  return v;
 }
 
 }
