@@ -32,6 +32,7 @@ public:
   void build(int n);
   ll res(int n, int k); // return nCk
   ll resone(ll n, ll k);
+  ll resp(int n, int k);
 };
 
 void Comb::build(int n) {
@@ -60,6 +61,12 @@ ll Comb::resone(ll n, ll k) {
     (res *= this->powm(i+1, mod-2)) %= mod;
   }
   return res;
+}
+
+ll Comb::resp(int n, int k) {
+  if(n < k) return 0;
+  if(n < 0 || k < 0) return 0;
+  return fact[n] * finv[n - k] % mod;
 }
 
 }
