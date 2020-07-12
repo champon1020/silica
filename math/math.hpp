@@ -18,11 +18,27 @@ public:
   ll lcm(ll a, ll b);
   ll powm(ll num1, ll num2);
   bool isPrime(ll n);
-  template<typename T>map<ll, ll> factorMap(T n); // 素因数分解(Map)
-  template<typename T> vector<ll> factorVec(T n); // 素因数分解(Vector)
-  template<typename T> vector<ll> divisor(T n);   // 約数(Vector)
+
+  // 素因数分解(pair vector)
+  template<typename T> vector<pair<ll, ll>> factor(T n);
+
+  // 約数(vector)
+  template<typename T> vector<ll> divisor(T n);
+  // オイラー関数
+  template<typename T> ll euler(T n);
+
+  // b進数に変換
   vector<ll> changeBase(ll n, int b);
 };
+
+ll Math::keta(ll num) {
+  ll k = 0;
+  while (num > 0) {
+    num /= 10;
+    k++;
+  }
+  return k;
+}
 
 ll Math::gcd(ll a, ll b) {
   if (b == 0) return a;
@@ -31,15 +47,6 @@ ll Math::gcd(ll a, ll b) {
 
 ll Math::lcm(ll a, ll b) {
   return a * (b / gcd(a, b));
-}
-
-ll Math::keta(ll num) {
-  ll k = 0;
-  while (num > 0) {
-      num /= 10;
-      k++;
-  }
-  return k;
 }
 
 ll Math::powm(ll a, ll b) {
@@ -64,30 +71,18 @@ bool Math::isPrime(ll n) {
 }
 
 template<typename T>
-map<ll, ll> Math::factorMap(T n) {
-  map<ll, ll> res;
-  ll buf = n;
-  for (ll i = 2; i*i<=n; i++) {
-    while (buf % i == 0) {
-      res[i]++;
-      buf /= i;
-    }
-  }
-  if(buf > 1) res[buf]++;
-  return res;
-}
-
-template<typename T>
-vector<ll> Math::factorVec(T n){
-  vector<ll> res;
-  ll buf = n;
+vector<pair<ll, ll>> Math::factor(T n){
+  vector<pair<ll, ll>> res;
   for(ll i=2; i*i<=n; i++){
-    while(buf%i == 0){
-      res.push_back(i);
-      buf /= i;
+    if(n%i != 0) continue;
+    int cnt = 0;
+    while(n%i == 0){
+      ++cnt;
+      n /= i;
     }
+    res.emplace_back(i, cnt);
   }
-  if(buf > 1) res.push_back(buf);
+  if(n > 1) res.emplace_back(n, 1);
   return res;
 }
 
@@ -102,6 +97,17 @@ vector<ll> Math::divisor(T n){
         res.push_back(n/i);
       }
     }
+  }
+  return res;
+}
+
+template<typename T>
+ll Math::euler(T n) {
+  ll res = n;
+  auto pv = factor(n);
+  for(auto& p : pv){
+    res *= (p.first-1);
+    res /= p.first;
   }
   return res;
 }
