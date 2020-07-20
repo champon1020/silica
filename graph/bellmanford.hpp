@@ -6,51 +6,51 @@ using namespace std;
 
 namespace bellman {
 
-    using ll = long long;
-    const ll inf = 1e18;
+using ll = long long;
+const ll inf = 1e18;
 
-    class BellmanFord {
-    private:
-        struct edge {
-            int from, to;
-            ll cost;
-            edge(int f, int t, ll c) : from(f), to(t), cost(c) {}
-        };
-    public:
-        vector<edge> es;
-        vector<ll> dist; // min distance
-        int n;  // num of nodes
-        bool negative = false;
+class BellmanFord {
+  private:
+  struct edge {
+    int from, to;
+    ll cost;
+    edge(int f, int t, ll c) : from(f), to(t), cost(c) {}
+  };
+public:
+  vector<edge> es;
+  vector<ll> dist; // min distance
+  int n;  // num of nodes
+  bool negative = false;
 
-        explicit BellmanFord(int n) : n(n) {}
-        void add(int from, int to, ll cost);
-        void build(int s);
-    };
+  explicit BellmanFord(int n) : n(n) {}
+  void add(int from, int to, ll cost);
+  void build(int s);
+};
 
-    void BellmanFord::add(int from, int to, ll cost) {
-        es.emplace_back(from, to, cost);
+void BellmanFord::add(int from, int to, ll cost) {
+  es.emplace_back(from, to, cost);
+}
+
+void BellmanFord::build(int s) {
+  dist.assign(n, inf);
+  dist[s] = 0;
+  int cnt = 1;
+  while (true) {
+    bool update = false;
+    for (auto const &e : es) {
+      if (dist[e.from] != inf && dist[e.to] > dist[e.from] + e.cost) {
+        dist[e.to] = dist[e.from] + e.cost;
+        update = true;
+      }
     }
-
-    void BellmanFord::build(int s) {
-        dist.assign(n, inf);
-        dist[s] = 0;
-        int cnt = 1;
-        while (true) {
-            bool update = false;
-            for (auto const &e : es) {
-                if (dist[e.from] != inf && dist[e.to] > dist[e.from] + e.cost) {
-                    dist[e.to] = dist[e.from] + e.cost;
-                    update = true;
-                }
-            }
-            cnt++;
-            if (cnt == n && update) {
-                negative = true;
-                break;
-            }
-            if (!update) break;
-        }
+    cnt++;
+    if (cnt == n && update) {
+      negative = true;
+      break;
     }
+    if (!update) break;
+  }
+}
 
 }
 
