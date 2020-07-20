@@ -33,6 +33,7 @@ public:
   ll res(int n, int k); // return nCk
   ll resone(ll n, ll k);
   ll resp(int n, int k);
+  ll resh(int n, int k);
 };
 
 void Comb::build(int n) {
@@ -67,6 +68,10 @@ ll Comb::resp(int n, int k) {
   if(n < k) return 0;
   if(n < 0 || k < 0) return 0;
   return fact[n] * finv[n - k] % mod;
+}
+
+ll Comb::resh(int n, int k) {
+  return res(n+k-1, k);
 }
 
 }
