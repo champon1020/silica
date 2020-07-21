@@ -1,2 +1,8 @@
-/tasks/*.cpp
+tasks/*.cpp
+tasks/test*
 kmyk/online-judge-tools
+
+!tasks/Makefile
+!tasks/dl
+!tasks/test
+!tasks/cmd

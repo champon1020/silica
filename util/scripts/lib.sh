@@ -1,19 +1,10 @@
 #!/bin/bash
 
-usage () {
-	echo "Usage: bash lib.sh [lib name]"
-}
-
 copy () {
 	cat $1 | xsel --clipboard --input
 }
 
-if [ $# = 0 ] || [ $1 = "-h" ]; then
-	usage
-	exit 1
-fi
-
-if [ $# -ne 1 ]; then
+if [ $# != 1 ]; then
 	echo "ERROR: the nubmer of arguments must be 1, but got $#"
 	exit 1
 fi

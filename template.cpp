@@ -12,7 +12,6 @@ template<typename T> inline bool chmin(T &a, T b){ if(a>b){a=b; return true;} re
 int dx[] = {1, 0, -1, 0, 1, -1, 1, -1};
 int dy[] = {0, 1, 0, -1, 1, -1, -1, 1};
 
-#include "debug/debug.hpp"
 
 void solve() {
   
