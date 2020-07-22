@@ -3,7 +3,7 @@
 #include <string.h>
 
 void usage(){
-  printf("./test [task alphabet]");
+  printf("USAGE: ./test [problem]\n");
 }
 
 int main(int argc, char *argv[]) {

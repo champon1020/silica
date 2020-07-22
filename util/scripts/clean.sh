@@ -5,13 +5,33 @@ if [ ! -e ".backup" ]; then
 fi
 
 if [ $# = 0 ]; then
-	mv ./*.cpp .backup/
-	echo "remove all tasks"
+	for path in ./*.cpp; do
+		if [ -f $path ]; then
+			mv $path .backup/
+		fi
+	done
+
+	for path in ./test*; do
+		if [ -d $path ]; then
+			cp -rf $path .backup/
+			rm -rf $path
+		fi
+	done
+	echo "backup and remove all tasks and tests"
 else
-	if [ ! -e ./$1.cpp ]; then
-		echo "ERROR: $1.cpp is not exist"
-		exit 1
+	if [ ! -f ./$1.cpp ]; then
+		if [ -d ./$1 ]; then
+			cp -rf ./$1 .backup/
+			echo "backup $1"
+			
+			rm -rf ./$1
+			echo "remove $1"
+		else
+			echo "ERROR: $1.cpp is not exist"
+			exit 1
+		fi
+	else
+		mv ./$1.cpp .backup/
+		echo "backup and remove $1.cpp"
 	fi
-	mv ./$1.cpp .backup/
-	echo "remove $1.cpp"
 fi

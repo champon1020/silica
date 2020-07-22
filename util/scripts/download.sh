@@ -1,14 +1,8 @@
 #!/bin/bash
 
-# arguments: (url) or (provider, contest, problem)
-if [ $# != 1 ] && [ $# != 3 ]; then
-	echo "ERROR: the number of arguments must be 1 or 3, but got $#"
-	exit 1
-fi
-
-if [ $# = 1 ]; then
-	echo "DOWNLOAD $1"
-	oj d $1
+# arguments: (url, problem) or (provider, contest, problem)
+if [ $# != 2 ] && [ $# != 3 ]; then
+	echo "ERROR: the number of arguments must be 2 or 3, but got $#"
 	exit 1
 fi
 
@@ -21,6 +15,14 @@ declare LOWER
 tolower () {
     LOWER=$(echo $1 | tr "[:upper:]" "[:lower:]")
 }
+
+
+if [ $# = 2 ]; then
+	echo "DOWNLOAD $1 as $2"
+	toupper $2
+	oj d $1 -d test${UPPER}
+	exit 1
+fi
 
 PROVIDER=$1
 CONTEST=$2

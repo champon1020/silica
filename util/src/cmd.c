@@ -3,7 +3,13 @@
 #include <string.h>
 
 void usage() {
-  printf("./cmd [command] [task alphabet]\n");
+  printf("USAGE: ./cmd [command] [problem | filename | libname]\n\n");
+  printf("COMMANDS:\n");
+  printf("  make: make cpp file\n");
+  printf("  clean: clean cpp file or test dir\n");
+  printf("  recover: recover cpp file from .backup\n");
+  printf("  copy: copy file t oclipboard\n");
+  printf("  lib: copy lib codes to clipboard\n");
 }
 
 int main(int argc, char *argv[]){
