@@ -2,9 +2,7 @@ tasks/.backup
 tasks/*.cpp
 tasks/test*
 
-#!tasks/Makefile
-#!tasks/dl
-#!tasks/test
-#!tasks/cmd
-
-tasks/*.cpp
+!tasks/Makefile
+!tasks/dl
+!tasks/test
+!tasks/cmd
