@@ -1,8 +1,8 @@
-**/bin/
-**/tempCodeRunnerFile.cpp
-cmake-build-debug/
-/tasks/out.cpp
-/tasks/test.cpp
-/.idea/
-/tasks/*.cpp
-kmyk/online-judge-tools
+tasks/.backup
+tasks/*.cpp
+tasks/test*
+
+!tasks/Makefile
+!tasks/dl
+!tasks/test
+!tasks/cmd
